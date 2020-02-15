@@ -26,11 +26,21 @@ public class BasicCallScript : MonoBehaviour
 
         string host = "https://localhost:" + port + "/api/Test";
 
-        text.text = getData(host);
+        text.text = getDataFromCore();
     }
 
+    private string getDataFromCore()
+    {
+        //80 => http port
+        //443 => https port
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://localhost:443/api/Test");
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        return jsonResponse;
+    }
 
-    private string getData(string host)
+    private string getDataFromFramework(string host)
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(host);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();

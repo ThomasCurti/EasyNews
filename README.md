@@ -24,6 +24,7 @@ If this works
 --
 sudo service mysql status 
 mysql
+
 mysql> SHOW GLOBAL VARIABLES LIKE 'PORT';
 
 Configure MariaDB
@@ -33,6 +34,7 @@ Install HeidiSQL on your windows
 Try to connect on your server (localhost, port)
 
 if it doesn't work, go back on your ubuntu and type:
+
 mysql
 
 mysql> GRANT ALL PRIVILEGES on \*.\* to 'root'@'localhost' IDENTIFIED BY '\<password\>';
@@ -42,6 +44,19 @@ mysql> FLUSH PRIVILEGES;
 sudo service mysql restart
 
 mysql -u root -p 
+
 then type your \<password\>
 
 If it worked, type your password in HeidiSQL
+
+Test table
+--
+Create a table on HeidiSQL
+
+go back on your server on Ubutuntu
+
+mysql> use table \<your table\>
+
+Data Type
+--
+https://mariadb.com/kb/en/data-types/

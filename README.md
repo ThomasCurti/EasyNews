@@ -35,13 +35,13 @@ Try to connect on your server (localhost, port)
 if it doesn't work, go back on your ubuntu and type:
 mysql
 
-mysql> GRANT ALL PRIVILEGES on *.* to 'root'@'localhost' IDENTIFIED BY '\<password\>';
+mysql> GRANT ALL PRIVILEGES on \*.\* to 'root'@'localhost' IDENTIFIED BY '\<password\>';
 
 mysql> FLUSH PRIVILEGES;
 
 sudo service mysql restart
 
 mysql -u root -p 
-then type your <password>
+then type your \<password\>
 
 If it worked, type your password in HeidiSQL

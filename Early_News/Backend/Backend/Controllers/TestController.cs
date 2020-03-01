@@ -14,13 +14,13 @@ namespace Backend.Controllers
     public class TestController : ControllerBase
     {
         private AppDb Db { get; }
+        private bool Log { get; }
 
-        public TestController(AppDb db)
+        public TestController(AppDb db, bool log = true)
         {
             Db = db;
+            Log = log;
         }
-
-
 
         // GET: api/Test
         [HttpGet]
@@ -33,7 +33,8 @@ namespace Backend.Controllers
             }
             catch(Exception e)
             {
-                await Logger.LoggerFactory.LogError(e);
+                if (Log)
+                    await Logger.LoggerFactory.LogError(e);
                 return null;
             }
             
@@ -52,7 +53,8 @@ namespace Backend.Controllers
             }
             catch(Exception e)
             {
-                await Logger.LoggerFactory.LogError(e);
+                if (Log)
+                    await Logger.LoggerFactory.LogError(e);
                 return null;
             }
             
@@ -75,7 +77,8 @@ namespace Backend.Controllers
             await reader.DisposeAsync();
             await reader.CloseAsync();
 
-            await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
+            if (Log)
+                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
 
             return values;
         }
@@ -91,7 +94,8 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-                await Logger.LoggerFactory.LogError(e);
+                if (Log)
+                    await Logger.LoggerFactory.LogError(e);
                 return null;
             }
 
@@ -107,7 +111,8 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-                await Logger.LoggerFactory.LogError(e);
+                if (Log)
+                    await Logger.LoggerFactory.LogError(e);
                 return null;
             }
 
@@ -129,7 +134,8 @@ namespace Backend.Controllers
             await reader.DisposeAsync();
             await reader.CloseAsync();
 
-            await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
+            if (Log)
+                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
 
             return test;
         }

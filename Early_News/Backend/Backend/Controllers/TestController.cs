@@ -27,7 +27,15 @@ namespace Backend.Controllers
         public async Task<IEnumerable<Object>> Get()
         {
             //open connection
-            await Db.Connection.OpenAsync();
+            try
+            {
+                await Db.Connection.OpenAsync();
+            }
+            catch(Exception e)
+            {
+                //log
+            }
+            
 
             //create query
             var cmd = TestQuery.GetData(Db);
@@ -35,23 +43,33 @@ namespace Backend.Controllers
             //Read all data
             List<Test> values = new List<Test>();
 
-            using(var reader = cmd.ExecuteReader())
+            MySqlDataReader reader = null;
+            try
             {
-                while(reader.Read())
-                {
-                    Object[] val = new Object[reader.FieldCount];
-                    reader.GetValues(val);
-
-                    values.Add(new Test
-                    {
-                        ID = Int32.Parse(val[0].ToString()),
-                        Value = Int32.Parse(val[1].ToString()),
-                        Text = val[2].ToString(),
-                        Boolean = bool.Parse(val[3].ToString()),
-                    });
-                }
+                reader = cmd.ExecuteReader();
+            }
+            catch(Exception e)
+            {
 
             }
+            
+            while(reader.Read())
+            {
+                Object[] val = new Object[reader.FieldCount];
+                reader.GetValues(val);
+
+                //TODO Here call "<Model>.Parse" instead of this 
+                values.Add(new Test
+                {
+                    ID = Int32.Parse(val[0].ToString()),
+                    Value = Int32.Parse(val[1].ToString()),
+                    Text = val[2].ToString(),
+                    Boolean = bool.Parse(val[3].ToString()),
+                });
+            }
+
+            await reader.DisposeAsync();
+            await reader.CloseAsync();
 
             return values;
         }
@@ -67,24 +85,33 @@ namespace Backend.Controllers
             var cmd = TestQuery.GetData(id, Db);
 
             //Read all data
-
             Test test;
-            using (var reader = cmd.ExecuteReader())
+            MySqlDataReader reader = null;
+            try
             {
-                reader.Read();
-
-                Object[] val = new Object[reader.FieldCount];
-                reader.GetValues(val);
-
-                test = new Test
-                {
-                    ID = Int32.Parse(val[0].ToString()),
-                    Value = Int32.Parse(val[1].ToString()),
-                    Text = val[2].ToString(),
-                    Boolean = bool.Parse(val[3].ToString()),
-                };
+                reader = cmd.ExecuteReader();
+            }
+            catch (Exception e)
+            {
 
             }
+            reader.Read();
+
+            Object[] val = new Object[reader.FieldCount];
+            reader.GetValues(val);
+            
+            //TODO Here call "<Model>.Parse" instead of this 
+            test = new Test
+            {
+                ID = Int32.Parse(val[0].ToString()),
+                Value = Int32.Parse(val[1].ToString()),
+                Text = val[2].ToString(),
+                Boolean = bool.Parse(val[3].ToString()),
+            };
+
+
+            await reader.DisposeAsync();
+            await reader.CloseAsync();
 
             return test;
         }

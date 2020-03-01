@@ -1,6 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Backend.Dbo;
+using MySql.Data.MySqlClient;
+using System;
 
-namespace Backend.Dbo
+namespace Backend.DataAccess
 {
     public static class TestQuery
     {

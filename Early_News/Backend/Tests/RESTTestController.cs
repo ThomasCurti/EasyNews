@@ -22,8 +22,9 @@ namespace Tests
         [Test]
         public void RESTTestGetAllValues()
         {
-            var data = controller.Get().Result.ToList();
-            Assert.AreEqual(data.Count, 3);
+            var data = controller.Get();
+            var test = data.Result.ToList();
+            Assert.AreEqual(test.Count, 3);
         }
 
 

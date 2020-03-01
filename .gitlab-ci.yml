@@ -1,0 +1,38 @@
+stages:
+    - build-mysql
+    - build-project
+  
+
+variables:
+  PROJECT_NAME: "Backend"
+
+build-mysql:
+    stage: build-mysql
+    image: mariadb:latest
+    services:
+        - mariadb
+    variables:
+        MYSQL_DATABASE: "Test"
+        MYSQL_ROOT_PASSWORD: "admin"
+        
+    before_script:
+        - "cd Early_News"
+        - "cd SQL"
+        - "mysql --user=root --password=$MYSQL_ROOT_PASSWORD --host=mariadb $MYSQL_DATABASE < InitTableTest.sql"
+        
+    script:
+        - "mysql --user=root --password=$MYSQL_ROOT_PASSWORD --host=mariadb $MYSQL_DATABASE < Test.sql"
+        - "echo Finished"
+
+build-project:
+    services:
+        - mariadb
+    stage: build-project
+    image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    before_script:
+        - "cd Early_News"
+        - "cd $PROJECT_NAME"
+        - "dotnet restore"
+        - "dotnet build $PROJECT_NAME.sln"
+    script:
+        - dotnet test Tests

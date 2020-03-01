@@ -27,9 +27,10 @@ namespace Backend.Controllers
         public async Task<IEnumerable<Object>> Get()
         {
             //open connection
+
+                await Db.Connection.OpenAsync();
             try
             {
-                await Db.Connection.OpenAsync();
             }
             catch(Exception e)
             {

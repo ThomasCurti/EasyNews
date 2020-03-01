@@ -15,7 +15,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            db = new AppDb("server=localhost;user=root;password=admin;database=Test");
+            db = new AppDb("server=mariadb;user=root;port=3306;password=admin;database=Test");
             controller = new TestController(db, false);
         }
 

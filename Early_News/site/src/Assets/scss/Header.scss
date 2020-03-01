@@ -1,0 +1,55 @@
+@import "Default_min";
+
+header {
+  display: block;
+  width: 100%;
+  background: $black;
+  color: $white;
+  height: 70px;
+  margin-bottom: 20px;
+
+  .container {
+    height: 100%;
+    display: flex;
+  }
+
+  .Logo {
+    height: 100%;
+    display: flex;
+
+    a {
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  nav,
+  nav ul,
+  nav ul li {
+    padding: 0;
+    margin: 0;
+  }
+
+  nav {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+
+    ul {
+      display: flex;
+      align-items: center;
+      float: left;
+
+      li {
+        list-style-type: none;
+        position: relative;
+        display: block;
+        float: left;
+
+        a {
+          padding: 15px 20px;
+        }
+      }
+    }
+  }
+}

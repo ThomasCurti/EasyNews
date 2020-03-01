@@ -33,16 +33,18 @@ namespace Backend.Controllers
             }
             catch(Exception e)
             {
-                //log
+                await Logger.LoggerFactory.LogError(e);
+                return null;
             }
             
 
             //create query
             var cmd = TestQuery.GetData(Db);
 
-            //Read all data
+            //List to read all data
             List<Test> values = new List<Test>();
 
+            //Create Reader
             MySqlDataReader reader = null;
             try
             {
@@ -50,9 +52,11 @@ namespace Backend.Controllers
             }
             catch(Exception e)
             {
-
+                await Logger.LoggerFactory.LogError(e);
+                return null;
             }
             
+            //Read data
             while(reader.Read())
             {
                 Object[] val = new Object[reader.FieldCount];
@@ -71,6 +75,8 @@ namespace Backend.Controllers
             await reader.DisposeAsync();
             await reader.CloseAsync();
 
+            await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
+
             return values;
         }
 
@@ -79,12 +85,20 @@ namespace Backend.Controllers
         public async Task<Test> Get(uint id)
         {
             //open connection
-            await Db.Connection.OpenAsync();
+            try
+            {
+                await Db.Connection.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                await Logger.LoggerFactory.LogError(e);
+                return null;
+            }
 
             //create query
             var cmd = TestQuery.GetData(id, Db);
 
-            //Read all data
+            //Create Reader
             Test test;
             MySqlDataReader reader = null;
             try
@@ -93,8 +107,11 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-
+                await Logger.LoggerFactory.LogError(e);
+                return null;
             }
+
+            //Read data
             reader.Read();
 
             Object[] val = new Object[reader.FieldCount];
@@ -109,9 +126,10 @@ namespace Backend.Controllers
                 Boolean = bool.Parse(val[3].ToString()),
             };
 
-
             await reader.DisposeAsync();
             await reader.CloseAsync();
+
+            await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
 
             return test;
         }

@@ -12,7 +12,7 @@ build-project:
 
     services:
         - name: mariadb:latest
-          
+          #command: ["/usr/bin/mysql", "--user=root", "--password=$MYSQL_ROOT_PASSWORD", "--host=mariadb", "$MYSQL_DATABASE < Early_News/SQL/InitTableTest.sql"]
     
     
     image: mcr.microsoft.com/dotnet/core/sdk:3.1

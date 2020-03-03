@@ -4,6 +4,10 @@ import './Assets/css/index.css';
 import Home from './Components/Home';
 import * as serviceWorker from './serviceWorker';
 
+import 'bootstrap';
+import 'bootstrap/dist/js/bootstrap.js';
+
+
 ReactDOM.render(<Home />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

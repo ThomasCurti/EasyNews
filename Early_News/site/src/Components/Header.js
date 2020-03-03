@@ -8,7 +8,6 @@ function Header() {
         <header>
 
             <div className="container">
-
                 <div className="Logo">
                     <a href="/">Easy News</a>
                 </div>
@@ -16,16 +15,17 @@ function Header() {
                 <nav>
                     <ul>
                         <li>
-                            <a href="/">Lien 1</a>
+                            <a href="/">Accueil</a>
                         </li>
                         <li>
-                            <a href="/">Lien 2</a>
+                            <a href="/">Dernière actualité</a>
                         </li>
                         <li>
-                            <a href="/">Lien 3</a>
+                            <div>Rechercher une actualité :</div>
                         </li>
+                        <li></li>
                         <li>
-                            <a href="/">Lien 4</a>
+                        <input type="text" class="form-control" placeholder="Recherche"/>
                         </li>
                     </ul>
                 </nav>

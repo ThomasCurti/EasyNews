@@ -6,10 +6,12 @@ public class Earth_UI : MonoBehaviour
 {
     public float rayDistance;
     public Color[] colors;
-    public string[] texts;
+    public string[] region_name;
 
     public Texture2D imageMap;
 
+
+    public GameObject Region_name_text;
     void Start()
     {
 
@@ -33,7 +35,7 @@ public class Earth_UI : MonoBehaviour
             int index = FindIndexColor(color);
             if (index >= 0)
             {
-                Debug.Log(texts[index]);
+                Region_name_text.GetComponent<UnityEngine.UI.Text>().text = "Region: \n " + region_name[index];
             }
         }
     }

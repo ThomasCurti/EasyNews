@@ -6,7 +6,8 @@ public class menu : MonoBehaviour
 {
     public GameObject select_lvl_pannel;
     public GameObject select_option_pannel;
-    
+
+
     void Start()
     {
         
@@ -34,4 +35,9 @@ public class menu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Load_level()
+    {
+        Application.LoadLevel("game_scene");
+    }
+    
 }

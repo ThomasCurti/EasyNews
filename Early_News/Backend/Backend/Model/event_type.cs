@@ -1,13 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend.Model
 {
     public class event_type
     {
-        int id { get; set; }
-        string name { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+
+        public static event_type Parse(Object[] val)
+        {
+            return new event_type
+            {
+                id = Int32.Parse(val[0].ToString()),
+                name = val[1].ToString(),
+            };
+        }
     }
 }

@@ -7,13 +7,13 @@ namespace Backend.Model
 {
     public class dubious_article
     {
-        int id { get; set; }
-        string title { get; set; }
-        int source_id { get; set; }
-        string full_article_source { get; set; }
-        int? other_source_id { get; set; }
-        string? full_article_other { get; set; }
-        bool seen_twice { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public int source_id { get; set; }
+        public string full_article_source { get; set; }
+        public int? other_source_id { get; set; }
+        public string? full_article_other { get; set; }
+        public bool seen_twice { get; set; }
 
         public static dubious_article Parse(Object[] val)
         {

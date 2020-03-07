@@ -10,42 +10,43 @@ using MySql.Data.MySqlClient;
 
 namespace Backend.Controllers
 {
+    
     [ApiController]
     [EnableCors("AllowAll")]
-    [Route("api/Test")]
-    public class TestController : ControllerBase
+    [Route("api/DubiousArticle")]
+    public class DubiousArticleController : ControllerBase
     {
         private AppDb Db { get; }
         private bool Log { get; }
 
-        public TestController(AppDb db, bool log = true)
+        public DubiousArticleController(AppDb db, bool log = true)
         {
             Db = db;
             Log = log;
         }
 
-        // GET: api/Test
+        // GET: api/DubiousArticle
         [HttpGet]
-        public async Task<IEnumerable<Object>> Get()
+        public async Task<IEnumerable<dubious_article>> Get()
         {
             //open connection
             try
             {
                 await Db.Connection.OpenAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (Log)
                     await Logger.LoggerFactory.LogError(e);
                 return null;
             }
-            
+
 
             //create query
-            var cmd = TestQuery.GetData(Db);
+            var cmd = DubiousArticleQuery.GetData(Db);
 
             //List to read all data
-            List<Test> values = new List<Test>();
+            List<dubious_article> values = new List<dubious_article>();
 
             //Create Reader
             MySqlDataReader reader = null;
@@ -53,27 +54,19 @@ namespace Backend.Controllers
             {
                 reader = cmd.ExecuteReader();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (Log)
                     await Logger.LoggerFactory.LogError(e);
                 return null;
             }
-            
+
             //Read data
-            while(reader.Read())
+            while (reader.Read())
             {
                 Object[] val = new Object[reader.FieldCount];
                 reader.GetValues(val);
-
-                //TODO Here call "<Model>.Parse" instead of this 
-                values.Add(new Test
-                {
-                    ID = Int32.Parse(val[0].ToString()),
-                    Value = Int32.Parse(val[1].ToString()),
-                    Text = val[2].ToString(),
-                    Boolean = bool.Parse(val[3].ToString()),
-                });
+                values.Add(dubious_article.Parse(val));
             }
 
             await reader.DisposeAsync();
@@ -85,9 +78,9 @@ namespace Backend.Controllers
             return values;
         }
 
-        // GET: api/Test/5
+        // GET: api/DubiousArticle/5
         [HttpGet("{id}")]
-        public async Task<Test> Get(uint id)
+        public async Task<dubious_article> Get(int id)
         {
             //open connection
             try
@@ -102,10 +95,10 @@ namespace Backend.Controllers
             }
 
             //create query
-            var cmd = TestQuery.GetData(id, Db);
+            var cmd = DubiousArticleQuery.GetData(Db, id);
 
             //Create Reader
-            Test test;
+            dubious_article d_article;
             MySqlDataReader reader = null;
             try
             {
@@ -119,19 +112,16 @@ namespace Backend.Controllers
             }
 
             //Read data
-            reader.Read();
-
+            if (!reader.Read())
+            {
+                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
+                return null;
+            }
+                
             Object[] val = new Object[reader.FieldCount];
             reader.GetValues(val);
-            
-            //TODO Here call "<Model>.Parse" instead of this 
-            test = new Test
-            {
-                ID = Int32.Parse(val[0].ToString()),
-                Value = Int32.Parse(val[1].ToString()),
-                Text = val[2].ToString(),
-                Boolean = bool.Parse(val[3].ToString()),
-            };
+
+            d_article = dubious_article.Parse(val);
 
             await reader.DisposeAsync();
             await reader.CloseAsync();
@@ -139,16 +129,16 @@ namespace Backend.Controllers
             if (Log)
                 await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
 
-            return test;
+            return d_article;
         }
 
-        /*// POST: api/Test
+        /*// POST: api/DubiousArticle
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Test/5
+        // PUT: api/DubiousArticle/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

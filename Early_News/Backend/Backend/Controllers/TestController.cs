@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Backend.DataAccess;
 using Backend.Dbo;
 using Backend.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
@@ -11,6 +12,7 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class TestController : ControllerBase
     {
         private AppDb Db { get; }

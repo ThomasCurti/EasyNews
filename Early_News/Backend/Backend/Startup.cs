@@ -21,6 +21,21 @@ namespace Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
+             options =>
+             {
+             options.AddPolicy("AllowMyOrigin",
+             builder => builder.WithOrigins("http://mysite.com"));
+             });
+             */
+            services.AddCors(options => {
+                options.AddPolicy("AllowAll", 
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
+
+
             services.AddControllers();
 
             //dependency-injected into Controller class
@@ -40,6 +55,8 @@ namespace Backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 

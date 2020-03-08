@@ -3,7 +3,10 @@ using Backend.Dbo;
 using Backend.Model;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
+using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Tests
 {
@@ -11,45 +14,57 @@ namespace Tests
     {
 
         AppDb db;
-        TestController controller;
         bool isSetup = false;
+        bool isLocal = false;
 
         [SetUp]
         public void Setup()
         {
-            db = new AppDb("server=mariadb;user=root;port=3306;password=admin;database=Test");
-            controller = new TestController(db, false);
+            if (!isLocal)
+                db = new AppDb("server=mariadb;user=root;port=3306;password=admin;database=earlynews_test");
+            else
+                db = new AppDb("server=localhost;user=root;port=3306;password=admin;database=earlynews_test");
 
-            if (!isSetup)
+            if (!isSetup && !isLocal)
             {
                 isSetup = true;
+
                 db.Connection.Open();
                 
                 var cmd = db.Connection.CreateCommand();
-                cmd.CommandText = "CREATE TABLE `Test_values` (" +
-	                "`ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," +
-	                "`Value` INT(11) NULL DEFAULT NULL," +
-                    "`Text` LONGTEXT NULL," +
-                    "`Boolean` TINYINT(1) NOT NULL DEFAULT '0'," +
-                    "PRIMARY KEY(`ID`)" +
-                    ");";
+                DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
+                string path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dbschema.sql");
+                cmd.CommandText = File.ReadAllText(path);
                 cmd.ExecuteNonQuery();
-                
-                    
+
+                /*"CREATE TABLE `Test_values` (" +
+                "`ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," +
+                "`Value` INT(11) NULL DEFAULT NULL," +
+                "`Text` LONGTEXT NULL," +
+                "`Boolean` TINYINT(1) NOT NULL DEFAULT '0'," +
+                "PRIMARY KEY(`ID`)" +
+                ");";*/
+
                 MySqlCommand comm = db.Connection.CreateCommand();
-                comm.CommandText = "INSERT INTO Test_values(ID,Value,Text,Boolean) VALUES(@ID, @Value, @Text, @Boolean)";
+                path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
+                cmd.CommandText = File.ReadAllText(path);
+                comm.ExecuteNonQuery();
+
+                /*comm.CommandText = "INSERT INTO Test_values(ID,Value,Text,Boolean) VALUES(@ID, @Value, @Text, @Boolean)";
                 comm.Parameters.AddWithValue("@ID", 1);
                 comm.Parameters.AddWithValue("@Value", 1);
                 comm.Parameters.AddWithValue("@Text", "TestText");
-                comm.Parameters.AddWithValue("@Boolean", 0);
-                comm.ExecuteNonQuery();
+                comm.Parameters.AddWithValue("@Boolean", 0);*/
+
                 db.Connection.Close();
             }
         }
 
         [Test]
-        public void RESTTestGetAllValues()
+        public void RESTArticleGetAllValues()
         {
+            var controller = new ArticleController(db, false);
+
             var data = controller.Get();
             var test = data.Result.ToList();
             Assert.AreEqual(test.Count, 1);
@@ -59,8 +74,10 @@ namespace Tests
         [Test]
         public void RESTTestGetById()
         {
+            var controller = new ArticleController(db, false);
+
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data.ID, 1);
+            Assert.AreEqual(data.id, 1);
         }
     }
 }

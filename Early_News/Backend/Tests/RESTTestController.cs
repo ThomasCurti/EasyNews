@@ -39,7 +39,6 @@ namespace Tests
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
                 comm.CommandText = File.ReadAllText(path);
-                Console.WriteLine(comm.CommandText);
                 comm.ExecuteNonQuery();
 
                 db.Connection.Close();
@@ -90,8 +89,8 @@ namespace Tests
             var controller = new DubiousArticleController(db, false);
 
             var data = controller.Get();
-            var test = data.Result;
-            Assert.AreEqual(test, null);
+            var test = data.Result.ToList();
+            Assert.AreEqual(test.Count, 0);
         }
 
         [Test]

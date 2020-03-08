@@ -14,7 +14,7 @@ namespace Tests
 
         AppDb db;
         bool isSetup = false;
-        bool isLocal = true;
+        bool isLocal = false;
 
         [SetUp]
         public void Setup()
@@ -39,6 +39,7 @@ namespace Tests
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
                 comm.CommandText = File.ReadAllText(path);
+                Console.WriteLine(comm.CommandText);
                 comm.ExecuteNonQuery();
 
                 db.Connection.Close();

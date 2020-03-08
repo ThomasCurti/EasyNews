@@ -64,7 +64,7 @@ namespace Backend.Controllers
             while (reader.Read())
             {
                 Object[] val = new Object[reader.FieldCount];
-               reader.GetValues(val);
+                reader.GetValues(val);
                 values.Add(article.Parse(val));
             }
 
@@ -113,7 +113,8 @@ namespace Backend.Controllers
             //Read data
             if (!reader.Read())
             {
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
+                if (Log)
+                    await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
                 return null;
             }
 

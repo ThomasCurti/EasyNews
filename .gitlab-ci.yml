@@ -2,7 +2,7 @@ stages:
     - build-project
   
 variables:
-        MYSQL_DATABASE: "Test"
+        MYSQL_DATABASE: "earlynews_test"
         MYSQL_ROOT_PASSWORD: "admin"
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         PROJECT_NAME: "Backend"

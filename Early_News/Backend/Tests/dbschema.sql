@@ -1,5 +1,3 @@
-
-
 CREATE OR REPLACE TABLE event_type (
     id   INT      AUTO_INCREMENT PRIMARY KEY,
     name CHAR(32)

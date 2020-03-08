@@ -46,7 +46,7 @@ namespace Tests
 
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
-                cmd.CommandText = File.ReadAllText(path);
+                comm.CommandText = File.ReadAllText(path);
                 comm.ExecuteNonQuery();
 
                 /*comm.CommandText = "INSERT INTO Test_values(ID,Value,Text,Boolean) VALUES(@ID, @Value, @Text, @Boolean)";

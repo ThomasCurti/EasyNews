@@ -6,7 +6,6 @@ using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Tests
 {
@@ -34,6 +33,10 @@ namespace Tests
                 var cmd = db.Connection.CreateCommand();
                 DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
                 string path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dbschema.sql");
+                Console.WriteLine("-----");
+                Console.WriteLine(path);
+                Console.WriteLine(dir.FullName);
+                Console.WriteLine("-----");
                 cmd.CommandText = File.ReadAllText(path);
                 cmd.ExecuteNonQuery();
 

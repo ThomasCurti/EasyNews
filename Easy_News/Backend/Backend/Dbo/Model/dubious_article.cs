@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend.Model
+namespace Backend.Dbo.Model
 {
     public class dubious_article
     {

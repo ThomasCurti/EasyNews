@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Backend.Model
+namespace Backend.Dbo.Model
 {
     public class Event
     {

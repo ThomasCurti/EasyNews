@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Backend.models
+namespace Backend.DataAccess.EFModels
 {
     public partial class ArticleSource
     {

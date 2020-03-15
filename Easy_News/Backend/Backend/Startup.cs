@@ -1,3 +1,4 @@
+using AutoMapper;
 using Backend.Dbo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,8 @@ namespace Backend
              builder => builder.WithOrigins("http://mysite.com"));
              });
              */
+            services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
+
             services.AddCors(options => {
                 options.AddPolicy("AllowAll", 
                     builder => builder.AllowAnyOrigin()

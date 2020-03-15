@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Backend.models
+namespace Backend.DataAccess.EFModels
 {
     public partial class earlynews_testContext : DbContext
     {

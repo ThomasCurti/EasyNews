@@ -15,6 +15,7 @@ namespace Backend.DataAccess
         private DbSet<DBEntity> _set;
         protected EFModels.earlynews_testContext _context;
         protected readonly IMapper _mapper;
+        public bool Log = true;
 
         public Repository(EFModels.earlynews_testContext ctx, IMapper mapper)
         {
@@ -39,7 +40,8 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                await LoggerFactory.LogError(e);
+                if (Log)
+                    await LoggerFactory.LogError(e);
                 return false;
             }
         }
@@ -65,7 +67,8 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                await LoggerFactory.LogError(e);
+                if (Log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
         }
@@ -82,7 +85,8 @@ namespace Backend.DataAccess
             }
             catch(Exception e)
             {
-                await LoggerFactory.LogError(e);
+                if (Log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
         }
@@ -104,7 +108,8 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                await LoggerFactory.LogError(e);
+                if (Log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
             return _mapper.Map<ModelEntity>(dBEntity);

@@ -1,6 +1,9 @@
+using AutoMapper;
 using Backend.Controllers;
+using Backend.DataAccess;
+using Backend.DataAccess.EFModels;
 using Backend.Dbo;
-using Backend.Model;
+using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using System;
@@ -14,15 +17,44 @@ namespace Tests
 
         AppDb db;
         bool isSetup = false;
-        bool isLocal = false;
+        bool isLocal = true;
+
+        private earlynews_testContext _context;
+        private AutomapperProfiles _mapper;
+
+        private ArticleRepository _articleRepository;
+        private ArticleSourceRepository _articleSourceRepository;
+        private DubiousArticleRepository _dubiousArticleRepository;
+        private EventRepository _eventRepository;
+        private EventTypeRepository _eventTypeRepository;
+
+        private readonly string gitlabConnection = "server=mariadb;user=root;port=3306;password=admin;database=earlynews_test";
+        private readonly string localConnection = "server=localhost;user=root;port=3306;password=admin;database=earlynews_test";
 
         [SetUp]
         public void Setup()
         {
             if (!isLocal)
-                db = new AppDb("server=mariadb;user=root;port=3306;password=admin;database=earlynews_test");
+            {
+                db = new AppDb(gitlabConnection);
+            }
             else
-                db = new AppDb("server=localhost;user=root;port=3306;password=admin;database=earlynews_test");
+            {
+                db = new AppDb(localConnection);
+            }
+
+            if (!isSetup)
+            {
+                _context = new earlynews_testContext();
+                _mapper = new AutomapperProfiles();
+
+                _articleRepository = new ArticleRepository(_context, _mapper as IMapper);
+                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper as IMapper);
+                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper as IMapper);
+                _eventRepository = new EventRepository(_context, _mapper as IMapper);
+                _eventTypeRepository = new EventTypeRepository(_context, _mapper as IMapper);
+            }
+            
 
             if (!isSetup && !isLocal)
             {
@@ -48,17 +80,18 @@ namespace Tests
         [Test]
         public void RESTArticleGetAllValues()
         {
-            var controller = new ArticleController(db, false);
+            var controller = new ArticleController(_articleRepository, false);
 
             var data = controller.Get();
-            var test = data.Result.ToList();
-            Assert.AreEqual(test.Count, 1);
+            var test = data.Result;
+            var test2 = test.ToList();
+            Assert.AreEqual(test2.Count, 1);
         }
 
         [Test]
         public void RESTArticleGetById()
         {
-            var controller = new ArticleController(db, false);
+            var controller = new ArticleController(_articleRepository, false);
 
             var data = controller.Get(1).Result;
             Assert.AreEqual(data.id, 1);
@@ -67,7 +100,7 @@ namespace Tests
         [Test]
         public void RESTArticleSourceGetAllValues()
         {
-            var controller = new ArticleSourceController(db, false);
+            var controller = new ArticleSourceController(_articleSourceRepository, false);
 
             var data = controller.Get();
             var test = data.Result.ToList();
@@ -77,7 +110,7 @@ namespace Tests
         [Test]
         public void RESTArticleSourceGetById()
         {
-            var controller = new ArticleSourceController(db, false);
+            var controller = new ArticleSourceController(_articleSourceRepository, false);
 
             var data = controller.Get(1).Result;
             Assert.AreEqual(data.id, 1);
@@ -86,7 +119,7 @@ namespace Tests
         [Test]
         public void RESTDubiousArticleGetAllValues()
         {
-            var controller = new DubiousArticleController(db, false);
+            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
 
             var data = controller.Get();
             var test = data.Result.ToList();
@@ -96,7 +129,7 @@ namespace Tests
         [Test]
         public void RESTDubiousArticleGetById()
         {
-            var controller = new DubiousArticleController(db, false);
+            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
 
             var data = controller.Get(1).Result;
             Assert.AreEqual(data, null);
@@ -105,7 +138,7 @@ namespace Tests
         [Test]
         public void RESTEventGetAllValues()
         {
-            var controller = new EventController(db, false);
+            var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get();
             var test = data.Result.ToList();
@@ -115,7 +148,7 @@ namespace Tests
         [Test]
         public void RESTEventGetById()
         {
-            var controller = new EventController(db, false);
+            var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get(1).Result;
             Assert.AreEqual(data.id, 1);
@@ -124,7 +157,7 @@ namespace Tests
         [Test]
         public void RESTEventTypeGetAllValues()
         {
-            var controller = new EventTypeController(db, false);
+            var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get();
             var test = data.Result.ToList();
@@ -134,7 +167,7 @@ namespace Tests
         [Test]
         public void RESTEventTypeGetById()
         {
-            var controller = new EventTypeController(db, false);
+            var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get(1).Result;
             Assert.AreEqual(data.id, 1);

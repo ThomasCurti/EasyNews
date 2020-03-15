@@ -19,6 +19,7 @@ namespace Backend.Controllers
         public ArticleController(ArticleRepository articleRepository, bool log = true)
         {
             _articleRepository = articleRepository;
+            _articleRepository.Log = log;
             _log = log;
         }
 

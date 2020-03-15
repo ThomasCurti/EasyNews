@@ -22,6 +22,7 @@ namespace Backend.Controllers
         public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, bool log = true)
         {
             _dubiousArticleRepository = dubiousArticleRepository;
+            _dubiousArticleRepository.Log = log;
             _log = log;
         }
 

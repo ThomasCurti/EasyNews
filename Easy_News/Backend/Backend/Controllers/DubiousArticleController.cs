@@ -1,6 +1,12 @@
-﻿using Backend.Dbo;
+﻿using Backend.DataAccess;
+using Backend.Dbo;
+using Backend.Dbo.Model;
+using Backend.Logger;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -10,125 +16,43 @@ namespace Backend.Controllers
     [Route("api/DubiousArticle")]
     public class DubiousArticleController : ControllerBase
     {
-        private AppDb Db { get; }
-        private bool Log { get; }
+        private readonly DubiousArticleRepository _dubiousArticleRepository;
+        private bool _log { get; }
 
-        public DubiousArticleController(AppDb db, bool log = true)
+        public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, bool log = true)
         {
-            Db = db;
-            Log = log;
+            _dubiousArticleRepository = dubiousArticleRepository;
+            _log = log;
         }
 
         // GET: api/DubiousArticle
-        /*[HttpGet]
+        [HttpGet]
         public async Task<IEnumerable<dubious_article>> Get()
         {
-            //open connection
-            try
-            {
-                await Db.Connection.OpenAsync();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-
-            //create query
-            var cmd = DubiousArticleQuery.GetData(Db);
-
-            //List to read all data
-            List<dubious_article> values = new List<dubious_article>();
-
-            //Create Reader
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            while (reader.Read())
-            {
-                Object[] val = new Object[reader.FieldCount];
-                reader.GetValues(val);
-                values.Add(dubious_article.Parse(val));
-            }
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
-
-            return values;
+            return await _dubiousArticleRepository.Get();
         }
 
         // GET: api/DubiousArticle/5
         [HttpGet("{id}")]
         public async Task<dubious_article> Get(int id)
         {
-            //open connection
+            var val = _dubiousArticleRepository.Get(id).Result;
+
             try
             {
-                await Db.Connection.OpenAsync();
+                List<Dbo.Model.dubious_article> list = new List<Dbo.Model.dubious_article>(val);
+                return list[0];
             }
             catch (Exception e)
             {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
+                if (_log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
-
-            //create query
-            var cmd = DubiousArticleQuery.GetData(Db, id);
-
-            //Create Reader
-            dubious_article d_article;
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            if (!reader.Read())
-            {
-                if(Log)
-                    await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
-                return null;
-            }
-                
-            Object[] val = new Object[reader.FieldCount];
-            reader.GetValues(val);
-
-            d_article = dubious_article.Parse(val);
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
-
-            return d_article;
         }
 
         // POST: api/DubiousArticle
-        [HttpPost]
+        /*[HttpPost]
         public void Post([FromBody] string value)
         {
         }

@@ -1,6 +1,12 @@
-﻿using Backend.Dbo;
+﻿using Backend.DataAccess;
+using Backend.Dbo;
+using Backend.Dbo.Model;
+using Backend.Logger;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -9,125 +15,43 @@ namespace Backend.Controllers
     [EnableCors("AllowAll")]
     public class EventController : ControllerBase
     {
-        private AppDb Db { get; }
-        private bool Log { get; }
+        private readonly EventRepository _eventRepository;
+        private bool _log { get; }
 
-        public EventController(AppDb db, bool log = true)
+        public EventController(EventRepository eventRepository, bool log = true)
         {
-            Db = db;
-            Log = log;
+            _eventRepository = eventRepository;
+            _log = log;
         }
 
-        /*// GET: api/Event
+        // GET: api/Event
         [HttpGet]
         public async Task<IEnumerable<Event>> Get()
         {
-            //open connection
-            try
-            {
-                await Db.Connection.OpenAsync();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-
-            //create query
-            var cmd = EventQuery.GetData(Db);
-
-            //List to read all data
-            List<Event> values = new List<Event>();
-
-            //Create Reader
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            while (reader.Read())
-            {
-                Object[] val = new Object[reader.FieldCount];
-                reader.GetValues(val);
-                values.Add(Event.Parse(val));
-            }
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
-
-            return values;
+            return await _eventRepository.Get();
         }
 
         // GET: api/Event/5
         [HttpGet("{id}")]
         public async Task<Event> Get(int id)
         {
-            //open connection
+            var val = _eventRepository.Get(id).Result;
+
             try
             {
-                await Db.Connection.OpenAsync();
+                List<Dbo.Model.Event> list = new List<Dbo.Model.Event>(val);
+                return list[0];
             }
             catch (Exception e)
             {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
+                if (_log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
-
-            //create query
-            var cmd = EventQuery.GetData(Db, id);
-
-            //Create Reader
-            Event ev;
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            if (!reader.Read())
-            {
-                if(Log)
-                    await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
-                return null;
-            }
-
-            Object[] val = new Object[reader.FieldCount];
-            reader.GetValues(val);
-
-            ev = Event.Parse(val);
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
-
-            return ev;
         }
 
         // POST: api/Event
-        [HttpPost]
+        /*[HttpPost]
         public void Post([FromBody] string value)
         {
         }

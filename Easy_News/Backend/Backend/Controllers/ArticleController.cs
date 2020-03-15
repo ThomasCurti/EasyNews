@@ -14,10 +14,12 @@ namespace Backend.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly ArticleRepository _articleRepository;
+        private bool _log;
 
         public ArticleController(ArticleRepository articleRepository, bool log = true)
         {
             _articleRepository = articleRepository;
+            _log = log;
         }
 
         // GET: api/Article
@@ -40,7 +42,8 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-                await LoggerFactory.LogError(e);
+                if (_log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
             

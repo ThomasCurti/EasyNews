@@ -46,6 +46,10 @@ namespace Backend
             services.AddControllers();
 
             services.AddTransient<DataAccess.ArticleRepository>();
+            services.AddTransient<DataAccess.ArticleSourceRepository>();
+            services.AddTransient<DataAccess.DubiousArticleRepository>();
+            services.AddTransient<DataAccess.EventRepository>();
+            services.AddTransient<DataAccess.EventTypeRepository>();
 
             //dependency-injected into Controller class
             //services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));

@@ -1,6 +1,12 @@
-﻿using Backend.Dbo;
+﻿using Backend.DataAccess;
+using Backend.Dbo;
+using Backend.Dbo.Model;
+using Backend.Logger;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -9,125 +15,43 @@ namespace Backend.Controllers
     [EnableCors("AllowAll")]
     public class ArticleSourceController : ControllerBase
     {
-        private AppDb Db { get; }
-        private bool Log { get; }
+        private readonly ArticleSourceRepository _articleSourceRepository;
+        private bool _log { get; }
 
-        public ArticleSourceController(AppDb db, bool log = true)
+        public ArticleSourceController(ArticleSourceRepository articleSourceRepository, bool log = true)
         {
-            Db = db;
-            Log = log;
+            _articleSourceRepository = articleSourceRepository;
+            _log = log;
         }
 
-        /*// GET: api/ArticleSource
+        // GET: api/ArticleSource
         [HttpGet]
         public async Task<IEnumerable<article_source>> Get()
         {
-            //open connection
-            try
-            {
-                await Db.Connection.OpenAsync();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-
-            //create query
-            var cmd = ArticleSourceQuery.GetData(Db);
-
-            //List to read all data
-            List<article_source> values = new List<article_source>();
-
-            //Create Reader
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            while (reader.Read())
-            {
-                Object[] val = new Object[reader.FieldCount];
-                reader.GetValues(val);
-                values.Add(article_source.Parse(val));
-            }
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all values");
-
-            return values;
+            return await _articleSourceRepository.Get();
         }
 
         // GET: api/ArticleSource/5
         [HttpGet("{id}")]
         public async Task<article_source> Get(int id)
         {
-            //open connection
+            var val = _articleSourceRepository.Get(id).Result;
+
             try
             {
-                await Db.Connection.OpenAsync();
+                List<Dbo.Model.article_source> list = new List<Dbo.Model.article_source>(val);
+                return list[0];
             }
             catch (Exception e)
             {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
+                if (_log)
+                    await LoggerFactory.LogError(e);
                 return null;
             }
-
-            //create query
-            var cmd = ArticleSourceQuery.GetData(Db, id);
-
-            //Create Reader
-            article_source art;
-            MySqlDataReader reader = null;
-            try
-            {
-                reader = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                if (Log)
-                    await Logger.LoggerFactory.LogError(e);
-                return null;
-            }
-
-            //Read data
-            if (!reader.Read())
-            {
-                if(Log)
-                    await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " COULDN'T GET all value with the id " + id);
-                return null;
-            }
-
-            Object[] val = new Object[reader.FieldCount];
-            reader.GetValues(val);
-
-            art = article_source.Parse(val);
-
-            await reader.DisposeAsync();
-            await reader.CloseAsync();
-
-            if (Log)
-                await Logger.LoggerFactory.LogInformation(Db.Connection.Database.ToString() + " GET all value with the id " + id);
-
-            return art;
         }
 
         // POST: api/ArticleSource
-        [HttpPost]
+        /*[HttpPost]
         public void Post([FromBody] string value)
         {
         }

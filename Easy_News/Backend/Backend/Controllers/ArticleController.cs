@@ -79,7 +79,7 @@ namespace Backend.Controllers
 
         // GET: api/Article/5
         [HttpGet("{id}")]
-        public async Task<article> Get(int id)
+        public async Task<article> Get(long id)
         {
             //open connection
             try

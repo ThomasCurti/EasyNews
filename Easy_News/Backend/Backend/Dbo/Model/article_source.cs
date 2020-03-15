@@ -2,9 +2,9 @@
 
 namespace Backend.Dbo.Model
 {
-    public class article_source
+    public class article_source : IObjectWithId
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public string name { get; set; }
 
         public static article_source Parse(Object[] val)

@@ -2,9 +2,9 @@
 
 namespace Backend.Dbo.Model
 {
-    public class Event
+    public class Event : IObjectWithId
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public int type_id { get; set; }
         public int article_id { get; set; }
         public DateTime published { get; set; }

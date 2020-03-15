@@ -2,9 +2,9 @@
 
 namespace Backend.Dbo.Model
 {
-    public class event_type
+    public class event_type : IObjectWithId
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public string name { get; set; }
 
         public static event_type Parse(Object[] val)

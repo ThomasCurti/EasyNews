@@ -1,0 +1,111 @@
+﻿using AutoMapper;
+using Backend.Logger;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Backend.DataAccess
+{
+    public class Repository<DBEntity, ModelEntity> : IRepository<DBEntity, ModelEntity>
+        where DBEntity : class, new()
+        where ModelEntity : class, Dbo.IObjectWithId, new()
+    {
+
+        private DbSet<DBEntity> _set;
+        protected EFModels.earlynews_testContext _context;
+        protected readonly IMapper _mapper;
+
+        public Repository(EFModels.earlynews_testContext ctx, IMapper mapper)
+        {
+            _mapper = mapper;
+            _context = ctx;
+            _set = _context.Set<DBEntity>();
+        }
+
+        public virtual async Task<bool> Delete(long idEntity)
+        {
+            DBEntity dBEntity = _set.Find(idEntity);
+
+            if (dBEntity == null)
+                return false;
+
+            _set.Remove(dBEntity);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                await LoggerFactory.LogError(e);
+                return false;
+            }
+        }
+
+        public virtual async Task<IEnumerable<ModelEntity>> Get(long id = -1)
+        {
+            try
+            {
+                List<DBEntity> query = null;
+                if(id == -1)
+                {
+                    query = await _set.AsNoTracking().ToListAsync();
+                }
+                else
+                {
+                    //TODO Check
+                    query = await _set.Include(id.ToString()).AsNoTracking().ToListAsync();
+                }
+
+                return _mapper.Map<ModelEntity[]>(query);
+            }
+            catch (Exception e)
+            {
+                await LoggerFactory.LogError(e);
+                return null;
+            }
+        }
+
+        public virtual async Task<ModelEntity> Insert(ModelEntity entity)
+        {
+            DBEntity dBEntity = _mapper.Map<DBEntity>(entity);
+            _set.Add(dBEntity);
+            try
+            {
+                await _context.SaveChangesAsync();
+                ModelEntity modelEntity = _mapper.Map<ModelEntity>(dBEntity);
+                return modelEntity;
+            }
+            catch(Exception e)
+            {
+                await LoggerFactory.LogError(e);
+                return null;
+            }
+        }
+
+        public virtual async Task<ModelEntity> Update(ModelEntity entity)
+        {
+            DBEntity dBEntity = _set.Find(entity.id);
+
+            if (dBEntity == null)
+                return null;
+
+            _mapper.Map(entity, dBEntity);
+            if (!_context.ChangeTracker.HasChanges())
+                return entity;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                await LoggerFactory.LogError(e);
+                return null;
+            }
+            return _mapper.Map<ModelEntity>(dBEntity);
+        }
+    }
+}

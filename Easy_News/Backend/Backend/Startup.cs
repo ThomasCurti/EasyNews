@@ -2,6 +2,7 @@ using AutoMapper;
 using Backend.Dbo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +30,11 @@ namespace Backend
              builder => builder.WithOrigins("http://mysite.com"));
              });
              */
+
+            services
+                .AddDbContext<DataAccess.EFModels.earlynews_testContext>
+                (options => options.UseMySql(Configuration["ConnectionStrings:Default"]));
+
             services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
 
             services.AddCors(options => {
@@ -42,7 +48,7 @@ namespace Backend
             services.AddControllers();
 
             //dependency-injected into Controller class
-            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
+            //services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

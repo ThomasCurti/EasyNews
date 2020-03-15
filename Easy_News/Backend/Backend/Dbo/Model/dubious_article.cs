@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Dbo.Model
 {
-    public class dubious_article
+    public class dubious_article : IObjectWithId
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public string title { get; set; }
         public int source_id { get; set; }
         public string full_article_source { get; set; }

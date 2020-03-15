@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Backend.DataAccess;
-using Backend.Dbo;
-using Backend.Model;
+﻿using Backend.Dbo;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
 
 namespace Backend.Controllers
 {
@@ -24,7 +18,7 @@ namespace Backend.Controllers
             Log = log;
         }
 
-        // GET: api/ArticleSource
+        /*// GET: api/ArticleSource
         [HttpGet]
         public async Task<IEnumerable<article_source>> Get()
         {
@@ -132,7 +126,7 @@ namespace Backend.Controllers
             return art;
         }
 
-        /*// POST: api/ArticleSource
+        // POST: api/ArticleSource
         [HttpPost]
         public void Post([FromBody] string value)
         {

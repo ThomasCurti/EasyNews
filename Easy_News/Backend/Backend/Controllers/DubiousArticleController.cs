@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Backend.DataAccess;
-using Backend.Dbo;
-using Backend.Model;
+﻿using Backend.Dbo;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
 
 namespace Backend.Controllers
 {
-    
+
     [ApiController]
     [EnableCors("AllowAll")]
     [Route("api/DubiousArticle")]
@@ -26,7 +20,7 @@ namespace Backend.Controllers
         }
 
         // GET: api/DubiousArticle
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IEnumerable<dubious_article>> Get()
         {
             //open connection
@@ -133,7 +127,7 @@ namespace Backend.Controllers
             return d_article;
         }
 
-        /*// POST: api/DubiousArticle
+        // POST: api/DubiousArticle
         [HttpPost]
         public void Post([FromBody] string value)
         {

@@ -44,7 +44,7 @@ namespace Backend.DataAccess
             }
         }
 
-        public virtual async Task<IEnumerable<ModelEntity>> Get(long id = -1)
+        public virtual async Task<IEnumerable<ModelEntity>> Get(int id = -1)
         {
             try
             {
@@ -55,8 +55,10 @@ namespace Backend.DataAccess
                 }
                 else
                 {
-                    //TODO Check
-                    query = await _set.Include(id.ToString()).AsNoTracking().ToListAsync();
+                    var entity = _set.Find(id);
+                    List<ModelEntity> list = new List<ModelEntity>();
+                    list.Add(_mapper.Map<ModelEntity>(entity));
+                    return list;
                 }
 
                 return _mapper.Map<ModelEntity[]>(query);

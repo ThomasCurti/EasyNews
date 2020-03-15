@@ -32,8 +32,7 @@ namespace Backend
              */
 
             services
-                .AddDbContext<DataAccess.EFModels.earlynews_testContext>
-                (options => options.UseMySql(Configuration["ConnectionStrings:Default"]));
+                .AddDbContext<DataAccess.EFModels.earlynews_testContext>(options => options.UseMySql(Configuration["ConnectionStrings:Default"]));
 
             services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
 
@@ -44,8 +43,9 @@ namespace Backend
                                       .AllowAnyHeader());
             });
 
-
             services.AddControllers();
+
+            services.AddTransient<DataAccess.ArticleRepository>();
 
             //dependency-injected into Controller class
             //services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));

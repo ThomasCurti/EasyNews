@@ -60,3 +60,9 @@ mysql> use table \<your table\>
 Data Type
 --
 https://mariadb.com/kb/en/data-types/
+
+
+EntityFramework For Backend
+--
+/!\ Use Pomelo EntityFrameworkCore Package
+https://docs.microsoft.com/fr-fr/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-3.1

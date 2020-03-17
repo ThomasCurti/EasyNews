@@ -69,6 +69,7 @@ namespace Backend.DataAccess
             {
                 if (Log)
                     await LoggerFactory.LogError(e);
+                Console.WriteLine(e.ToString());
                 return null;
             }
         }

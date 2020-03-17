@@ -1,9 +1,12 @@
 using AutoMapper;
+using AutoMapper.Configuration;
 using Backend.Controllers;
 using Backend.DataAccess;
 using Backend.DataAccess.EFModels;
 using Backend.Dbo;
+using Backend.Dbo.Model;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using System;
@@ -20,7 +23,7 @@ namespace Tests
         bool isLocal = true;
 
         private earlynews_testContext _context;
-        private AutomapperProfiles _mapper;
+        private IMapper _mapper;
 
         private ArticleRepository _articleRepository;
         private ArticleSourceRepository _articleSourceRepository;
@@ -31,33 +34,43 @@ namespace Tests
         private readonly string gitlabConnection = "server=mariadb;user=root;port=3306;password=admin;database=earlynews_test";
         private readonly string localConnection = "server=localhost;user=root;port=3306;password=admin;database=earlynews_test";
 
+        private IMapper MappingData()
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile<AutomapperProfiles>();
+            });
+            IMapper mapper = new Mapper(config);
+            return mapper;
+        }
+
         [SetUp]
         public void Setup()
         {
-            if (!isLocal)
-            {
-                db = new AppDb(gitlabConnection);
-            }
-            else
-            {
-                db = new AppDb(localConnection);
-            }
-
             if (!isSetup)
             {
                 _context = new earlynews_testContext();
-                _mapper = new AutomapperProfiles();
+                _mapper = MappingData();
 
-                _articleRepository = new ArticleRepository(_context, _mapper as IMapper);
-                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper as IMapper);
-                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper as IMapper);
-                _eventRepository = new EventRepository(_context, _mapper as IMapper);
-                _eventTypeRepository = new EventTypeRepository(_context, _mapper as IMapper);
-            }
+                _articleRepository = new ArticleRepository(_context, _mapper);
+                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper);
+                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper);
+                _eventRepository = new EventRepository(_context, _mapper);
+                _eventTypeRepository = new EventTypeRepository(_context, _mapper);
             
+            }
 
             if (!isSetup && !isLocal)
             {
+
+                if (!isLocal)
+                {
+                    db = new AppDb(gitlabConnection);
+                }
+                else
+                {
+                    db = new AppDb(localConnection);
+                }
+
                 isSetup = true;
 
                 db.Connection.Open();

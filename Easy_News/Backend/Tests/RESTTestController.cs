@@ -20,7 +20,7 @@ namespace Tests
 
         AppDb db;
         bool isSetup = false;
-        bool isLocal = true;
+        bool isLocal = false;
 
         private earlynews_testContext _context;
         private IMapper _mapper;

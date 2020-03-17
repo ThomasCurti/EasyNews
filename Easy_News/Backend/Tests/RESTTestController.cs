@@ -49,6 +49,8 @@ namespace Tests
             if (!isSetup)
             {
                 _context = new earlynews_testContext();
+                if (!isLocal)
+                    _context.connectionString = gitlabConnection;
                 _mapper = MappingData();
 
                 _articleRepository = new ArticleRepository(_context, _mapper);

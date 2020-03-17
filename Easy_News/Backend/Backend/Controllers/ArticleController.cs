@@ -45,6 +45,7 @@ namespace Backend.Controllers
             {
                 if (_log)
                     await LoggerFactory.LogError(e);
+                Console.WriteLine(e.ToString());
                 return null;
             }
             

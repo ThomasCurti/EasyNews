@@ -6,6 +6,8 @@ namespace Backend.DataAccess.EFModels
 {
     public partial class earlynews_testContext : DbContext
     {
+        public string connectionString = "server=localhost;user=root;password=admin;database=earlynews_test";
+
         public earlynews_testContext()
         {
         }
@@ -26,7 +28,7 @@ namespace Backend.DataAccess.EFModels
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("server=localhost;user=root;password=admin;database=earlynews_test", x => x.ServerVersion("10.1.44-mariadb"));
+                optionsBuilder.UseMySql(connectionString, x => x.ServerVersion("10.1.44-mariadb"));
             }
         }
 

@@ -1,5 +1,3 @@
-USE earlynews_test;
-
 INSERT INTO event_type VALUES (null, "plague");
 
 INSERT INTO article_source VALUES (null, "AFP");

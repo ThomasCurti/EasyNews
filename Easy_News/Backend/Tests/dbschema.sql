@@ -36,4 +36,4 @@ CREATE OR REPLACE TABLE dubious_article (
     seen_twice          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (source_id)       REFERENCES article_source (id),
     FOREIGN KEY (other_source_id) REFERENCES article_source (id)
-)
+);

@@ -76,13 +76,11 @@ namespace Tests
                 DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
                 string path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dbschema.sql");
                 cmd.CommandText = File.ReadAllText(path);
-                Console.WriteLine(cmd.CommandText);
                 cmd.ExecuteNonQuery();
 
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
                 comm.CommandText = File.ReadAllText(path);
-                Console.WriteLine(comm.CommandText);
                 comm.ExecuteNonQuery();
 
                 db.Connection.Close();

@@ -53,7 +53,7 @@ namespace Backend.DataAccess
                 List<DBEntity> query = null;
                 if(id == -1)
                 {
-                    query = await _set.AsNoTracking().ToListAsync();
+                    var tmp = await _set.AsNoTracking().ToListAsync();
                 }
                 else
                 {

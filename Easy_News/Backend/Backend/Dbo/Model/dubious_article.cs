@@ -9,7 +9,7 @@ namespace Backend.Dbo.Model
     {
         public long id { get; set; }
         public string title { get; set; }
-        public int source_id { get; set; }
+        public int? source_id { get; set; }
         public string full_article_source { get; set; }
         public int? other_source_id { get; set; }
         public string? full_article_other { get; set; }

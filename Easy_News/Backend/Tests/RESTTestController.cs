@@ -1,12 +1,8 @@
 using AutoMapper;
-using AutoMapper.Configuration;
 using Backend.Controllers;
 using Backend.DataAccess;
 using Backend.DataAccess.EFModels;
 using Backend.Dbo;
-using Backend.Dbo.Model;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using System;
@@ -20,7 +16,7 @@ namespace Tests
 
         AppDb db;
         bool isSetup = false;
-        bool isLocal = false;
+        bool isLocal = true;
 
         private earlynews_testContext _context;
         private IMapper _mapper;
@@ -58,7 +54,6 @@ namespace Tests
                 _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper);
                 _eventRepository = new EventRepository(_context, _mapper);
                 _eventTypeRepository = new EventTypeRepository(_context, _mapper);
-            
             }
 
             if (!isSetup && !isLocal)
@@ -66,7 +61,6 @@ namespace Tests
 
                 if (!isLocal)
                 {
-                    Console.WriteLine("gitlab Co");
                     db = new AppDb(gitlabConnection);
                 }
                 else
@@ -103,7 +97,7 @@ namespace Tests
             var data = controller.Get();
             var test = data.Result;
             var test2 = test.ToList();
-            Assert.AreEqual(test2.Count, 1);
+            Assert.AreEqual(1, test2.Count);
         }
 
         [Test]
@@ -112,7 +106,7 @@ namespace Tests
             var controller = new ArticleController(_articleRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data.id, 1);
+            Assert.AreEqual(1, data.id);
         }
 
         [Test]
@@ -122,7 +116,7 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result.ToList();
-            Assert.AreEqual(test.Count, 1);
+            Assert.AreEqual(1, test.Count);
         }
 
         [Test]
@@ -131,7 +125,7 @@ namespace Tests
             var controller = new ArticleSourceController(_articleSourceRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data.id, 1);
+            Assert.AreEqual(1, data.id);
         }
 
         [Test]
@@ -141,7 +135,7 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result.ToList();
-            Assert.AreEqual(test.Count, 0);
+            Assert.AreEqual(0, test.Count);
         }
 
         [Test]
@@ -150,7 +144,7 @@ namespace Tests
             var controller = new DubiousArticleController(_dubiousArticleRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data, null);
+            Assert.AreEqual(null, data);
         }
 
         [Test]
@@ -160,7 +154,7 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result.ToList();
-            Assert.AreEqual(test.Count, 1);
+            Assert.AreEqual(1, test.Count);
         }
 
         [Test]
@@ -169,7 +163,7 @@ namespace Tests
             var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data.id, 1);
+            Assert.AreEqual(1, data.id);
         }
 
         [Test]
@@ -179,7 +173,7 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result.ToList();
-            Assert.AreEqual(test.Count, 1);
+            Assert.AreEqual(1, test.Count);
         }
 
         [Test]
@@ -188,7 +182,7 @@ namespace Tests
             var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(data.id, 1);
+            Assert.AreEqual(1, data.id);
         }
 
     }

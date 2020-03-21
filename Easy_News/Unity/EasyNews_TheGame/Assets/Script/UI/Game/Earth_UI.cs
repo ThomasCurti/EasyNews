@@ -22,6 +22,7 @@ public class Earth_UI : MonoBehaviour
         RaycastHit hit;
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, rayDistance))
         {
+        
             Renderer renderer = hit.transform.GetComponent<MeshRenderer>();
             Texture2D texture = renderer.material.mainTexture as Texture2D;
 
@@ -29,12 +30,15 @@ public class Earth_UI : MonoBehaviour
             pixelUV.x *= texture.width;
             pixelUV.y *= texture.height;
 
+
             Vector2 tilling = renderer.material.mainTextureScale;
             Color color = imageMap.GetPixel(Mathf.FloorToInt(pixelUV.x * tilling.x), Mathf.FloorToInt(pixelUV.y * tilling.y));
-
+            
             int index = FindIndexColor(color);
+           // Debug.Log(index);
             if (index >= 0)
             {
+               
                 Region_name_text.GetComponent<UnityEngine.UI.Text>().text = "Region: \n " + region_name[index];
             }
         }
@@ -43,7 +47,7 @@ public class Earth_UI : MonoBehaviour
     
     private int FindIndexColor(Color color) 
     {
-        //Debug.Log(ColorUtility.ToHtmlStringRGB(color));   
+        Debug.Log(ColorUtility.ToHtmlStringRGB(color));   
         for (int i = 0; i < colors.Length; i++)
         {
             if (colors[i] == color)

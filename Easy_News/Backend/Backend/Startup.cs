@@ -39,7 +39,7 @@ namespace Backend
             services.AddCors(options => {
                 options.AddPolicy("AllowAll", 
                     builder => builder.AllowAnyOrigin()
-                                      .AllowAnyMethod()
+                                      .WithMethods("GET", "HEAD")
                                       .AllowAnyHeader());
             });
 
@@ -50,9 +50,6 @@ namespace Backend
             services.AddTransient<DataAccess.DubiousArticleRepository>();
             services.AddTransient<DataAccess.EventRepository>();
             services.AddTransient<DataAccess.EventTypeRepository>();
-
-            //dependency-injected into Controller class
-            //services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

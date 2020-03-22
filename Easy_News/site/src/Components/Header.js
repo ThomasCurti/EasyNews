@@ -18,12 +18,11 @@ function Header() {
                             <a href="/">Accueil</a>
                         </li>
                         <li>
-                            <a href="/">Dernière actualité</a>
+                            <a href="/">Dernières actualités</a>
                         </li>
                         <li>
                             <div>Rechercher une actualité :</div>
                         </li>
-                        <li></li>
                         <li>
                         <input type="text" class="form-control" placeholder="Recherche"/>
                         </li>

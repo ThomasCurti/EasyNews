@@ -714,6 +714,7 @@ MonoBehaviour:
   - {r: 0.9372549, g: 0.24705882, b: 0.2784314, a: 1}
   - {r: 0.85882354, g: 0.34117648, b: 0, a: 1}
   - {r: 0.05882353, g: 0.3019608, b: 0.12941177, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   region_name:
   - Alaska
   - Canada
@@ -740,6 +741,7 @@ MonoBehaviour:
   - Afrique Centrale
   - Afrique de l'Est
   - Afrique Australe
+  - Groenland
   imageMap: {fileID: 2800000, guid: f1856ea16e6170d44aac6a71677d66b9, type: 3}
   Region_name_text: {fileID: 286171832}
 --- !u!54 &1050676201
@@ -758,6 +760,49 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1054288228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1054288230}
+  - component: {fileID: 1054288229}
+  m_Layer: 0
+  m_Name: Data_Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1054288229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054288228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202a0d45d737c6a4e99976e5ff2e2dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1054288230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054288228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8866112, y: -5.6248555, z: -2.5886562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103173869
 GameObject:
   m_ObjectHideFlags: 0

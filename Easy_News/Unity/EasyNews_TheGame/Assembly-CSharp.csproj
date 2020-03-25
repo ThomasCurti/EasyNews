@@ -66,6 +66,7 @@
     <Compile Include="Assets\Script\UI\Game\Earth_UI.cs" />
     <Compile Include="Assets\Script\UI\Game\Region.cs" />
     <Compile Include="Assets\Script\UI\Menu\menu.cs" />
+    <Compile Include="Assets\Script\monde_data.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

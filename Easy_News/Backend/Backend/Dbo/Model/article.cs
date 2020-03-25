@@ -11,7 +11,7 @@ namespace Backend.Dbo.Model
         public string title { get; set; }
         public string description { get; set; }
         public string full_article { get; set; }
-        public int source_id { get; set; }
+        public int SourceId { get; set; }
 
         public static article Parse(Object[] val)
         {
@@ -21,7 +21,7 @@ namespace Backend.Dbo.Model
                 title = val[1].ToString(),
                 description = val[2].ToString(),
                 full_article = val[3].ToString(),
-                source_id = Int32.Parse(val[4].ToString()),
+                SourceId = Int32.Parse(val[4].ToString()),
             };
         }
     }

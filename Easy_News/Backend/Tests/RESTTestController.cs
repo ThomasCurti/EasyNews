@@ -94,8 +94,10 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result;
+            Assert.IsNotNull(test);
+
             var test2 = test.ToList();
-            Assert.AreEqual(1, test2.Count);
+            Assert.AreEqual(12, test2.Count);
         }
 
         [Test]
@@ -104,7 +106,12 @@ namespace Tests
             var controller = new ArticleController(_articleRepository, false);
 
             var data = controller.Get(1).Result;
+            Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
+            Assert.AreEqual("Naissance du Coronavirus", data.title);
+            Assert.AreEqual("Le coronavirus est une maladie qui est apparu en Chine dans la ville de Wuhan.", data.description);
+            Assert.AreEqual("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan semper sodales. Fusce rhoncus, justo sed lacinia lacinia, sapien tellus dictum massa, ac viverra diam nibh non lacus. Sed tristique, eros ut fringilla sollicitudin, purus lacus facilisis orci, a euismod lectus elit sed nisi. Integer vestibulum erat vel metus consectetur auctor. Phasellus in suscipit sapien, nec rutrum dui. Maecenas tristique ornare velit, non dictum ante. Morbi interdum magna eu nulla cursus, non tincidunt odio mattis. Nam vehicula lectus ut eleifend luctus. Cras a ullamcorper lectus, ac cursus elit. Fusce nec ex risus. Morbi ipsum ligula, pulvinar ac laoreet sed, ultrices id ipsum. Duis blandit, augue vel pretium venenatis, velit sapien cursus nisl, a gravida lectus ex a dolor.", data.full_article);
+            Assert.AreEqual(1, data.SourceId);
         }
 
         [Test]
@@ -114,7 +121,7 @@ namespace Tests
 
             var data = controller.Get();
             var test = data.Result.ToList();
-            Assert.AreEqual(1, test.Count);
+            Assert.AreEqual(4, test.Count);
         }
 
         [Test]
@@ -123,7 +130,9 @@ namespace Tests
             var controller = new ArticleSourceController(_articleSourceRepository, false);
 
             var data = controller.Get(1).Result;
+            Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
+            Assert.AreEqual("AFP", data.name);
         }
 
         [Test]
@@ -142,7 +151,7 @@ namespace Tests
             var controller = new DubiousArticleController(_dubiousArticleRepository, false);
 
             var data = controller.Get(1).Result;
-            Assert.AreEqual(null, data);
+            Assert.IsNull(data);
         }
 
         [Test]
@@ -151,8 +160,10 @@ namespace Tests
             var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get();
+            Assert.IsNotNull(data);
+
             var test = data.Result.ToList();
-            Assert.AreEqual(1, test.Count);
+            Assert.AreEqual(12, test.Count);
         }
 
         [Test]
@@ -161,7 +172,11 @@ namespace Tests
             var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get(1).Result;
+            Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
+            Assert.AreEqual(new DateTime(2020, 3, 2), data.published);
+            Assert.AreEqual(1, data.TypeId);
+            Assert.AreEqual(1, data.ArticleId);
         }
 
         [Test]
@@ -170,8 +185,10 @@ namespace Tests
             var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get();
+            Assert.IsNotNull(data);
+
             var test = data.Result.ToList();
-            Assert.AreEqual(1, test.Count);
+            Assert.AreEqual(3, test.Count);
         }
 
         [Test]
@@ -180,7 +197,9 @@ namespace Tests
             var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get(1).Result;
+            Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
+            Assert.AreEqual("plague", data.name);
         }
 
     }

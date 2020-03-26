@@ -1,5 +1,7 @@
 CREATE OR REPLACE DATABASE earlynews_test;
 
+USE earlynews_test;
+
 CREATE OR REPLACE TABLE event_type (
     id   INT      AUTO_INCREMENT PRIMARY KEY,
     name CHAR(32)
@@ -38,4 +40,11 @@ CREATE OR REPLACE TABLE dubious_article (
     seen_twice          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (source_id)       REFERENCES article_source (id),
     FOREIGN KEY (other_source_id) REFERENCES article_source (id)
+);
+
+CREATE OR REPLACE TABLE logs (
+	id					INT                    AUTO_INCREMENT PRIMARY KEY,
+	type				CHAR(32)	NOT NULL,
+	class				CHAR(128) NOT NULL,
+	message		 	LONGTEXT NULL
 );

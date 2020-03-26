@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Backend.DataAccess;
+using Backend.Dbo.Model;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -6,50 +8,39 @@ namespace Backend.Logger
 {
     public static class Logger
     {
-        public static string Directory_ = string.Empty;
-        public static string File_ = string.Empty;
-
-        public static void AddFile(string directory = "", string file = "")
+        public static async Task LogInformation(string info, string classLocation, LogRepository logger)
         {
-            if (directory != "")
+            log log = new log
             {
-                Directory_ = directory;
-                if (!Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
-            }
-                
-            if (file != "")
-            {
-                File_ = file;
-            }
-                
+                Class = classLocation,
+                Type = "INFO",
+                Message = DateTime.Now.ToString() + " - " + info,
+            };
+
+            await logger.Insert(log); 
         }
 
-        public static async Task LogInformation(string info, string classLocation)
+        public static async Task LogError(Exception e, string classLocation, LogRepository logger)
         {
-            string path = Path.Combine(Directory_, File_);
-            using (StreamWriter sw = new StreamWriter(path, append: true))
-            {
-                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [INF]: " + info + " - [CLASS]: " + classLocation);
-            }
-        }
 
-        public static async Task LogError(Exception e, string classLocation)
-        {
-            string path = Path.Combine(Directory_, File_);
-            using (StreamWriter sw = new StreamWriter(path, append: true))
+            string info = e.GetType().FullName + System.Environment.NewLine + e.Message;
+            while (e.InnerException != null)
             {
-                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [ERR]: " + e.GetType().FullName + " - [CLASS]: " + classLocation);
-                await sw.WriteLineAsync(e.Message);
-                while(e.InnerException != null)
-                {
-                    e = e.InnerException;
-                    await sw.WriteLineAsync(Environment.NewLine + e.GetType().FullName + 
-                                      Environment.NewLine + e.Message);
-                }
+                e = e.InnerException;
+                info += Environment.NewLine + 
+                        e.GetType().FullName +
+                        Environment.NewLine + 
+                        e.Message;
             }
+
+            log log = new log
+            {
+                Class = classLocation,
+                Type = "ERROR",
+                Message = DateTime.Now.ToString() + " - " + info,
+            };
+
+            await logger.Insert(log);
         }
 
 

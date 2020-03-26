@@ -20,6 +20,9 @@ namespace Backend.DataAccess
 
             CreateMap<DataAccess.EFModels.EventType, Dbo.Model.event_type>();
             CreateMap<Dbo.Model.event_type, DataAccess.EFModels.EventType>();
+
+            CreateMap<DataAccess.EFModels.Logs, Dbo.Model.log>();
+            CreateMap<Dbo.Model.log, DataAccess.EFModels.Logs>();
         }
     }
 }

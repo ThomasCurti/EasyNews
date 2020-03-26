@@ -14,6 +14,7 @@ namespace Backend.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly ArticleRepository _articleRepository;
+        private LogRepository _logRepository;
         private bool _log;
 
         public ArticleController(ArticleRepository articleRepository, bool log = true)
@@ -44,7 +45,7 @@ namespace Backend.Controllers
             catch (Exception e)
             {
                 if (_log)
-                    await Logger.Logger.LogError(e, "ArticleController");
+                    await Logger.Logger.LogError(e, "ArticleController", _logRepository);
                 Console.WriteLine(e.ToString());
                 return null;
             }

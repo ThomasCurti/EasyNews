@@ -16,6 +16,7 @@ namespace Backend.Controllers
     public class EventTypeController : ControllerBase
     {
         private readonly EventTypeRepository _eventTypeRepository;
+        private LogRepository _logRepository;
         private bool _log { get; }
 
         public EventTypeController(EventTypeRepository eventTypeRepository, bool log = true)
@@ -46,7 +47,7 @@ namespace Backend.Controllers
             catch (Exception e)
             {
                 if (_log)
-                    await Logger.Logger.LogError(e, "EventTypeController");
+                    await Logger.Logger.LogError(e, "EventTypeController", _logRepository);
                 return null;
             }
         }

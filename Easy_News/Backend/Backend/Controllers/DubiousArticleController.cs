@@ -17,6 +17,7 @@ namespace Backend.Controllers
     public class DubiousArticleController : ControllerBase
     {
         private readonly DubiousArticleRepository _dubiousArticleRepository;
+        private LogRepository _logRepository;
         private bool _log { get; }
 
         public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, bool log = true)
@@ -47,7 +48,7 @@ namespace Backend.Controllers
             catch (Exception e)
             {
                 if (_log)
-                    await Logger.Logger.LogError(e, "DubiousArticleController");
+                    await Logger.Logger.LogError(e, "DubiousArticleController", _logRepository);
                 return null;
             }
         }

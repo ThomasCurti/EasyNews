@@ -49,11 +49,13 @@ namespace Tests
                     _context.connectionString = gitlabConnection;
                 _mapper = MappingData();
 
-                _articleRepository = new ArticleRepository(_context, _mapper);
-                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper);
-                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper);
-                _eventRepository = new EventRepository(_context, _mapper);
-                _eventTypeRepository = new EventTypeRepository(_context, _mapper);
+                var logger = new LogRepository(_context, _mapper);
+
+                _articleRepository = new ArticleRepository(_context, _mapper, logger);
+                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper, logger);
+                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger);
+                _eventRepository = new EventRepository(_context, _mapper, logger);
+                _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger);
             }
 
             if (!isSetup && !isLocal)

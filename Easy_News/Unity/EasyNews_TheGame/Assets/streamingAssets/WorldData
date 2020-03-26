@@ -1,0 +1,37 @@
+{
+	"CountryList": [
+				{
+					"Id":0,
+					"Name" : "Groenland",
+					"Climat" : 1,
+					"CityList" : [
+							{
+								"Id":1,
+								"Name":"Nunk",
+								"PopTotal": 17635,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":2,
+								"Name":"Reykjavik",
+								"PopTotal": 122853 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							}
+							
+							
+						]
+				}
+			]
+}

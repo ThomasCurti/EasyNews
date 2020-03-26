@@ -44,7 +44,7 @@ namespace Backend.Controllers
             catch (Exception e)
             {
                 if (_log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "ArticleController");
                 Console.WriteLine(e.ToString());
                 return null;
             }

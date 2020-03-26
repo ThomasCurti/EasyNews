@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Logger
 {
-    public static class LoggerFactory
+    public static class Logger
     {
         public static string Directory_ = string.Empty;
         public static string File_ = string.Empty;
@@ -27,21 +27,21 @@ namespace Backend.Logger
                 
         }
 
-        public static async Task LogInformation(string info)
+        public static async Task LogInformation(string info, string classLocation)
         {
             string path = Path.Combine(Directory_, File_);
             using (StreamWriter sw = new StreamWriter(path, append: true))
             {
-                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [INF]: " + info);
+                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [INF]: " + info + " - [CLASS]: " + classLocation);
             }
         }
 
-        public static async Task LogError(Exception e)
+        public static async Task LogError(Exception e, string classLocation)
         {
             string path = Path.Combine(Directory_, File_);
             using (StreamWriter sw = new StreamWriter(path, append: true))
             {
-                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [ERR]: " + e.GetType().FullName);
+                await sw.WriteLineAsync(DateTime.Now.ToString() + " - [ERR]: " + e.GetType().FullName + " - [CLASS]: " + classLocation);
                 await sw.WriteLineAsync(e.Message);
                 while(e.InnerException != null)
                 {

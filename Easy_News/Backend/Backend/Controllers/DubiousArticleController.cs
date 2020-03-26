@@ -47,7 +47,7 @@ namespace Backend.Controllers
             catch (Exception e)
             {
                 if (_log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "DubiousArticleController");
                 return null;
             }
         }

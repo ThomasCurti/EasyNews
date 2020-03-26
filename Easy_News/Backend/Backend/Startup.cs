@@ -55,7 +55,7 @@ namespace Backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Logger.LoggerFactory.AddFile("Log", DateTime.Now.ToString("MM_dd_yyyy_HH_mm") + "-Log.txt");
+            //Logger.Logger.AddFile("Log", DateTime.Now.ToString("MM_dd_yyyy_HH_mm") + "-Log.txt");
 
             if (env.IsDevelopment())
             {

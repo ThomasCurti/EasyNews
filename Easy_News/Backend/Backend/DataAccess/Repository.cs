@@ -41,7 +41,7 @@ namespace Backend.DataAccess
             catch (Exception e)
             {
                 if (Log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "Repository");
                 return false;
             }
         }
@@ -68,7 +68,7 @@ namespace Backend.DataAccess
             catch (Exception e)
             {
                 if (Log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "Repository");
                 Console.WriteLine(e.ToString());
                 return null;
             }
@@ -87,7 +87,7 @@ namespace Backend.DataAccess
             catch(Exception e)
             {
                 if (Log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "Repository");
                 return null;
             }
         }
@@ -110,7 +110,7 @@ namespace Backend.DataAccess
             catch (Exception e)
             {
                 if (Log)
-                    await LoggerFactory.LogError(e);
+                    await Logger.Logger.LogError(e, "Repository");
                 return null;
             }
             return _mapper.Map<ModelEntity>(dBEntity);

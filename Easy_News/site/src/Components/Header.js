@@ -2,6 +2,7 @@ import React from 'react';
 
 // CSS
 import '../Assets/scss/Header.scss';
+import {Link} from "react-router-dom";
 
 function Header() {
     return (
@@ -9,22 +10,22 @@ function Header() {
 
             <div className="container">
                 <div className="Logo">
-                    <a href="/">Easy News</a>
+                    <Link to="/">Easy News</Link>
                 </div>
 
                 <nav>
                     <ul>
                         <li>
-                            <a href="/">Accueil</a>
+                            <Link to="/">Accueil</Link>
                         </li>
                         <li>
-                            <a href="/">Dernières actualités</a>
+                            <Link to="/list">Dernières actualités</Link>
                         </li>
                         <li>
                             <div>Rechercher une actualité :</div>
                         </li>
                         <li>
-                        <input type="text" class="form-control" placeholder="Recherche"/>
+                        <input type="text" className="form-control" placeholder="Recherche"/>
                         </li>
                     </ul>
                 </nav>

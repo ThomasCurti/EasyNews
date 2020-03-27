@@ -1,0 +1,27 @@
+@import "Default_min";
+
+.title{
+  padding-bottom: 10px;
+}
+
+.description{
+  padding-bottom: 20px;
+}
+
+.full_article{
+  padding-bottom: 15px;
+}
+
+a.source{
+  color: $black;
+}
+
+.article{
+  border: solid 1px black;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+  a{
+    color: $black;
+  }
+}

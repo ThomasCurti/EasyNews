@@ -31,8 +31,21 @@ namespace Backend
              });
              */
 
+            string connectionString = Configuration["ConnectionStrings:Default"];
+
+            AppDb db = new AppDb(connectionString);
+            try
+            {
+                db.Connection.Open();
+                db.Connection.Close();
+            }
+            catch
+            {
+                connectionString = "server=mariadb;user=root;port=3306;password=admin;database=earlynews_test";
+            }
+
             services
-                .AddDbContext<DataAccess.EFModels.earlynews_testContext>(options => options.UseMySql(Configuration["ConnectionStrings:Default"]));
+                .AddDbContext<DataAccess.EFModels.earlynews_testContext>(options => options.UseMySql(connectionString));
 
             services.AddAutoMapper(typeof(DataAccess.AutomapperProfiles));
 

@@ -17,11 +17,15 @@ build-project:
     
     image: mcr.microsoft.com/dotnet/core/sdk:3.1
     before_script:
-        - "cd Easy_News"
-        - "cd $PROJECT_NAME"
-        - "dotnet restore"
-        - "dotnet build $PROJECT_NAME.sln"
+        - apt-get update -y
+        - apt-get install -yq nodejs npm
+        - cd Easy_News
+        - cd $PROJECT_NAME
+        - dotnet restore
+        - dotnet build $PROJECT_NAME.sln
     script:
         - dotnet test Tests
-        - dotnet run dotnet run --project .\Backend\Backend.csproj
-        - cd ../site; npm test
+        - nohup dotnet run --project Backend/Backend.csproj &
+        - cd ../site; 
+        - npm install
+        - npm test

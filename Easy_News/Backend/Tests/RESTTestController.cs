@@ -85,6 +85,8 @@ namespace Tests
                 comm.CommandText = File.ReadAllText(path);
                 comm.ExecuteNonQuery();
 
+                Console.WriteLine(comm.CommandText);
+
                 db.Connection.Close();
             }
         }

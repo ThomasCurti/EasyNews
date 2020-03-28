@@ -23,3 +23,5 @@ build-project:
         - "dotnet build $PROJECT_NAME.sln"
     script:
         - dotnet test Tests
+        - dotnet run dotnet run --project .\Backend\Backend.csproj
+        - cd ../site; npm test

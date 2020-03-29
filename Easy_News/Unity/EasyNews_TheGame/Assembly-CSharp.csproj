@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\UI\Game\CityUI.cs" />
     <Compile Include="Assets\Script\UI\Game\Earth_UI.cs" />
+    <Compile Include="Assets\Script\UI\Game\Interface.cs" />
     <Compile Include="Assets\Script\UI\Game\Region.cs" />
     <Compile Include="Assets\Script\UI\Menu\menu.cs" />
     <Compile Include="Assets\Script\monde_data.cs" />

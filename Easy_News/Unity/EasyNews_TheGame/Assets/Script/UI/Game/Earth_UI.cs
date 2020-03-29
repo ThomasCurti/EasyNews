@@ -108,8 +108,8 @@ public class Earth_UI : MonoBehaviour
             Vector3 tmpPosition = new Vector3(ButtonCityParent.transform.position.x, yPosition, ButtonCityParent.transform.position.z);
             tmp.transform.position = tmpPosition;
 
-
             tmp.GetComponentInChildren<Text>().text = selectedRegion.CityList[i].Name;
+            tmp.GetComponent<CityUI>().city = selectedRegion.CityList[i];
         }
     }
 

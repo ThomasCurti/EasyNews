@@ -2,6 +2,7 @@
 	"CountryList": [
 				{
 					"Id":0,
+					"CountryColor":"#FFFFFF",
 					"Name" : "Groenland",
 					"Climat" : 1,
 					"CityList" : [
@@ -28,9 +29,127 @@
 										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
 										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
 								]
+							}	
+						]
+				},
+				{
+					"Id":1,
+					"CountryColor":"#0080C0",
+					"Name" : "Alaska",
+					"Climat" : 1,
+					"CityList" : [
+							{
+								"Id":1,
+								"Name":"Juneau",
+								"PopTotal": 32164,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
 							}
-							
-							
+						]
+				},
+				{
+					"Id":2,
+					"CountryColor":"#99D9EA",
+					"Name" : "Canada",
+					"Climat" : 1,
+					"CityList" : [
+							{
+								"Id":1,
+								"Name":"Ottawa",
+								"PopTotal": 994837 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":2,
+								"Name":"Vancouver",
+								"PopTotal": 675218 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							}
+						]
+				},
+				{
+					"Id":3,
+					"CountryColor":"#FF7F27",
+					"Name" : "Etat Unis",
+					"Climat" : 1,
+					"CityList" : [
+							{
+								"Id":1,
+								"Name":"Washington",
+								"PopTotal": 633427,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":2,
+								"Name":"New York",
+								"PopTotal": 8623000,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":3,
+								"Name":"Miami",
+								"PopTotal": 463347 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":4,
+								"Name":"Los Angeles",
+								"PopTotal": 4000000 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							},
+							{
+								"Id":4,
+								"Name":"San Francisco",
+								"PopTotal": 884363 ,
+								"PopInfecte": 0,
+								"PopMort": 0,
+								"Revenu": 0,
+								"InfraList": [
+										{ "Id" : 1, "TypeId" : 0, "Status" : 2 },
+										{ "Id" : 2, "TypeId" : 0, "Status" : 2 }
+								]
+							}
 						]
 				}
 			]

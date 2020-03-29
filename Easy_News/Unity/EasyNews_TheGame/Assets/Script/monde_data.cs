@@ -4,6 +4,8 @@ using UnityEngine;
 using System.IO;
 public class monde_data : MonoBehaviour
 {
+    public GameObject earth_map;
+
     public World TheWorld;
 
     
@@ -18,6 +20,24 @@ public class monde_data : MonoBehaviour
         string chemin = Application.streamingAssetsPath + file;
         string jsonString = File.ReadAllText(chemin);
         TheWorld = JsonUtility.FromJson<World>(jsonString);
+
+
+        earth_map.GetComponent<Earth_UI>().CreateRegionColorList();
+    }
+
+    public Country FindCountryById(int id)
+    {
+        if (id < 0)
+            return null;
+
+        for(int i = 0; i < TheWorld.CountryList.Count; i++)
+        {
+            if(TheWorld.CountryList[i].Id == id)
+            {
+                return TheWorld.CountryList[i];
+            }
+        }
+        return null;
     }
 
 
@@ -33,6 +53,7 @@ public class World
 public class Country
 {
     public int Id;
+    public string CountryColor;
     public string Name;
     public int Climat;
     public List<City> CityList;

@@ -5,8 +5,9 @@ import * as serviceWorker from './serviceWorker';
 // Bootstrap
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js';
-import App from "./Components/App";
 
+// App
+import App from "./Components/App";
 
 ReactDOM.render(<App />, document.getElementById("app"));
 

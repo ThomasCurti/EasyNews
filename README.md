@@ -23,6 +23,7 @@ sudo service mysql start
 If this works
 --
 sudo service mysql status 
+
 mysql
 
 mysql> SHOW GLOBAL VARIABLES LIKE 'PORT';

@@ -12,10 +12,6 @@
   padding-bottom: 15px;
 }
 
-a.source{
-  color: $black;
-}
-
 .article{
   border: solid 1px black;
   margin-bottom: 10px;
@@ -23,5 +19,23 @@ a.source{
 
   a{
     color: $black;
+  }
+}
+
+.pagination{
+
+  justify-content: space-between;
+
+  a{
+    color: $black;
+  }
+}
+
+.list-pagination{
+  display: flex;
+  justify-content: space-between;
+
+  .pagination-right, .pagination-left{
+    width: 100px;
   }
 }

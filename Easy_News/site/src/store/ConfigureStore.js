@@ -1,10 +1,8 @@
-import { createStore } from 'redux';
-import GetAllArticlesReducer from '../reducers/GetAllArticlesReducer';
+import {createStore} from 'redux';
+import allReducers from "../reducers/AllReducers";
 
-const configureStore = () => {
+export default function configureStore(){
     return createStore(
-        GetAllArticlesReducer,
-    );
-};
-
-export default configureStore
+        allReducers,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+}

@@ -16,7 +16,12 @@ const client = axios.create({
     httpsAgent: agent
 });
 */
-const initialState = [
+import * as actionTypes from '../actions/ActionsTypes'
+
+const TOTAL_PER_PAGE = 5;
+
+const initialState = {
+    listArticles : [
         {
             id: 1,
             title : "Article 1",
@@ -51,13 +56,41 @@ const initialState = [
             description : "Description de l'article 5",
             full_article : "Ceci est le texte complet de l'article 5.",
             source : "https://www.google.com/",
-        }
-];
+        }],
+    page: 0,
+    totalPages: 1,
+    TOTAL_PER_PAGE: 5
+};
 
 const GetAllArticlesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'REQUEST_POSTS_ARTICLES':
-            return action.payload;
+        case actionTypes.REQUEST_POSTS_ARTICLES:
+            return {
+                ...state,
+                listArticles: action.payload,
+                page: 0,
+                totalPages: Math.ceil(action.payload.length / TOTAL_PER_PAGE)
+            };
+        case actionTypes.PAGINATION_SET:
+            return {
+                ...state,
+                page: action.payload
+            };
+        case actionTypes.PAGINATION_UP:
+            return {
+                ...state,
+                page: state.page + 1
+            };
+        case actionTypes.PAGINATION_DOWN:
+            return {
+                ...state,
+                page: state.page - 1
+            };
+        case actionTypes.PAGINATION_RESET:
+            return {
+                ...state,
+                page: 0
+            };
         default:
             return state;
     }

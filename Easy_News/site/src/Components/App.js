@@ -78,7 +78,7 @@ class App extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        listArticles: state.listArticles,
+        listArticles: state.Articles.listArticles,
     };
 };
 

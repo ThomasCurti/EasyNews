@@ -5,7 +5,7 @@ import {combineReducers} from "redux";
 import GetAllArticlesReducer from './GetAllArticlesReducer';
 
 const allReducers = combineReducers({
-   listArticles : GetAllArticlesReducer
+   Articles : GetAllArticlesReducer
 });
 
 export default allReducers;

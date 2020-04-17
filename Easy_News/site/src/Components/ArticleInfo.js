@@ -66,9 +66,9 @@ class ArticleInfo extends React.Component{
 
 const mapStateToProps = (state, ownProps) => {
     let article_id = ownProps.match.params.id;
-    const article = state.listArticles.find(article => article.id.toString() === article_id);
+    const article = state.Articles.listArticles.find(article => article.id.toString() === article_id);
     if (article){
-        return { article : article, length : state.listArticles.length + 1}
+        return { article : article, length : state.Articles.listArticles.length + 1}
     }
     else{
         return {}

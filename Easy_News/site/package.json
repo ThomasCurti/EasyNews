@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "lodash.times": "^4.3.2",
     "node-sass": "^4.13.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
@@ -19,7 +20,9 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
     "start": "react-scripts start",

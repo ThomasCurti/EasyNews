@@ -5,10 +5,16 @@ import {connect} from "react-redux";
 
 // CSS
 import '../Assets/scss/Article.scss';
+import 'semantic-ui-css/components/icon.min.css';
+import 'semantic-ui-css/components/menu.min.css';
 
-const TOTAL_PER_PAGE = 5;
+// semantic
+import { Menu, Icon } from 'semantic-ui-react';
+import times from 'lodash.times';
 
-function renderListArticles(listArticles, startIndex) {
+import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../actions/Actions";
+
+function renderListArticles(listArticles, startIndex, TOTAL_PER_PAGE) {
     const listData = listArticles.length ? (
         listArticles.slice(startIndex, startIndex + TOTAL_PER_PAGE).map((article, key) => {
             return (
@@ -26,63 +32,47 @@ function renderListArticles(listArticles, startIndex) {
 }
 
 class List_articles extends React.Component{
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            page: 0,
-            totalPages: 0,
-        };
-        this.incrementPage = this.incrementPage.bind(this);
-        this.decrementPage = this.decrementPage.bind(this);
-        this.setPage = this.setPage.bind(this);
+    componentDidMount() {
+        this.props.Pagination_RESET()
     }
 
-    setPage(page) {
-        return () => {
-            this.setState({ page });
-        };
-    }
+    decrementPage = () => {
+        this.props.Pagination_DOWN()
+    };
 
-    decrementPage() {
-        const { page } = this.state;
-        this.setState({ page: page - 1 });
-    }
+    incrementPage = () => {
+        this.props.Pagination_UP()
+    };
 
-    incrementPage() {
-        const { page } = this.state;
-        this.setState({ page: page + 1 });
-    }
-
-    componentDidMount(){
-        const totalPages = Math.ceil(this.props.listArticles.length / TOTAL_PER_PAGE);
-
-        this.setState({
-            page: 0,
-            totalPages,
-        });
-    }
+    setPage = (page) => {
+        this.props.Pagination_SET(page);
+    };
 
     renderPagination(page, totalPages) {
-        return (
-            <div className={"list-pagination"}>
-                {page !== 0 ? <button className={"pagination-left"} onClick={this.decrementPage}>
-                    Précédent
-                </button> : <div className={"pagination-left"}/> }
-                <div> Page {page + 1} / {totalPages}</div>
-                {page !== (totalPages - 1) ? <button className={"pagination-right"} onClick={this.incrementPage}>
-                    Suivant
-                </button> : <div className={"pagination-right"}/>}
-            </div>
+        return(
+            <Menu floated="right" pagination>
+                {page !== 0 && <Menu.Item as="a" icon onClick={this.decrementPage}>
+                    <Icon name="left chevron" />
+                </Menu.Item>}
+                {times(totalPages, n =>
+                    (<Menu.Item as="a" key={n} active={n === page} onClick={() => this.setPage(n)}>
+                        {n + 1}
+                    </Menu.Item>),
+                )}
+                {page !== (totalPages - 1) && <Menu.Item as="a" icon onClick={this.incrementPage}>
+                    <Icon name="right chevron" />
+                </Menu.Item>}
+            </Menu>
         );
     }
 
     render() {
-        const { page, totalPages } = this.state;
+        const { page, totalPages, TOTAL_PER_PAGE } = this.props;
         const startIndex = page * TOTAL_PER_PAGE;
 
         const listArticles = this.props.listArticles;
-        const listData = renderListArticles(listArticles, startIndex);
+        const listData = renderListArticles(listArticles, startIndex, TOTAL_PER_PAGE);
         const pagination = this.renderPagination(page, totalPages);
 
         return (
@@ -96,8 +86,11 @@ class List_articles extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        listArticles: state.listArticles,
+        listArticles: state.Articles.listArticles,
+        totalPages: state.Articles.totalPages,
+        page: state.Articles.page,
+        TOTAL_PER_PAGE: state.Articles.TOTAL_PER_PAGE,
     };
 };
 
-export default connect(mapStateToProps)(List_articles);
+export default connect(mapStateToProps, {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET})(List_articles);

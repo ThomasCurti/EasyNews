@@ -4,10 +4,6 @@ import {connect} from "react-redux";
 // CSS
 import '../Assets/scss/Article.scss';
 
-// client
-import {client, getAllArticlesApiCall} from '../Client'
-import {getAllArticles} from "../actions/Actions";
-
 // Router
 import {Link} from "react-router-dom";
 
@@ -55,10 +51,6 @@ function renderPagination(article, length) {
 
 class ArticleInfo extends React.Component{
 
-    componentDidMount() {
-        client.get(getAllArticlesApiCall).then(res => this.props.setListArticles(res.data));
-    }
-
     render() {
         const article = renderArticle(this.props.article);
         const pagination = this.props.article ? renderPagination(this.props.article, this.props.length) : (<div/>);
@@ -78,12 +70,9 @@ const mapStateToProps = (state, ownProps) => {
     if (article){
         return { article : article, length : state.listArticles.length + 1}
     }
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setListArticles: data => dispatch(getAllArticles(data))
+    else{
+        return {}
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleInfo);
+export default connect(mapStateToProps)(ArticleInfo);

@@ -6,12 +6,6 @@ import {connect} from "react-redux";
 // CSS
 import '../Assets/scss/Article.scss';
 
-// Actions
-import { getAllArticles } from '../actions/Actions'
-
-// client
-import {client, getAllArticlesApiCall} from '../Client'
-
 const TOTAL_PER_PAGE = 5;
 
 function renderListArticles(listArticles, startIndex) {
@@ -61,14 +55,11 @@ class List_articles extends React.Component{
     }
 
     componentDidMount(){
-        client.get(getAllArticlesApiCall).then(res => {
-            this.props.setListArticles(res.data);
-            const totalPages = Math.ceil(res.data.length / TOTAL_PER_PAGE);
+        const totalPages = Math.ceil(this.props.listArticles.length / TOTAL_PER_PAGE);
 
-            this.setState({
-                page: 0,
-                totalPages,
-            });
+        this.setState({
+            page: 0,
+            totalPages,
         });
     }
 
@@ -109,35 +100,4 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setListArticles: data => dispatch(getAllArticles(data))
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(List_articles);
-
-/*
-const ListOfArticles = () => {
-    const listArticles = useSelector(state => state.listArticles);
-    const dispatch = useDispatch();
-
-    const listData = listArticles.length ? (
-        listArticles.map(article => {
-            return (
-                <Article id={article.id} title={article.title} description={article.description}/>
-            );
-        })
-    ): (
-        <p>Aucun articles pour le moment.</p>
-    );
-    return (
-        <div className={"list_article"}>
-            <button onClick={() => dispatch(getAllArticles())}>Refresh</button>
-            {listData}
-        </div>
-    );
-};
-
-export default ListOfArticles;
-*/
+export default connect(mapStateToProps)(List_articles);

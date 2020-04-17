@@ -4,3 +4,10 @@ export const getAllArticles = (payload) => {
         payload
     };
 };
+
+export const searchArticles = (payload) => dispatch => {
+    dispatch({
+        type: 'SEARCH_TEXT',
+        payload: payload
+    });
+};

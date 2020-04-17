@@ -4,36 +4,41 @@ import React from 'react';
 import '../Assets/scss/Header.scss';
 import {Link} from "react-router-dom";
 
-function Header() {
-    return (
-        <header>
+import {searchArticles} from '../actions/Actions'
 
-            <div className="container">
-                <div className="Logo">
-                    <Link to="/">Easy News</Link>
+class Header extends React.Component{
+
+    onChange = e => dispatch => {
+        dispatch(searchArticles(e.target.value))
+    };
+
+    render(){
+        return (
+            <header>
+                <div className="container">
+                    <div className="Logo">
+                        <Link to="/">Easy News</Link>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Accueil</Link>
+                            </li>
+                            <li>
+                                <Link to="/list">Dernières actualités</Link>
+                            </li>
+                            <li>
+                                <div>Rechercher une actualité :</div>
+                            </li>
+                            <li>
+                                <input type="text" className="form-control" placeholder="Recherche" onChange={this.onChange}/>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Accueil</Link>
-                        </li>
-                        <li>
-                            <Link to="/list">Dernières actualités</Link>
-                        </li>
-                        <li>
-                            <div>Rechercher une actualité :</div>
-                        </li>
-                        <li>
-                        <input type="text" className="form-control" placeholder="Recherche"/>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-
-        </header>
-    );
+            </header>
+        );
+    }
 }
 
 export default Header;

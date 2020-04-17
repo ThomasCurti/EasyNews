@@ -13,8 +13,6 @@ import App from "./Components/App";
 import {Provider} from "react-redux";
 import configureStore from "./store/ConfigureStore";
 
-
-
 const store = configureStore();
 
 ReactDOM.render(

@@ -5,11 +5,12 @@ import '../Assets/scss/Header.scss';
 import {Link} from "react-router-dom";
 
 import {searchArticles} from '../actions/Actions'
+import {connect} from "react-redux";
 
 class Header extends React.Component{
 
-    onChange = e => dispatch => {
-        dispatch(searchArticles(e.target.value))
+    onChange = e => {
+        this.props.searchArticles(e.target.value)
     };
 
     render(){
@@ -41,4 +42,4 @@ class Header extends React.Component{
     }
 }
 
-export default Header;
+export default connect(null, {searchArticles})(Header);

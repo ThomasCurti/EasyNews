@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Article from "./Article";
+import {renderListArticles} from './List_articles';
 import {connect} from "react-redux";
 
 // CSS
@@ -12,26 +12,10 @@ import 'semantic-ui-css/components/menu.min.css';
 import { Menu, Icon } from 'semantic-ui-react';
 import times from 'lodash.times';
 
+// Actions
 import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../actions/Actions";
 
-export function renderListArticles(listArticles, startIndex, TOTAL_PER_PAGE) {
-    const listData = listArticles.length ? (
-        listArticles.slice(startIndex, startIndex + TOTAL_PER_PAGE).map((article, key) => {
-            return (
-                <Article id={article.id} title={article.title} description={article.description} key={key}/>
-            );
-        })
-    ): (
-        <p>Aucun articles pour le moment.</p>
-    );
-    return (
-        <div className={"list_article"}>
-            {listData}
-        </div>
-    );
-}
-
-class List_articles extends React.Component{
+class SearchResults extends React.Component{
 
     componentDidMount() {
         this.props.Pagination_RESET()
@@ -68,17 +52,17 @@ class List_articles extends React.Component{
     }
 
     render() {
-        const { page, totalPages, TOTAL_PER_PAGE } = this.props;
-        const startIndex = page * TOTAL_PER_PAGE;
+        const { searchPage, searchTotalPages, TOTAL_PER_PAGE } = this.props;
+        const startIndex = searchPage * TOTAL_PER_PAGE;
 
-        const listArticles = this.props.listArticles;
-        const listData = renderListArticles(listArticles, startIndex, TOTAL_PER_PAGE);
-        const pagination = this.renderPagination(page, totalPages);
+        const searchListArticles = this.props.searchListArticles;
+        const listData = renderListArticles(searchListArticles, startIndex, TOTAL_PER_PAGE);
+        const pagination = this.renderPagination(searchPage, searchTotalPages);
 
         return (
             <div className={"list_article"}>
                 {listData}
-                {totalPages !== 1 && pagination}
+                {searchTotalPages !== 1 && pagination}
             </div>
         );
     }
@@ -86,11 +70,11 @@ class List_articles extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        listArticles: state.Articles.listArticles,
-        totalPages: state.Articles.totalPages,
-        page: state.Articles.page,
+        searchListArticles: state.Articles.searchListArticles,
+        searchTotalPages: state.Articles.searchTotalPages,
+        searchPage: state.Articles.page,
         TOTAL_PER_PAGE: state.Articles.TOTAL_PER_PAGE,
     };
 };
 
-export default connect(mapStateToProps, {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET})(List_articles);
+export default connect(mapStateToProps, {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET})(SearchResults);

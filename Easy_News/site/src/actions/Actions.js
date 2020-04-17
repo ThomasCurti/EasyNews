@@ -32,9 +32,15 @@ export const Pagination_RESET = () => {
     };
 };
 
-export const searchArticles = (payload) => dispatch => {
-    dispatch({
+export const searchArticles = (payload) => {
+    return {
         type: types.SEARCH_TEXT,
-        payload: payload
-    });
+        payload
+    };
+};
+
+export const searchTextClear = () => {
+    return {
+        type: types.SEARCH_TEXT_CLEAR,
+    };
 };

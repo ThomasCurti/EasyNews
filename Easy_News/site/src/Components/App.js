@@ -10,9 +10,16 @@ import {connect} from "react-redux";
 import '../Assets/scss/Home.scss';
 
 import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+
+// Components
 import Home from "./Home";
 import List_articles from "./List_articles";
+import SearchResults from "./SearchResults";
+
+// Actions
 import {getAllArticles} from "../actions/Actions";
+
+// Client
 import {client, getAllArticlesApiCall} from "../Client";
 
 class App extends React.Component{
@@ -22,10 +29,13 @@ class App extends React.Component{
     }
 
     render() {
+
+        const searchText = this.props.searchText;
+
         return (
             <div className="App">
                 <BrowserRouter>
-                    <Header/>
+                    <Header />
                     <div className="container">
                         <div className="row">
                             <div className="col-2">
@@ -60,11 +70,15 @@ class App extends React.Component{
                             <div className="col-1"/>
                             <div className="col-8">
 
-                                <Switch>
-                                    <Route exact path={"/"} component={Home} />
-                                    <Route path={"/list"} component={List_articles} />
-                                    <Route path={"/article/:id"} component={ArticleInfo} />
-                                </Switch>
+                                {searchText === '' ? (
+                                    <Switch>
+                                        <Route exact path={"/"} component={Home} />
+                                        <Route path={"/list"} component={List_articles} />
+                                        <Route path={"/article/:id"} component={ArticleInfo} />
+                                    </Switch>
+                                ) : (
+                                    <SearchResults />
+                                )}
 
                             </div>
                         </div>
@@ -79,6 +93,7 @@ class App extends React.Component{
 const mapStateToProps = state => {
     return {
         listArticles: state.Articles.listArticles,
+        searchText: state.Articles.searchText,
     };
 };
 

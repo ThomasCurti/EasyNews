@@ -59,17 +59,22 @@ const initialState = {
         }],
     page: 0,
     totalPages: 1,
-    TOTAL_PER_PAGE: 5
+    TOTAL_PER_PAGE: 5,
+    searchText: '',
+    searchTotalPages: 1,
+    searchListArticles : [],
 };
 
 const GetAllArticlesReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.REQUEST_POSTS_ARTICLES:
+            const totalPagesTmp = Math.ceil(action.payload.length / TOTAL_PER_PAGE);
+            const totalPages = totalPagesTmp ? totalPagesTmp : 1;
             return {
                 ...state,
                 listArticles: action.payload,
                 page: 0,
-                totalPages: Math.ceil(action.payload.length / TOTAL_PER_PAGE)
+                totalPages: totalPages
             };
         case actionTypes.PAGINATION_SET:
             return {
@@ -90,6 +95,27 @@ const GetAllArticlesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 page: 0
+            };
+        case  actionTypes.SEARCH_TEXT:
+            const searchTextLowerCase = action.payload.toLowerCase();
+            const searchListArticles = state.listArticles.filter((item) => {
+                const itemLowerCase = item.title.toLowerCase();
+                return itemLowerCase.includes(searchTextLowerCase);
+            });
+            const searchTotalPagesTmp = Math.ceil(searchListArticles.length / TOTAL_PER_PAGE);
+            const searchTotalPages = searchTotalPagesTmp ? searchTotalPagesTmp : 1;
+
+            return {
+                ...state,
+                searchText: action.payload,
+                searchListArticles: searchListArticles,
+                searchTotalPages: searchTotalPages,
+                page: 0,
+            };
+        case actionTypes.SEARCH_TEXT_CLEAR:
+            return {
+              ...state,
+                searchText: ''
             };
         default:
             return state;

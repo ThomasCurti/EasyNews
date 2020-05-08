@@ -23,16 +23,13 @@ class Header extends React.Component{
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Accueil</Link>
-                            </li>
-                            <li>
                                 <Link to="/list">Dernières actualités</Link>
                             </li>
                             <li>
-                                <div>Rechercher une actualité :</div>
+                                <Link to="/list">Easy News le jeu</Link>
                             </li>
                             <li>
-                                <input type="text" className="form-control" placeholder="Recherche" onChange={this.onChange}/>
+                                <input type="text" className="form-control" placeholder="Rechercher une actualité" onChange={this.onChange}/>
                             </li>
                         </ul>
                     </nav>

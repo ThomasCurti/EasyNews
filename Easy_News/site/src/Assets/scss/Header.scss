@@ -3,23 +3,32 @@
 header {
   display: block;
   width: 100%;
-  background: $black;
+  background: #F9F6F7;
   color: $white;
   height: 70px;
   margin-bottom: 20px;
+  font-family: Roboto;
 
   .container {
     height: 100%;
+    width: 100%;
     display: flex;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
   }
 
   .Logo {
     height: 100%;
+    width: 20%;
     display: flex;
-
+    float: left;
     a {
       margin: auto;
       text-align: center;
+      font-size: 200%;
+      font-family: Roboto Black;
+      color: #FF971D;
     }
   }
 
@@ -33,23 +42,35 @@ header {
   nav {
     display: flex;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0;
+    float: right;
 
     ul {
       display: flex;
       align-items: center;
-      float: left;
+      float: right;
 
       li {
         list-style-type: none;
         position: relative;
         display: block;
-        float: left;
+        float: right;
+        color: #FF971D;
 
         a {
           padding: 15px 20px;
+          color: #FF971D;
+        }
+        a:hover {
+          color: #FFE8D6
         }
       }
+
     }
+  }
+
+  .form-control {
+    border-radius: 100px;
+    background-color: #FFE8D6;
   }
 }

@@ -24,6 +24,13 @@ import {client, getAllArticlesApiCall} from "../Client";
 
 class App extends React.Component{
 
+    /*
+      Principal #FFFFFF
+      Second Princiapl #F9F6F7
+      Secondaire #FFE8D6
+      Second Secondaire #FF971D
+    * */
+
     componentDidMount() {
         client.get(getAllArticlesApiCall).then(res => this.props.setListArticles(res.data));
     }

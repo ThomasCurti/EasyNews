@@ -13,7 +13,7 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
 
 async function getArticles() {
     const response = await client.get('https://localhost/api/Article');
-    return response.data.length;
+    return response.data;
 }
 
 module.exports = getArticles;

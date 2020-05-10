@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 
 // CSS
-import '../Assets/scss/Article.scss';
+import '../Assets/scss/ArticleInfo.scss';
 
 // Router
 import {Link} from "react-router-dom";
@@ -10,13 +10,13 @@ import {Link} from "react-router-dom";
 function renderArticle(article) {
     return article ? (
         <article>
-            <h1 className={"title"}>
+            <h1 className="titleInfo">
                 {article.title}
             </h1>
-            <h4 className={"description"}>
+            <h4 className="descriptionInfo">
                 {article.description}
             </h4>
-            <div className={"full_article"}>
+            <div className="fullArticleInfo">
                 {article.full_article}
             </div>
         </article>
@@ -34,16 +34,16 @@ function renderPagination(article, length) {
     const previousArticleLink = previousArticleId !== 0 ? "/article/" + previousArticleId : "/";
     const nextArticleLink = nextArticleId !== length ? "/article/" + nextArticleId : "/";
 
-    const previousArticleText = "<<< Article précédent";
-    const nextArticleText = "Article suivant >>>";
+    const previousArticleText = "< Article précédent";
+    const nextArticleText = "Article suivant >";
 
     const previousArticle = previousArticleLink === "/" ? <div/> : (<Link to={previousArticleLink}>{previousArticleText}</Link>);
     const nextArticle = nextArticleLink === "/" ? <div/> : (<Link to={nextArticleLink}>{nextArticleText}</Link>);
 
     return (
-        <div className={"pagination"}>
-            <div className={"previous"}>{previousArticle}</div>
-            <div className={"next"}>{nextArticle}</div>
+        <div className="pagination">
+            <div className="previous paginationArrow">{previousArticle}</div>
+            <div className="next paginationArrow">{nextArticle}</div>
         </div>
     );
 

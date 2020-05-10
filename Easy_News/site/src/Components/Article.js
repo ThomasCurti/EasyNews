@@ -24,16 +24,20 @@ class Article extends React.Component {
         const  description = this.props.description;
 
         return (
-            <div className={"article"}>
-                <Link to={"/article/" + id} onClick={this.onClick}>
-                    <h3 className={"title"}>
-                        {title}
+            <Link className="articleLinkTo" to={"/article/" + id} onClick={this.onClick}>
+
+                <div className="article">
+                    <h3>
+                        <div className="title">
+                            {title}
+                        </div>
                     </h3>
-                </Link>
-                <div className={"description"}>
-                    {description}
+                    <div className="description">
+                        {description}
+                    </div>
                 </div>
-            </div>
+
+            </Link>
         );
     }
 }

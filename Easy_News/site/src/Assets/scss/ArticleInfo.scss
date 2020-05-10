@@ -1,0 +1,39 @@
+@import "Default_min";
+
+.titleInfo {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #FF971D;
+  font-family: "Roboto Black";
+}
+
+.descriptionInfo {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFE8D6;
+  font-family: "Roboto";
+}
+
+.fullArticleInfo {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: "Roboto";
+}
+
+.pagination {
+  margin-top: 40px;
+  margin-bottom: -30px;
+  font-family: "Roboto";
+  font-style: italic;
+  a {
+    color: #FF971D!important;
+  }
+}
+
+.previous {
+  margin-left: 20px;
+}
+
+.next {
+  margin-right: 20px;
+}

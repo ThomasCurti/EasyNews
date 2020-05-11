@@ -14,7 +14,7 @@
   display: flex;
   height: 200px;
   width: 200px;
-  background-color: #F9F6F7;
+  background-color: $site-color-2;
   float: left;
   margin-left: 10px;
 }
@@ -23,7 +23,7 @@
   display: flex;
   height: 200px;
   width: 200px;
-  background-color: #F9F6F7;
+  background-color: $site-color-2;
   float: right;
   margin-right: 10px;
 }
@@ -46,7 +46,7 @@
 
 .homeBlockTextSubtitle {
   display: block;
-  color: #FFE8D6;
+  color: $site-color-4;
   float: inherit;
 }
 
@@ -61,17 +61,22 @@
   display: block;
   float: inherit;
   font-family: "Roboto Black";
-  color: #FF971D;
+  color: $site-color-4;
+
+  &:hover {
+    color: $site-color-3
+  }
 }
 
 .homeBlockText {
   text-align: center;
   font-size: medium;
   margin-top: 10px;
+  width: 100%;
 }
 
 .homeBlockImage {
-  background-color: #FF971D;
+  background-color: $site-color-4;
   width: auto;
   height: auto;
 }
@@ -94,7 +99,7 @@
   position: absolute;
   top: -100px;
   left: calc(50% - 100px);
-  background-color: #F9F6F7;
+  background-color: $site-color-2;
 }
 
 .circleText {
@@ -103,17 +108,9 @@
 }
 
 .imagesFooter {
-  ul {
-    width: 100%;
-    padding: 0;
-    display:table;
-    box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-  }
-  li {
-    display:table-cell;
-  }
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 .imagesFooterImage {
@@ -129,4 +126,11 @@
 .imagesFooterText {
   display: block;
   text-align: center;
+}
+
+.gameDl{
+  text-align: center;
+  padding-top: 10px;
+  color: $site-color-4;
+  font-size: 14px;
 }

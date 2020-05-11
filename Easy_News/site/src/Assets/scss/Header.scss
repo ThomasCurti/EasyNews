@@ -3,7 +3,7 @@
 header {
   display: block;
   width: 100%;
-  background: #F9F6F7;
+  background: $site-color-2;
   color: $white;
   height: 70px;
   margin-bottom: 20px;
@@ -23,12 +23,13 @@ header {
     width: 20%;
     display: flex;
     float: left;
+
     a {
       margin: auto;
       text-align: center;
       font-size: 200%;
       font-family: Roboto Black;
-      color: #FF971D;
+      color: $site-color-4;
     }
   }
 
@@ -55,22 +56,22 @@ header {
         position: relative;
         display: block;
         float: right;
-        color: #FF971D;
+        color: $site-color-4;
 
         a {
           padding: 15px 20px;
-          color: #FF971D;
-        }
-        a:hover {
-          color: #FFE8D6
+          color: $site-color-4;
+
+          &:hover {
+            color: $site-color-3
+          }
         }
       }
-
     }
   }
 
   .form-control {
     border-radius: 100px;
-    background-color: #FFE8D6;
+    background-color: $site-color-3;
   }
 }

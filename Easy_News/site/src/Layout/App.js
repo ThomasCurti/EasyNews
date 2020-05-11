@@ -9,27 +9,21 @@ import {connect} from "react-redux";
 // CSS
 import '../Assets/scss/Home.scss';
 
-import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 // Components
 import Home from "./Home";
-import List_articles from "./List_articles";
-import SearchResults from "./SearchResults";
+import List_articles from "../Components/List_articles";
+import SearchResults from "../Components/SearchResults";
 
 // Actions
-import {getAllArticles} from "../actions/Actions";
+import {getAllArticles} from "../Actions/Actions";
 
 // Client
 import {client, getAllArticlesApiCall} from "../Client";
+import GamePage from "./GamePage";
 
 class App extends React.Component{
-
-    /*
-      Principal #FFFFFF
-      Second Princiapl #F9F6F7
-      Secondaire #FFE8D6
-      Second Secondaire #FF971D
-    * */
 
     componentDidMount() {
         client.get(getAllArticlesApiCall).then(res => this.props.setListArticles(res.data));
@@ -43,15 +37,19 @@ class App extends React.Component{
             <div className="App">
                 <BrowserRouter>
                     <Header />
-                    {searchText === '' ? (
-                        <Switch>
-                            <Route exact path={"/"} component={Home} />
-                            <Route path={"/list"} component={List_articles} />
-                            <Route path={"/article/:id"} component={ArticleInfo} />
-                        </Switch>
-                    ) : (
-                        <SearchResults />
-                    )}
+
+                    <div className={"container"}>
+                        {searchText === '' ? (
+                            <Switch>
+                                <Route exact path={"/"} component={Home} />
+                                <Route path={"/list"} component={List_articles} />
+                                <Route path={"/article/:id"} component={ArticleInfo} />
+                                <Route path={"/game"} component={GamePage} />
+                            </Switch>
+                        ) : (
+                            <SearchResults />
+                        )}
+                    </div>
 
                     <Footer/>
                 </BrowserRouter>

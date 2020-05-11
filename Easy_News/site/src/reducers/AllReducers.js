@@ -1,7 +1,7 @@
 // Redux
 import {combineReducers} from "redux";
 
-// Different reducers
+// Different Reducers
 import GetAllArticlesReducer from './GetAllArticlesReducer';
 
 const allReducers = combineReducers({

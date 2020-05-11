@@ -7,13 +7,11 @@ import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js';
 
 // Components
-import App from "./Components/App";
+import App from "./Layout/App";
 
-// Redux and store
+// Redux and Store
 import {Provider} from "react-redux";
-import configureStore from "./store/ConfigureStore";
-
-const store = configureStore();
+import store from "./Store/ConfigureStore";
 
 ReactDOM.render(
     <Provider store={store}>

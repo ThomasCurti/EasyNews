@@ -13,7 +13,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import times from 'lodash.times';
 
 // Actions
-import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../actions/Actions";
+import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../Actions/Actions";
 
 class SearchResults extends React.Component{
 

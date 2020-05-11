@@ -4,7 +4,7 @@ import React from 'react';
 import '../Assets/scss/Header.scss';
 import {Link} from "react-router-dom";
 
-import {searchArticles} from '../actions/Actions'
+import {searchArticles} from '../Actions/Actions'
 import {connect} from "react-redux";
 
 class Header extends React.Component{
@@ -26,7 +26,7 @@ class Header extends React.Component{
                                 <Link to="/list">Dernières actualités</Link>
                             </li>
                             <li>
-                                <Link to="/list">Easy News le jeu</Link>
+                                <Link to="/game">Easy News le jeu</Link>
                             </li>
                             <li>
                                 <input type="text" className="form-control" placeholder="Rechercher une actualité" onChange={this.onChange}/>

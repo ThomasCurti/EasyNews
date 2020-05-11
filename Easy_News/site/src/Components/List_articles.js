@@ -12,7 +12,7 @@ import 'semantic-ui-css/components/menu.min.css';
 import { Menu, Icon } from 'semantic-ui-react';
 import times from 'lodash.times';
 
-import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../actions/Actions";
+import {Pagination_UP, Pagination_DOWN, Pagination_RESET, Pagination_SET} from "../Actions/Actions";
 
 export function renderListArticles(listArticles, startIndex, TOTAL_PER_PAGE) {
     const listData = listArticles.length ? (

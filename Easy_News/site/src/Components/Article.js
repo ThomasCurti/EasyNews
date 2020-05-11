@@ -7,12 +7,9 @@ import '../Assets/scss/Article.scss';
 import {connect} from "react-redux";
 
 // Actions
-import {searchTextClear} from '../actions/Actions'
+import {searchTextClear} from '../Actions/Actions'
 
 class Article extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     onClick = () => {
         this.props.searchTextClear();
@@ -24,20 +21,18 @@ class Article extends React.Component {
         const  description = this.props.description;
 
         return (
-            <Link className="articleLinkTo" to={"/article/" + id} onClick={this.onClick}>
-
                 <div className="article">
                     <h3>
+                        <Link className="articleLinkTo" to={"/article/" + id} onClick={this.onClick}>
                         <div className="title">
                             {title}
                         </div>
+                        </Link>
                     </h3>
                     <div className="description">
                         {description}
                     </div>
                 </div>
-
-            </Link>
         );
     }
 }

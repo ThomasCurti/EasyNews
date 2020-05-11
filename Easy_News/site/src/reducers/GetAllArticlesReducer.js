@@ -16,7 +16,7 @@ const client = axios.create({
     httpsAgent: agent
 });
 */
-import * as actionTypes from '../actions/ActionsTypes'
+import * as actionTypes from '../Actions/ActionsTypes'
 
 const TOTAL_PER_PAGE = 5;
 

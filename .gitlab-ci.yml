@@ -5,7 +5,7 @@ variables:
         PROJECT_NAME: "Backend"
 
 test_backend:
-    stage: test_backend
+    stage: test
     
     services:
         - name: mariadb:latest
@@ -20,7 +20,7 @@ test_backend:
         - dotnet test Tests
 
 test_website:
-    stage: test_website
+    stage: test
 
     services:
         - name: mariadb:latest

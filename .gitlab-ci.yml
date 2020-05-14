@@ -1,5 +1,6 @@
 stages:
-    - build-project
+    - test_backend
+    - test_website
   
 variables:
         MYSQL_DATABASE: "earlynews_test"
@@ -7,8 +8,20 @@ variables:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         PROJECT_NAME: "Backend"
 
-build-project:
-    stage: build-project
+test_backend:
+    stage: test_backend
+    
+    image: dstockhammer/dotnet-core-sdk-node-npm
+    before_script:
+        - cd Easy_News
+        - cd $PROJECT_NAME
+        - dotnet restore
+        - dotnet build $PROJECT_NAME.sln
+    script:
+        - dotnet test Tests
+
+test_website:
+    stage: test_website
 
     services:
         - name: mariadb:latest

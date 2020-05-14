@@ -11,6 +11,9 @@ variables:
 test_backend:
     stage: test_backend
     
+    services:
+        - name: mariadb:latest
+    
     image: dstockhammer/dotnet-core-sdk-node-npm
     before_script:
         - cd Easy_News

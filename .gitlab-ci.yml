@@ -8,6 +8,8 @@ test_backend:
     stage: test
     
     artifacts:
+        paths: 
+            - Easy_News
         expire_in: 1 week
     
     services:
@@ -26,6 +28,8 @@ test_website:
     stage: test
     
     artifacts:
+        paths: 
+            - Easy_News
         expire_in: 1 week
 
     services:

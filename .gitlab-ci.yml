@@ -7,6 +7,9 @@ variables:
 test_backend:
     stage: test
     
+    artifacts:
+        expire_in: 1 week
+    
     services:
         - name: mariadb:latest
     
@@ -21,6 +24,9 @@ test_backend:
 
 test_website:
     stage: test
+    
+    artifacts:
+        expire_in: 1 week
 
     services:
         - name: mariadb:latest

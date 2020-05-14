@@ -1,7 +1,3 @@
-stages:
-    - test_backend
-    - test_website
-  
 variables:
         MYSQL_DATABASE: "earlynews_test"
         MYSQL_ROOT_PASSWORD: "admin"

@@ -1,12 +1,12 @@
 # NOTIFICATIONS DISCORD
 
-Le script notify.py sert à notifier des channels Discord dédiés.
+Le script [notify.py](notify.py) sert à notifier des channels Discord dédiés.
 
 ### REQUIREMENTS
 
 - python3.5 ou plus
-- requests.py
-- discord.py
+- [requests.py](https://pypi.org/project/requests/)
+- [discord.py](https://discordpy.readthedocs.io/en/latest/)
 
 Deux types d'événements sont susceptibles d'être notifiés:
 

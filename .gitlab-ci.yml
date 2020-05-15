@@ -17,6 +17,7 @@ test_backend:
     
     image: faltren/dotnet-sdk-npm-3
     before_script:
+        - echo $CI_COMMIT_TITLE
         - cd Easy_News
         - cd $PROJECT_NAME
         - dotnet restore

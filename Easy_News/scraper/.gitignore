@@ -1,0 +1,6 @@
+# ignore the IDE
+/.idea
+
+venv
+
+_pycache_

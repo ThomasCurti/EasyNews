@@ -4,6 +4,16 @@ variables:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         PROJECT_NAME: "Backend"
 
+merge:
+    image: faltren/dotnet-sdk-npm-3:python
+
+    stage: build
+    rules:
+        - if: $CI_COMMIT_BRANCH == 'master'
+    
+    script:
+        - echo MERGED
+
 test_backend:
     stage: test
     
@@ -15,9 +25,8 @@ test_backend:
     services:
         - name: mariadb:latest
     
-    image: faltren/dotnet-sdk-npm-3
+    image: faltren/dotnet-sdk-npm-3:python
     before_script:
-        - echo $CI_COMMIT_TITLE
         - cd Easy_News
         - cd $PROJECT_NAME
         - dotnet restore
@@ -36,7 +45,7 @@ test_website:
     services:
         - name: mariadb:latest
     
-    image: faltren/dotnet-sdk-npm-3
+    image: faltren/dotnet-sdk-npm-3:python
     before_script:
         - cd Easy_News
         - cd $PROJECT_NAME

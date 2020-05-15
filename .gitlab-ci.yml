@@ -21,7 +21,7 @@ merge:
     script:
         - chmod +x /env/bin/activate
         - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "NEW MERGE \n Merging $CI_COMMIT_REF_NAME"
+        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|                     NEW MERGE                |\n [Merging $CI_COMMIT_REF_NAME| \n ----------------------------------------"
         - /env/bin/deactivate
 
 test_backend:
@@ -39,7 +39,7 @@ test_backend:
     before_script:
         - chmod +x /env/bin/activate
         - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "NEW PIPELINE STARTED \n Starting backend CI for the commit\n    $CI_COMMIT_TITLE \n in pipeline number   $CI_PIPELINE_IID"
+        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------------\n |             NEW PIPELINE STARTED            | \n |Starting backend CI for the commit         |\n|    $CI_COMMIT_TITLE \n |in pipeline number   $CI_PIPELINE_IID                            |\n----------------------------------------------"
         
     script:
         - cd Easy_News
@@ -64,7 +64,7 @@ test_website:
     before_script:
         - chmod +x /env/bin/activate
         - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "NEW PIPELINE STARTED \n Starting website CI for the commit\n    $CI_COMMIT_TITLE \n in pipeline number   $CI_PIPELINE_IID"
+        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------------\n |             NEW PIPELINE STARTED            | \n |Starting website CI for the commit         |\n|    $CI_COMMIT_TITLE \n |in pipeline number   $CI_PIPELINE_IID                            |\n----------------------------------------------"
         
     script:
         - cd Easy_News
@@ -86,7 +86,7 @@ on_failure:
     script:
         - chmod +x /env/bin/activate
         - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "PIPELINE FAILED \n pipeline number   $CI_PIPELINE_IID"
+        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|            PIPELINE FAILED!          |\n pipeline number   $CI_PIPELINE_IID\n|_  __ ____ \n|/ |/ //  _ \\n||   / | / \|\n||   \ | \_/|\n|\_|\_\\____/\n"
         
 on_success: 
     image: faltren/dotnet-sdk-npm-3:pip3
@@ -97,4 +97,4 @@ on_success:
     script:
         - chmod +x /env/bin/activate
         - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "PIPELINE SUCCESS \n pipeline number   $CI_PIPELINE_IID"
+        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|            PIPELINE SUCCESS!          |\n pipeline number   $CI_PIPELINE_IID\n|        _\n    |      | |\n  |  ___ | | __\n| / _ \| |/ /\n|| (_) |   < \n| \___/|_|\_\\n"

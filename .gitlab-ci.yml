@@ -19,10 +19,10 @@ merge:
         - if: $CI_COMMIT_BRANCH == 'master'
     
     script:
-        - chmod +x env/bin/activate
-        - ./env/bin/activate
+        - chmod +x /env/bin/activate
+        - /env/bin/activate
         - python3.7 Easy_News/Discord/notify.py 'ci' "NEW MERGE \n Merging $CI_COMMIT_REF_NAME"
-        - ./env/bin/deactivate
+        - /env/bin/deactivate
 
 test_backend:
     stage: test

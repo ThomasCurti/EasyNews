@@ -15,7 +15,7 @@ test_backend:
     services:
         - name: mariadb:latest
     
-    image: dstockhammer/dotnet-core-sdk-node-npm
+    image: faltren/dotnet-sdk-npm-3
     before_script:
         - cd Easy_News
         - cd $PROJECT_NAME
@@ -35,7 +35,7 @@ test_website:
     services:
         - name: mariadb:latest
     
-    image: dstockhammer/dotnet-core-sdk-node-npm
+    image: faltren/dotnet-sdk-npm-3
     before_script:
         - cd Easy_News
         - cd $PROJECT_NAME

@@ -37,6 +37,10 @@ test_backend:
     
     image: faltren/dotnet-sdk-npm-3:pip3
     before_script:
+        - ls
+        - ls env
+        - ls env/bin
+        -ls env/bin/activate
         - chmod +x env/bin/activate
         - ./env/bin/activate
         - python3.7 Easy_News/Discord/notify.py 'ci' Starting backend CI for $CI_COMMIT_TITLE with pipeline $CI_PIPELINE_IID

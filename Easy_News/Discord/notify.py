@@ -11,11 +11,15 @@ WEBHOOK_TOKEN_CI = "Qf5D00tuH5RmjUBH78OJYu_9X22YGYYPdzLY57Bw48N9BchuPhleleGFNq1j
 
 def send_scraper_channel(text):
     webhook_scraper = Webhook.partial(WEBHOOK_ID_SCRAPER, WEBHOOK_TOKEN_SCRAPER, adapter=RequestsWebhookAdapter())
-    webhook_scraper.send(text)
+    lines = text.split('\\n')
+    for line in lines:
+        webhook_scraper.send(line)
 
 def send_ci_channel(text):
     webhook_ci = Webhook.partial(WEBHOOK_ID_CI, WEBHOOK_TOKEN_CI, adapter=RequestsWebhookAdapter())
-    webhook_ci.send(text)
+    lines = text.split('\\n')
+    for line in lines:
+        webhook_ci.send(lines)
 
 if len(sys.argv) != 3:
     print ("Usage: python3 notify.py CHANNEL TEXT")

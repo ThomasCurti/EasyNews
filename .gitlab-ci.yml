@@ -78,6 +78,8 @@ test_website:
         - npm test
         
 on_failure:
+    image: faltren/dotnet-sdk-npm-3:pip3
+
     stage: .post
     when: on_failure
     
@@ -87,6 +89,8 @@ on_failure:
         - python3.7 Easy_News/Discord/notify.py 'ci' "PIPELINE FAILED \n pipeline number   $CI_PIPELINE_IID"
         
 on_success: 
+    image: faltren/dotnet-sdk-npm-3:pip3
+
     stage: .post
     when: on_success
     

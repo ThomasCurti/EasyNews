@@ -19,7 +19,7 @@ def send_ci_channel(text):
     webhook_ci = Webhook.partial(WEBHOOK_ID_CI, WEBHOOK_TOKEN_CI, adapter=RequestsWebhookAdapter())
     lines = text.split('\\n')
     for line in lines:
-        webhook_ci.send(lines)
+        webhook_ci.send(line)
 
 if len(sys.argv) != 3:
     print ("Usage: python3 notify.py CHANNEL TEXT")

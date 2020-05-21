@@ -50,9 +50,9 @@ CREATE OR REPLACE TABLE logs (
 );
 
 CREATE OR REPLACE TABLE scenarios (
-	id					INT                    AUTO_INCREMENT PRIMARY KEY,
+	id					   INT                    AUTO_INCREMENT PRIMARY KEY,
 	virus 				CHAR(128) NOT NULL,
-	townId 				INT NOT NULL,
+	town_id 				INT NOT NULL,
 	begin_date		 	CHAR(128) NOT NULL,
-	description			LONGTEXT,
+	description			LONGTEXT
 );

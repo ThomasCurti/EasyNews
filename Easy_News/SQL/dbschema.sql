@@ -48,3 +48,11 @@ CREATE OR REPLACE TABLE logs (
 	class				CHAR(128) NOT NULL,
 	message		 	LONGTEXT NULL
 );
+
+CREATE OR REPLACE TABLE scenarios (
+	id					INT                    AUTO_INCREMENT PRIMARY KEY,
+	virus 				CHAR(128) NOT NULL,
+	townId 				INT NOT NULL,
+	begin_date		 	CHAR(128) NOT NULL,
+	description			LONGTEXT,
+);

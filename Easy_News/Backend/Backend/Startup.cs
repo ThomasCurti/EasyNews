@@ -64,6 +64,7 @@ namespace Backend
             services.AddTransient<DataAccess.EventRepository>();
             services.AddTransient<DataAccess.EventTypeRepository>();
             services.AddTransient<DataAccess.LogRepository>();
+            services.AddTransient<DataAccess.ScenarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

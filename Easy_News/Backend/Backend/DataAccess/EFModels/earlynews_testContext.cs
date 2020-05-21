@@ -6,7 +6,7 @@ namespace Backend.DataAccess.EFModels
 {
     public partial class earlynews_testContext : DbContext
     {
-        public string connectionString = "server=localhost;port=3306;user=root;password=admin;database=earlynews_test";
+        public string connectionString = "server=localhost;user=root;password=admin;database=earlynews_test";
 
         public earlynews_testContext()
         {
@@ -23,12 +23,12 @@ namespace Backend.DataAccess.EFModels
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventType> EventType { get; set; }
         public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<Scenarios> Scenarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql(connectionString, x => x.ServerVersion("10.1.44-mariadb"));
             }
         }
@@ -221,6 +221,39 @@ namespace Backend.DataAccess.EFModels
                     .IsRequired()
                     .HasColumnName("type")
                     .HasColumnType("char(32)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+            });
+
+            modelBuilder.Entity<Scenarios>(entity =>
+            {
+                entity.ToTable("scenarios");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.BeginDate)
+                    .IsRequired()
+                    .HasColumnName("begin_date")
+                    .HasColumnType("char(128)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasColumnType("longtext")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.TownId)
+                    .HasColumnName("town_id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Virus)
+                    .IsRequired()
+                    .HasColumnName("virus")
+                    .HasColumnType("char(128)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
             });

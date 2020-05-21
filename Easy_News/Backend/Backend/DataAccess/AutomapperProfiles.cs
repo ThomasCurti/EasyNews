@@ -23,6 +23,9 @@ namespace Backend.DataAccess
 
             CreateMap<DataAccess.EFModels.Logs, Dbo.Model.log>();
             CreateMap<Dbo.Model.log, DataAccess.EFModels.Logs>();
+
+            CreateMap<DataAccess.EFModels.Scenarios, Dbo.Model.scenarios>();
+            CreateMap<Dbo.Model.scenarios, DataAccess.EFModels.Scenarios>();
         }
     }
 }

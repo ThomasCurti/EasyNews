@@ -67,3 +67,7 @@ EntityFramework For Backend
 --
 /!\ Use Pomelo EntityFrameworkCore Package
 https://docs.microsoft.com/fr-fr/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-3.1
+
+Update Database:
+--
+Scaffold-DbContext "server=localhost;user=root;password=admin;database=earlynews_test" Pomelo.EntityFrameworkCore.Mysql -OutputDir DataAccess\EFModels -force

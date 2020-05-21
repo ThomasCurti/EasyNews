@@ -201,3 +201,6 @@ INSERT INTO event VALUES
 INSERT INTO event VALUES
 (null, 3, 12, "2020-07-01");
 
+INSERT INTO scenarios VALUES
+(null, "coronavirus", 1, "2020/01/02", "Description de test");
+

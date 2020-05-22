@@ -86,6 +86,9 @@ namespace Tests
                 cmd.CommandText = File.ReadAllText(path);
                 cmd.ExecuteNonQuery();
 
+                Console.WriteLine("Commande 1 - text");
+                Console.WriteLine(cmd.CommandText);
+
                 Console.WriteLine("Commande 2");
                 Console.WriteLine("------------------------------------------------------------");
 

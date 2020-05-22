@@ -26,6 +26,7 @@ namespace Tests
         private DubiousArticleRepository _dubiousArticleRepository;
         private EventRepository _eventRepository;
         private EventTypeRepository _eventTypeRepository;
+        private ScenarioRepository scenarioRepository;
 
         private readonly string gitlabConnection = "server=mariadb;user=root;port=3306;password=admin;database=earlynews_test";
         private readonly string localConnection = "server=localhost;user=root;port=3306;password=admin;database=earlynews_test";
@@ -56,6 +57,8 @@ namespace Tests
                 _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger);
                 _eventRepository = new EventRepository(_context, _mapper, logger);
                 _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger);
+                scenarioRepository = new ScenarioRepository(_context, _mapper, logger);
+
             }
 
             if (!isSetup && !isLocal)
@@ -73,18 +76,25 @@ namespace Tests
                 isSetup = true;
 
                 db.Connection.Open();
-                
+
+                Console.WriteLine("Commande 1");
+                Console.WriteLine("------------------------------------------------------------");
+
                 var cmd = db.Connection.CreateCommand();
                 DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
                 string path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dbschema.sql");
                 cmd.CommandText = File.ReadAllText(path);
                 cmd.ExecuteNonQuery();
 
+                Console.WriteLine("Commande 2");
+                Console.WriteLine("------------------------------------------------------------");
+
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
                 comm.CommandText = File.ReadAllText(path);
                 comm.ExecuteNonQuery();
 
+                Console.WriteLine("Commande 2 - text");
                 Console.WriteLine(comm.CommandText);
 
                 db.Connection.Close();
@@ -119,6 +129,15 @@ namespace Tests
         }
 
         [Test]
+        public void RESTArticleGetByWrongId()
+        {
+            var controller = new ArticleController(_articleRepository, false);
+
+            var data = controller.Get(40).Result;
+            Assert.IsNull(data);
+        }
+
+        [Test]
         public void RESTArticleSourceGetAllValues()
         {
             var controller = new ArticleSourceController(_articleSourceRepository, false);
@@ -140,6 +159,15 @@ namespace Tests
         }
 
         [Test]
+        public void RESTArticleSourceGetByWrongId()
+        {
+            var controller = new ArticleSourceController(_articleSourceRepository, false);
+
+            var data = controller.Get(40).Result;
+            Assert.IsNull(data);
+        }
+
+        [Test]
         public void RESTDubiousArticleGetAllValues()
         {
             var controller = new DubiousArticleController(_dubiousArticleRepository, false);
@@ -155,6 +183,15 @@ namespace Tests
             var controller = new DubiousArticleController(_dubiousArticleRepository, false);
 
             var data = controller.Get(1).Result;
+            Assert.IsNull(data);
+        }
+
+        [Test]
+        public void RESTDubiousArticleGetByWrongId()
+        {
+            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
+
+            var data = controller.Get(40).Result;
             Assert.IsNull(data);
         }
 
@@ -184,6 +221,15 @@ namespace Tests
         }
 
         [Test]
+        public void RESTEventGetByWrongId()
+        {
+            var controller = new EventController(_eventRepository, false);
+
+            var data = controller.Get(40).Result;
+            Assert.IsNull(data);
+        }
+
+        [Test]
         public void RESTEventTypeGetAllValues()
         {
             var controller = new EventTypeController(_eventTypeRepository, false);
@@ -206,5 +252,48 @@ namespace Tests
             Assert.AreEqual("plague", data.name);
         }
 
+        [Test]
+        public void RESTEventTypeGetByWrongId()
+        {
+            var controller = new EventTypeController(_eventTypeRepository, false);
+
+            var data = controller.Get(40).Result;
+            Assert.IsNull(data);
+        }
+
+        [Test]
+        public void RESTScenarioGetAllValues()
+        {
+            var controller = new ScenarioController(scenarioRepository, false);
+
+            var data = controller.Get().Result.ToList();
+            Assert.IsNotNull(data);
+            Assert.AreEqual(3, data.Count);
+            Assert.AreEqual("Coronavirus", data[0].Virus);
+            Assert.AreEqual("Peste", data[1].Virus);
+            Assert.AreEqual("Grippe espagnole", data[2].Virus);
+        }
+
+        [Test]
+        public void RESTScenarioGetById()
+        {
+            var controller = new ScenarioController(scenarioRepository, false);
+
+            var data = controller.Get(2).Result;
+            Assert.IsNotNull(data);
+            Assert.AreEqual("Peste", data.Virus);
+            Assert.AreEqual(12, data.TownId);
+            Assert.AreEqual("600/01/02", data.BeginDate);
+            Assert.AreEqual("Description de test peste", data.Description);
+        }
+
+        [Test]
+        public void RESTScenarioGetByWrongId()
+        {
+            var controller = new ScenarioController(scenarioRepository, false);
+
+            var data = controller.Get(6).Result;
+            Assert.IsNull(data);
+        }
     }
 }

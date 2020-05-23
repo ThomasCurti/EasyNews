@@ -21,53 +21,54 @@ import * as actionTypes from '../Actions/ActionsTypes'
 const TOTAL_PER_PAGE = 5;
 
 const initialState = {
-    listArticles : [
+    listArticles: [
         {
             id: 1,
-            title : "Article 1",
-            description : "Description de l'article 1",
-            full_article : "Ceci est le texte complet de l'article 1.",
-            source : "https://www.google.com/",
+            title: "Article 1",
+            description: "Description de l'article 1",
+            full_article: "Ceci est le texte complet de l'article 1.",
+            source: "https://www.google.com/",
         },
         {
             id: 2,
-            title : "Article 2",
-            description : "Description de l'article 2",
-            full_article : "Ceci est le texte complet de l'article 2.",
-            source : "https://www.google.com/",
+            title: "Article 2",
+            description: "Description de l'article 2",
+            full_article: "Ceci est le texte complet de l'article 2.",
+            source: "https://www.google.com/",
         },
         {
             id: 3,
-            title : "Article 3",
-            description : "Description de l'article 3",
-            full_article : "Ceci est le texte complet de l'article 3.",
-            source : "https://www.google.com/",
+            title: "Article 3",
+            description: "Description de l'article 3",
+            full_article: "Ceci est le texte complet de l'article 3.",
+            source: "https://www.google.com/",
         },
         {
             id: 4,
-            title : "Article 4",
-            description : "Description de l'article 4",
-            full_article : "Ceci est le texte complet de l'article 4.",
-            source : "https://www.google.com/",
+            title: "Article 4",
+            description: "Description de l'article 4",
+            full_article: "Ceci est le texte complet de l'article 4.",
+            source: "https://www.google.com/",
         },
         {
             id: 5,
-            title : "Article 5",
-            description : "Description de l'article 5",
-            full_article : "Ceci est le texte complet de l'article 5.",
-            source : "https://www.google.com/",
+            title: "Article 5",
+            description: "Description de l'article 5",
+            full_article: "Ceci est le texte complet de l'article 5.",
+            source: "https://www.google.com/",
         }],
     page: 0,
     totalPages: 1,
     TOTAL_PER_PAGE: 5,
     searchText: '',
     searchTotalPages: 1,
-    searchListArticles : [],
+    showSearchArticles: 0,
+    searchListArticles: [],
 };
 
 const GetAllArticlesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.REQUEST_POSTS_ARTICLES:
+        case actionTypes.SET_ARTICLES:
             const totalPagesTmp = Math.ceil(action.payload.length / TOTAL_PER_PAGE);
             const totalPages = totalPagesTmp ? totalPagesTmp : 1;
             return {
@@ -96,15 +97,14 @@ const GetAllArticlesReducer = (state = initialState, action) => {
                 ...state,
                 page: 0
             };
-        case  actionTypes.SEARCH_TEXT:
-            const searchTextLowerCase = action.payload.toLowerCase();
+        case  actionTypes.SHOW_SEARCH_ARTICLES:
+            const searchTextLowerCase = state.searchText;
             const searchListArticles = state.listArticles.filter((item) => {
                 const itemLowerCase = item.title.toLowerCase();
                 return itemLowerCase.includes(searchTextLowerCase);
             });
             const searchTotalPagesTmp = Math.ceil(searchListArticles.length / TOTAL_PER_PAGE);
             const searchTotalPages = searchTotalPagesTmp ? searchTotalPagesTmp : 1;
-
             return {
                 ...state,
                 searchText: action.payload,
@@ -112,10 +112,26 @@ const GetAllArticlesReducer = (state = initialState, action) => {
                 searchTotalPages: searchTotalPages,
                 page: 0,
             };
+        case actionTypes.SEARCH_TEXT_INPUT:
+            return {
+                ...state,
+                searchText: action.payload
+            };
         case actionTypes.SEARCH_TEXT_CLEAR:
             return {
-              ...state,
-                searchText: ''
+                ...state,
+                searchText: '',
+                showSearchArticles: 0,
+            };
+        case actionTypes.SHOW_SEARCH_ARTICLE_YES:
+            return {
+                ...state,
+                showSearchArticles: 1,
+            };
+        case actionTypes.SHOW_SEARCH_ARTICLE_NO:
+            return {
+                ...state,
+                showSearchArticles: 0,
             };
         default:
             return state;

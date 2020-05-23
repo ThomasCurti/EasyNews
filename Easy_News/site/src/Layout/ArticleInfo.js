@@ -7,7 +7,7 @@ import '../Assets/scss/ArticleInfo.scss';
 // Router
 import {Link} from "react-router-dom";
 
-function renderArticle(article) {
+const renderArticle = (article) => {
     return article ? (
         <article>
             <h1 className="titleInfo">
@@ -23,9 +23,9 @@ function renderArticle(article) {
     ) : (
         <p>L'article n'existe pas</p>
     );
-}
+};
 
-function renderPagination(article, length) {
+const renderPagination = (article, length) => {
     const id = article.id;
 
     const previousArticleId = id - 1;
@@ -37,7 +37,8 @@ function renderPagination(article, length) {
     const previousArticleText = "< Article précédent";
     const nextArticleText = "Article suivant >";
 
-    const previousArticle = previousArticleLink === "/" ? <div/> : (<Link to={previousArticleLink}>{previousArticleText}</Link>);
+    const previousArticle = previousArticleLink === "/" ? <div/> : (
+        <Link to={previousArticleLink}>{previousArticleText}</Link>);
     const nextArticle = nextArticleLink === "/" ? <div/> : (<Link to={nextArticleLink}>{nextArticleText}</Link>);
 
     return (
@@ -47,30 +48,29 @@ function renderPagination(article, length) {
         </div>
     );
 
-}
+};
 
-class ArticleInfo extends React.Component{
+const ArticleInfo = ({article, length}) => {
 
-    render() {
-        const article = renderArticle(this.props.article);
-        const pagination = this.props.article ? renderPagination(this.props.article, this.props.length) : (<div/>);
+    const render = renderArticle(article);
+    const pagination = article ? renderPagination(article, length) : (<div/>);
 
-        return (<div>
+    return (
+        <div>
             <aside>
                 {pagination}
             </aside>
-            {article}
-        </div>);
-    }
-}
+            {render}
+        </div>
+    );
+};
 
 const mapStateToProps = (state, ownProps) => {
     let article_id = ownProps.match.params.id;
     const article = state.Articles.listArticles.find(article => article.id.toString() === article_id);
-    if (article){
-        return { article : article, length : state.Articles.listArticles.length + 1}
-    }
-    else{
+    if (article) {
+        return {article: article, length: state.Articles.listArticles.length + 1}
+    } else {
         return {}
     }
 };

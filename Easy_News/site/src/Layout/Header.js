@@ -1,42 +1,49 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 // CSS
 import '../Assets/scss/Header.scss';
 import {Link} from "react-router-dom";
 
-import {searchArticles} from '../Actions/Actions'
+import {searchTextInput, showSearchNo} from '../Actions/Actions'
 import {connect} from "react-redux";
 
-class Header extends React.Component{
+const Header = ({dispatch}) => {
 
-    onChange = e => {
-        this.props.searchArticles(e.target.value)
-    };
+    const CancelShowSearch = useCallback(() => {
+        dispatch(showSearchNo())
+    }, [
+        dispatch
+    ]);
 
-    render(){
-        return (
-            <header>
-                <div className="container">
-                    <div className="Logo">
-                        <Link to="/">Easy News</Link>
-                    </div>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/list">Dernières actualités</Link>
-                            </li>
-                            <li>
-                                <Link to="/game">Easy News le jeu</Link>
-                            </li>
-                            <li>
-                                <input type="text" className="form-control" placeholder="Rechercher une actualité" onChange={this.onChange}/>
-                            </li>
-                        </ul>
-                    </nav>
+    const handleOnChange = useCallback((e) => {
+        dispatch(searchTextInput(e.target.value))
+    }, [
+        dispatch,
+    ]);
+
+    return (
+        <header>
+            <div className="container">
+                <div className="Logo">
+                    <Link to="/" onClick={CancelShowSearch}>Easy News</Link>
                 </div>
-            </header>
-        );
-    }
-}
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/list" onClick={CancelShowSearch}>Dernières actualités</Link>
+                        </li>
+                        <li>
+                            <Link to="/game" onClick={CancelShowSearch}>Easy News le jeu</Link>
+                        </li>
+                        <li>
+                            <input type="text" className="form-control" placeholder="Rechercher une actualité"
+                                   onChange={handleOnChange}/>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    );
+};
 
-export default connect(null, {searchArticles})(Header);
+export default connect()(Header);

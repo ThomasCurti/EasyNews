@@ -13,10 +13,13 @@ def parse_article(response):
     title = extract_with_css('h1::text')
     description = extract_with_css('p.chapo::text')
     full_article = extract_all_with_css("div#col-middle p::text")
+    full_article_text = ''
+    for paragraph in full_article:
+        full_article_text = full_article_text + paragraph
     source = response.url
     article = Article(title=cleanhtml(title),
                       description=cleanhtml(description),
-                      full_article=cleanhtml(full_article),
+                      full_article=cleanhtml(full_article_text),
                       source=source)
     yield {
         'Article': article,

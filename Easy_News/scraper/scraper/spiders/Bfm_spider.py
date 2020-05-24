@@ -1,5 +1,6 @@
 import scrapy
 from ..items import Article
+from ..CleanHtml import cleanhtml
 
 
 def parse_article(response):
@@ -10,8 +11,10 @@ def parse_article(response):
     description = extract_with_css('h2.title-large::text')
     full_article = extract_with_css('div.article-body-main')
     source = response.url
-    article = Article(title=title, description=description, full_article=full_article, source=source)
-
+    article = Article(title=cleanhtml(title),
+                      description=cleanhtml(description),
+                      full_article=cleanhtml(full_article),
+                      source=source)
     yield {
         'Article': article,
     }

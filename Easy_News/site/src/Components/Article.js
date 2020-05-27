@@ -11,21 +11,23 @@ import {showSearchNo} from '../Actions/Actions'
 
 const Article = ({id, title, description, dispatch}) => {
 
-    const CancelShowSearch = useCallback(() => {dispatch(showSearchNo())}, [dispatch]);
+    const CancelShowSearch = useCallback(() => {
+        dispatch(showSearchNo())
+    }, [dispatch]);
 
     return (
-        <div className="article">
-            <h3>
-                <Link className="articleLinkTo" to={"/article/" + id} onClick={CancelShowSearch}>
+        <Link className="articleLinkTo" to={"/article/" + id} onClick={CancelShowSearch}>
+            <div className="article">
+                <h3>
                     <div className="title">
                         {title}
                     </div>
-                </Link>
-            </h3>
-            <div className="description">
-                {description}
+                </h3>
+                <div className="description">
+                    {description}
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

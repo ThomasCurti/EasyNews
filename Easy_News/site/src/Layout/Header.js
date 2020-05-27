@@ -21,16 +21,21 @@ const Header = ({dispatch}) => {
         dispatch,
     ]);
 
+    //<Link to="/" onClick={CancelShowSearch}></Link>
     return (
         <header>
             <div className="container">
-                <div className="Logo">
-                    <Link to="/" onClick={CancelShowSearch}>Easy News</Link>
-                </div>
+
+                <Link to="/">
+                    <img src="logoEasyNews.png" className="Logo"/>
+                </Link>
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/list" onClick={CancelShowSearch}>Dernières actualités</Link>
+                            <Link to="/list" onClick={CancelShowSearch}>Accueil</Link>
+                        </li>
+                        <li>
+                            <Link to="/list" onClick={CancelShowSearch}>Actualités</Link>
                         </li>
                         <li>
                             <Link to="/game" onClick={CancelShowSearch}>Easy News le jeu</Link>

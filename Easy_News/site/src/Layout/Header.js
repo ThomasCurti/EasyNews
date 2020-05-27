@@ -32,7 +32,7 @@ const Header = ({dispatch}) => {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/list" onClick={CancelShowSearch}>Accueil</Link>
+                            <Link to="/" onClick={CancelShowSearch}>Accueil</Link>
                         </li>
                         <li>
                             <Link to="/list" onClick={CancelShowSearch}>Actualités</Link>

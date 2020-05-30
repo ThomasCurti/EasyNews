@@ -6,6 +6,10 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import json
 from scrapy.utils.serialize import ScrapyJSONEncoder
+import requests
+
+api_host = 'https://localhost:44346/'
+api_dubiousArticle = 'api/DubiousArticle'
 
 
 class ScraperPipeline(object):
@@ -24,4 +28,6 @@ class JsonWriterPipeline(object):
     def process_item(self, item, spider):
         line = json.dumps(dict(item), cls=ScrapyJSONEncoder) + "\n"
         self.file.write(line)
+        # call to Backend API, api/DubiousArticle
+        requests.post(url=(api_host + api_dubiousArticle), data=line)
         return item

@@ -1,23 +1,18 @@
 import scrapy
+from scrapy.loader import ItemLoader
 from ..items import Article
-from ..CleanHtml import cleanhtml
 
 
 def parse_article(response):
     def extract_with_css(query):
         return response.css(query).get(default='').strip()
 
-    title = extract_with_css('h1.article__title::text')
-    description = extract_with_css('p.article__desc::text')
-    full_article = extract_with_css("article.article__content.old__article-content-single")
-    source = response.url
-    article = Article(title=cleanhtml(title),
-                      description=cleanhtml(description),
-                      full_article=cleanhtml(full_article),
-                      source=source)
-    yield {
-        'Article': article,
-    }
+    article = ItemLoader(item=Article())
+    article.add_value('title', extract_with_css('h1.article__title::text'))
+    article.add_value('description', extract_with_css('p.article__desc::text'))
+    article.add_value('full_article', extract_with_css('article.article__content.old__article-content-single'))
+    article.add_value('source', response.url)
+    return article.load_item()
 
 
 class LeMondeSpider(scrapy.Spider):

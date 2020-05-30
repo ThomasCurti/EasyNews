@@ -1,6 +1,6 @@
 import scrapy
+from scrapy.loader import ItemLoader
 from ..items import Article
-from ..CleanHtml import cleanhtml
 
 
 def parse_article(response):
@@ -10,20 +10,14 @@ def parse_article(response):
     def extract_all_with_css(query):
         return response.css(query).getall()
 
-    title = extract_with_css('h1::text')
-    description = extract_with_css('p.chapo::text')
-    full_article = extract_all_with_css("div#col-middle p::text")
-    full_article_text = ''
+    article = ItemLoader(item=Article())
+    article.add_value('title', extract_with_css('h1::text'))
+    article.add_value('description', extract_with_css('p.chapo::text'))
+    full_article = extract_all_with_css("div#col-middle p")
     for paragraph in full_article:
-        full_article_text = full_article_text + paragraph
-    source = response.url
-    article = Article(title=cleanhtml(title),
-                      description=cleanhtml(description),
-                      full_article=cleanhtml(full_article_text),
-                      source=source)
-    yield {
-        'Article': article,
-    }
+        article.add_value('full_article', paragraph)
+    article.add_value('source', response.url)
+    return article.load_item()
 
 
 class FranceInfoSpider(scrapy.Spider):

@@ -3,10 +3,7 @@ import scrapy
 
 def parse_article(response):
     article = response.css("div#contentcol").get(default='').strip()
-
-    yield {
-        'page': article,
-    }
+    return article
 
 
 class AfpSpider(scrapy.Spider):

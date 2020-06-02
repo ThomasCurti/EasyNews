@@ -5,7 +5,7 @@ from scrapy.crawler import CrawlerProcess
 
 class Command(ScrapyCommand):
     requires_project = True
-    excludes = ['Afp']
+    excludes = []
 
     def syntax(self):
         return '[options]'

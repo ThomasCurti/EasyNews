@@ -90,3 +90,35 @@ ITEM_PIPELINES = {
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 COMMANDS_MODULE = 'scraper.Commands'
+
+#
+#   Prometheus export data
+#
+
+# STATS_CLASS = 'scrapy_prometheus.PrometheusStatsCollector'
+STATS_CLASS = 'scraper.Metrics.PrometheusStatsCollector.PrometheusStatsCollector'
+
+# Prometheus pushgateway host
+PROMETHEUS_PUSHGATEWAY = '192.168.99.101:9091'
+
+# Metric name prefix
+PROMETHEUS_METRIC_PREFIX = 'scrapy_prometheus'  # default
+
+# Timeout for pushing metrics to pushgateway
+PROMETHEUS_PUSH_TIMEOUT = 5  # default
+
+# Method to use when pushing metrics
+# Read https://github.com/prometheus/pushgateway#put-method
+PROMETHEUS_PUSH_METHOD = 'POST'  # default
+
+# Do not raise scrapy_prometheus.InvalidMetricType when stat is accessed as different type metric.
+# For example, doing stats.inc_value('foo', 1) and then stats.set_value('foo', 2) will raise an error,
+# Because metric of type Counter was already created for stat foo.
+PROMETHEUS_SUPPRESS_TYPE_CHECK = True
+
+# job label value, applied to all metrics.
+PROMETHEUS_JOB = 'scrapy'  # default
+
+# grouping label dict, applied to all metrics.
+# by default it is an instance key with hostname value.
+PROMETHEUS_GROUPING_KEY = {'instance': 'localhost'}

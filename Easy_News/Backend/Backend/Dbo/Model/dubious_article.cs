@@ -9,9 +9,9 @@ namespace Backend.Dbo.Model
     {
         public long id { get; set; }
         public string title { get; set; }
-        public int? source_id { get; set; }
+        public int? sourceId { get; set; }
         public string full_article_source { get; set; }
-        public int? other_source_id { get; set; }
+        public int? otherSourceId { get; set; }
         public string? full_article_other { get; set; }
         public bool seen_twice { get; set; }
 
@@ -33,9 +33,9 @@ namespace Backend.Dbo.Model
             {
                 id = Int32.Parse(val[0].ToString()),
                 title = val[1].ToString(),
-                source_id = Int32.Parse(val[2].ToString()),
+                sourceId = Int32.Parse(val[2].ToString()),
                 full_article_source = val[3].ToString(),
-                other_source_id = other,
+                otherSourceId = other,
                 full_article_other = full,
                 seen_twice = Boolean.Parse(val[6].ToString()),
             };

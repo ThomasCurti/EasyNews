@@ -1,11 +1,15 @@
 ﻿using Backend.DataAccess;
+using Backend.DataAccess.EFModels;
 using Backend.Dbo;
 using Backend.Dbo.Model;
 using Backend.Logger;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Backend.Controllers
@@ -54,12 +58,25 @@ namespace Backend.Controllers
         }
 
         // POST: api/DubiousArticle
-        /*[HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost]
+        public void Post([FromBody] JsonElement value)
         {
+            Dbo.Model.dubious_article dubiousArticle = null;
+            try
+            {
+                string val = System.Text.Json.JsonSerializer.Serialize(value);
+                dubiousArticle = JsonConvert.DeserializeObject<dubious_article>(val);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Tried to insert dubious article but the value was wrong");
+                Log.Error(e.Message);
+                return;
+            }
+            _dubiousArticleRepository.Insert(dubiousArticle).Wait();
         }
 
-        // PUT: api/DubiousArticle/5
+        /*// PUT: api/DubiousArticle/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

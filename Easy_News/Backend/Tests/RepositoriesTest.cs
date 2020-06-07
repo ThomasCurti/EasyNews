@@ -291,10 +291,10 @@ namespace Tests
             Assert.AreEqual(1, res.id);
             Assert.AreEqual("dubious1", res.title);
             Assert.AreEqual(0, res.sourceId);
-            Assert.AreEqual("source1", res.full_article_source);
+            Assert.AreEqual("source1", res.fullArticleSource);
             Assert.AreEqual(0, res.otherSourceId);
-            Assert.AreEqual("other1", res.full_article_other);
-            Assert.AreEqual(false, res.seen_twice);
+            Assert.AreEqual("other1", res.fullArticleOther);
+            Assert.AreEqual(false, res.seenTwice);
         }
 
         [Test]

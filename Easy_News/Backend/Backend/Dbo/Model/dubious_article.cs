@@ -10,10 +10,10 @@ namespace Backend.Dbo.Model
         public long id { get; set; }
         public string title { get; set; }
         public int? sourceId { get; set; }
-        public string full_article_source { get; set; }
+        public string fullArticleSource { get; set; }
         public int? otherSourceId { get; set; }
-        public string? full_article_other { get; set; }
-        public bool seen_twice { get; set; }
+        public string? fullArticleOther { get; set; }
+        public bool seenTwice { get; set; }
 
         public static dubious_article Parse(Object[] val)
         {
@@ -34,10 +34,10 @@ namespace Backend.Dbo.Model
                 id = Int32.Parse(val[0].ToString()),
                 title = val[1].ToString(),
                 sourceId = Int32.Parse(val[2].ToString()),
-                full_article_source = val[3].ToString(),
+                fullArticleSource = val[3].ToString(),
                 otherSourceId = other,
-                full_article_other = full,
-                seen_twice = Boolean.Parse(val[6].ToString()),
+                fullArticleOther = full,
+                seenTwice = Boolean.Parse(val[6].ToString()),
             };
         }
 

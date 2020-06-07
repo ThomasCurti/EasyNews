@@ -81,9 +81,9 @@ namespace Tests
             Assert.IsNotNull(val as Backend.Dbo.Model.dubious_article);
             Assert.AreEqual(efDubiousArticle.Id, val.id);
             Assert.AreEqual(efDubiousArticle.Title, val.title);
-            Assert.AreEqual(efDubiousArticle.FullArticleSource, val.full_article_source);
-            Assert.AreEqual(efDubiousArticle.FullArticleOther, val.full_article_other);
-            Assert.AreEqual(efDubiousArticle.SeenTwice, val.seen_twice);
+            Assert.AreEqual(efDubiousArticle.FullArticleSource, val.fullArticleSource);
+            Assert.AreEqual(efDubiousArticle.FullArticleOther, val.fullArticleOther);
+            Assert.AreEqual(efDubiousArticle.SeenTwice, val.seenTwice);
             
         }
 

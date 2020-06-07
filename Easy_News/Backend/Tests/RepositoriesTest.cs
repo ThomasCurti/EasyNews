@@ -113,19 +113,19 @@ namespace Tests
             var logger = new LogRepository(_context.Object, _mapper);
 
             _articleRepository = new ArticleRepository(_context.Object, _mapper, logger);
-            _articleRepository.Log = false;
+            _articleRepository.DoLog = false;
 
             _articleSourceRepository = new ArticleSourceRepository(_context.Object, _mapper, logger);
-            _articleSourceRepository.Log = false;
+            _articleSourceRepository.DoLog = false;
 
             _dubiousArticleRepository = new DubiousArticleRepository(_context.Object, _mapper, logger);
-            _dubiousArticleRepository.Log = false;
+            _dubiousArticleRepository.DoLog = false;
 
             _eventRepository = new EventRepository(_context.Object, _mapper, logger);
-            _eventRepository.Log = false;
+            _eventRepository.DoLog = false;
             
             _eventTypeRepository = new EventTypeRepository(_context.Object, _mapper, logger);
-            _eventTypeRepository.Log = false;
+            _eventTypeRepository.DoLog = false;
         }
 
         [Test]

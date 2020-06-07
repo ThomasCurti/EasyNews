@@ -22,7 +22,7 @@ namespace Backend.Controllers
         public EventTypeController(EventTypeRepository eventTypeRepository, bool log = true)
         {
             _eventTypeRepository = eventTypeRepository;
-            _eventTypeRepository.Log = log;
+            _eventTypeRepository.DoLog = log;
             _log = log;
         }
 

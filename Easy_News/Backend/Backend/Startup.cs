@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySql.Data.MySqlClient;
-using System;
+using Serilog;
 
 namespace Backend
 {
@@ -70,7 +69,6 @@ namespace Backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //Logger.Logger.AddFile("Log", DateTime.Now.ToString("MM_dd_yyyy_HH_mm") + "-Log.txt");
 
             if (env.IsDevelopment())
             {
@@ -78,6 +76,8 @@ namespace Backend
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

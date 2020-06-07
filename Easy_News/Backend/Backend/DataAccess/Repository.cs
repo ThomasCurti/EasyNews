@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Backend.Logger;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,15 +15,17 @@ namespace Backend.DataAccess
         private DbSet<DBEntity> _set;
         protected EFModels.earlynews_testContext _context;
         protected readonly IMapper _mapper;
-        protected LogRepository _logger;
-        public bool Log = true;
+        protected LogRepository _loggerRepo;
+        protected ILogger _logger;
+        public bool DoLog = true;
 
-        public Repository(EFModels.earlynews_testContext ctx, IMapper mapper, LogRepository logger)
+        public Repository(EFModels.earlynews_testContext ctx, IMapper mapper, LogRepository loggerRepo)
         {
             _mapper = mapper;
             _context = ctx;
             _set = _context.Set<DBEntity>();
-            _logger = logger;
+            _loggerRepo = loggerRepo;
+            _logger = Log.Logger;
         }
 
         public virtual async Task<bool> Delete(long idEntity)
@@ -32,8 +34,8 @@ namespace Backend.DataAccess
 
             if (dBEntity == null)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogInformation("Deletion successful of entity with id " + idEntity + ", no entity found", this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Deletion successful of entity with id " + idEntity + ", no entity found", this.GetType().Name, _loggerRepo);
                 return false;
             }
                 
@@ -43,14 +45,14 @@ namespace Backend.DataAccess
             try
             {
                 await _context.SaveChangesAsync();
-                if(Log && _logger != null)
-                    await Logger.Logger.LogInformation("Deletion successful of entity with id " + idEntity, this.GetType().Name, _logger);
+                if(DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Deletion successful of entity with id " + idEntity, this.GetType().Name, _loggerRepo);
                 return true;
             }
             catch (Exception e)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogError(e, this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return false;
             }
         }
@@ -69,19 +71,19 @@ namespace Backend.DataAccess
                     var entity = _set.Find(id);
                     List<ModelEntity> list = new List<ModelEntity>();
                     list.Add(_mapper.Map<ModelEntity>(entity));
-                    if (Log && _logger != null)
-                        await Logger.Logger.LogInformation("Retrieve successful of entity with id " + id, this.GetType().Name, _logger);
+                    if (DoLog && _loggerRepo != null)
+                        await Logger.Logger.LogInformation("Retrieve successful of entity with id " + id, this.GetType().Name, _loggerRepo);
                     return list;
                 }
 
-                if (Log && _logger != null)
-                    await Logger.Logger.LogInformation("Retrieve successful of entities", this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Retrieve successful of entities", this.GetType().Name, _loggerRepo);
                 return _mapper.Map<ModelEntity[]>(query);
             }
             catch (Exception e)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogError(e, this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
             }
         }
@@ -94,14 +96,14 @@ namespace Backend.DataAccess
             {
                 await _context.SaveChangesAsync();
                 ModelEntity modelEntity = _mapper.Map<ModelEntity>(dBEntity);
-                if (Log && _logger != null)
-                    await Logger.Logger.LogInformation("Insertion successful of " + entity.ToString(), this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Insertion successful of " + entity.ToString(), this.GetType().Name, _loggerRepo);
                 return modelEntity;
             }
             catch(Exception e)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogError(e, this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
             }
         }
@@ -112,16 +114,16 @@ namespace Backend.DataAccess
 
             if (dBEntity == null)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogInformation("Update successful, null entity", this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Update successful, null entity", this.GetType().Name, _loggerRepo);
                 return null;
             }
                 
             _mapper.Map(entity, dBEntity);
             if (!_context.ChangeTracker.HasChanges())
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogInformation("Update successful, no change done", this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogInformation("Update successful, no change done", this.GetType().Name, _loggerRepo);
                 return entity;
             }
                 
@@ -132,13 +134,13 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                if (Log && _logger != null)
-                    await Logger.Logger.LogError(e, this.GetType().Name, _logger);
+                if (DoLog && _loggerRepo != null)
+                    await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
             }
 
-            if (Log && _logger != null)
-                await Logger.Logger.LogInformation("Update successful", this.GetType().Name, _logger);
+            if (DoLog && _loggerRepo != null)
+                await Logger.Logger.LogInformation("Update successful", this.GetType().Name, _loggerRepo);
             return _mapper.Map<ModelEntity>(dBEntity);
         }
     }

@@ -20,7 +20,7 @@ namespace Backend.Controllers
         public ScenarioController(ScenarioRepository scenarioRepository, bool log = true)
         {
             _scenarioRepository = scenarioRepository;
-            _scenarioRepository.Log = log;
+            _scenarioRepository.DoLog = log;
             _log = log;
         }
 

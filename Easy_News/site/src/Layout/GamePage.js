@@ -6,6 +6,7 @@ import '../Assets/scss/GamePage.scss';
 
 import HomeBlockLeft from "../Components/HomeBlockLeft";
 import HomeBlockRight from "../Components/HomeBlockRight";
+import DownloadButton from "../Components/DownloadButton";
 import {Link} from "react-router-dom";
 
 let sampleText = "Conpingerentur sunt ex suam Asbolius ex ex negotio latius unde vitamque ea petitam ex latius inpetrarunt Sericus suam negotio palaestrita Asbolius autem conpingerentur conpingerentur se adseverantes hi hi autem vitamque negotio praefectum Olybrium Asbolius praefectum unde vincula latius se funditabat tali negotio sunt vitamque suam suam eius et Maxima Campensis petitam.";
@@ -19,9 +20,9 @@ const GamePage = () => {
             <div>
                 <img src="BackgroundAccueil.png" className="gameImage"/>
                 <div className="gameImageContainer">
-                    <Link to="/game">
+                    <DownloadButton filepath="/BackgroundAccueil.png">
                         <h2>Télécharger le jeu en cliquant ici</h2>
-                    </Link>
+                    </DownloadButton>
                     <p>Jouable par les petits mais aussi par les grands !</p>
                 </div>
             </div>

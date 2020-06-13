@@ -20,7 +20,7 @@ const GamePage = () => {
             <div>
                 <img src="BackgroundAccueil.png" className="gameImage"/>
                 <div className="gameImageContainer">
-                    <DownloadButton filepath="/BackgroundAccueil.png">
+                    <DownloadButton filepath="/V1.zip">
                         <h2>Télécharger le jeu en cliquant ici</h2>
                     </DownloadButton>
                     <p>Jouable par les petits mais aussi par les grands !</p>

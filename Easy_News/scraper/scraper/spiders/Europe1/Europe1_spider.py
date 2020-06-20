@@ -1,6 +1,6 @@
 import scrapy
 from scrapy.loader import ItemLoader
-from ..items import Article
+from scraper.items import Article
 
 
 def parse_article(response):

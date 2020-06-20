@@ -1,5 +1,5 @@
 import scrapy
-from ..items import Article
+from scraper.items import Article
 from scrapy.loader import ItemLoader
 
 

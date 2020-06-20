@@ -1,6 +1,10 @@
 # ignore the IDE
 /.idea
 
+build
+project.egg-info
 venv
+setup.py
+scrapinghub.yml
 
 _pycache_

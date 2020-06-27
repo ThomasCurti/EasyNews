@@ -20,9 +20,9 @@ const Home = () => {
                     <div>
                         <div className="carouselContainer">
                             <h2>Restez à jour</h2>
-                            <p>Tenez vous à jour sur les crises</p>
+                            <h5>Tenez vous à jour sur les crises</h5>
                             <Link to="/list">
-                                <h5>En savoir plus ></h5>
+                                <p className="carouselContainerSubtitle">En savoir plus ></p>
                             </Link>
                         </div>
                         <img
@@ -32,7 +32,7 @@ const Home = () => {
                         />
                     </div>
                     <Carousel.Caption>
-                        <p>Easy News possède un très grand nombre d'article mis à votre disposition. Toutes ces
+                        <p className="carouselCaption">Easy News possède un très grand nombre d'article mis à votre disposition. Toutes ces
                             actualités vous permettront de vous tenir à jour sur les grandes crises actuelles. Easy News
                             s'engage à vous fournir un maximum d'article venant de sources sures.</p>
                     </Carousel.Caption>
@@ -43,9 +43,9 @@ const Home = () => {
                     <div>
                         <div className="carouselContainer">
                             <h2>Apprenez en jouant</h2>
-                            <p>Apprenez à sauver le monde en jouant</p>
+                            <h5>Apprenez à sauver le monde en jouant</h5>
                             <Link to="/game">
-                                <h5>En savoir plus ></h5>
+                                <p className="carouselContainerSubtitle">En savoir plus ></p>
                             </Link>
                         </div>
                         <img
@@ -55,7 +55,7 @@ const Home = () => {
                         />
                     </div>
                     <Carousel.Caption>
-                        <p>Easy News est un site mais aussi un jeu ! En jouant avec nous, vous pourrez apprendre en vous
+                        <p className="carouselCaption">Easy News est un site mais aussi un jeu ! En jouant avec nous, vous pourrez apprendre en vous
                             amusant les gestes et les Actions permettant de sauver le monde ou gérer les grandes crises.
                             Ce jeu est mis à jour régulièrement et utilise les mêmes sources d'informations que pour nos
                             articles.</p>

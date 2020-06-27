@@ -12,7 +12,6 @@ namespace Backend
         {
             Log.Logger = new LoggerConfiguration()
            .MinimumLevel.Debug()
-           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
            .Enrich.FromLogContext()
            .WriteTo.Console()
            .CreateLogger();

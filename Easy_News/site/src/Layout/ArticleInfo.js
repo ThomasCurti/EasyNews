@@ -10,12 +10,12 @@ import {Link} from "react-router-dom";
 const renderArticle = (article) => {
     return article ? (
         <article>
-            <h1 className="titleInfo">
+            <h4 className="titleInfo">
                 {article.title}
-            </h1>
-            <h4 className="descriptionInfo">
-                {article.description}
             </h4>
+            <h5 className="descriptionInfo">
+                {article.description}
+            </h5>
             <div className="fullArticleInfo">
                 {article.full_article}
             </div>

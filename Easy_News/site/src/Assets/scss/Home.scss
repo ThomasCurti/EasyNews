@@ -17,9 +17,19 @@
   color: white;
 }
 
+.carouselContainerSubtitle {
+  font-style: italic;
+}
+
 .carouselImage {
   margin-top: 10px;
   height: 500px;
+}
+
+.carouselCaption {
+  font-family: "Roboto";
+  font-size: 18px;
+  line-height: 1.4;
 }
 
 .carousel {
@@ -76,6 +86,7 @@
 .homeBlockTextSubtitle {
   display: block;
   color: $site-color-2;
+  font-family: "Roboto Black";
   float: inherit;
 }
 
@@ -89,7 +100,8 @@
   margin-top: 10px;
   display: block;
   float: inherit;
-  font-family: "Roboto Black";
+  font-family: "Roboto";
+  font-style: italic;
   color: $site-color-2;
 
   &:hover {

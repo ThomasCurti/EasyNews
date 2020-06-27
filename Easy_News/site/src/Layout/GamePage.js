@@ -30,25 +30,25 @@ const GamePage = () => {
             <HomeBlockLeft
                 title={"Comment installer"}
                 imageText={"Comment on installe"}
-                text={sampleText}
+                text={"Cliquer sur le lien ci-dessus pour télécharger le jeu.\n Une fois que vous aurez téléchargé le jeu, dézippez le dossier V1.zip (clique droit -> extraire tout). Une fois le dossier décompressé, ils vous suffit d'executer le fichier EasyNews_TheGame.exe en double cliquant dessus"}
             />
 
             <HomeBlockRight
                 title={"Comment jouer"}
                 imageText={"Comment on joue"}
-                text={sampleText}
+                text={"Lorsque vous arriverez sur le menu du jeu, sélectionnez un niveau. Les niveaux sont décrit ci-dessous. Lorsque vous démarrerez un niveau, un mini tutoriel vous expliquera comment jouer au jeu. Vous pourrez, par la suite, jouer au jeu et apprendre de nouvelles choses facilement"}
             />
 
             <HomeBlockLeft
                 title={"Niveau 1"}
-                imageText={"On peut faire ça"}
-                text={sampleText}
+                imageText={"Les virus"}
+                text={"Le niveau 1 est basé sur la gestion de crise lors de l'apparation de virus. Vous pourrez apprendre et comprendre les gestes ou actions que vous pourrez faire pour sauver le monde. Vous devrez par ailleurs aussi essayer de sauvver le monde en ordonnant à la population d'effectuer certaines actions pour contrer le virus. Attention à bien agir, sinon les populations ne voudront plus vous suivre..."}
             />
 
             <HomeBlockRight
                 title={"Niveau 2"}
-                imageText={"Mais aussi ça"}
-                text={sampleText}
+                imageText={"Réchauffement climatique"}
+                text={"Le niveau 2 est basé sur la gestion de la crise climatique actuelle. Vous pourrez apprendre et comprendres les gestes ou actions que vous pourrez faire pour aider à sauver le monde. Dans ce niveau, vous devrez aider l'islande à mieux gérer la pollution de son pays en utilisant des énergies propres et durables. Attention tout de même à l'économie de votre pays, vous ne voulez pas non plus faire faillite..."}
             />
 
         </div>

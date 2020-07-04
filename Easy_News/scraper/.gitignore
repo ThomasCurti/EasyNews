@@ -4,6 +4,11 @@
 build
 project.egg-info
 venv
+logs
+eggs
+dbs
+
+items
 setup.py
 scrapinghub.yml
 

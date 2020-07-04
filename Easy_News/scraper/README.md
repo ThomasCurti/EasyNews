@@ -6,6 +6,7 @@
 pip install scrapy
 pip install discord  
 pip install scrapy-prometheus  
+export SCRAPYKEY=be89a6454b5c48a9a86a27b3aa3e10de
 ```
 
 ## To Launch

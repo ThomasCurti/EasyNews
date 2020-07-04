@@ -10,8 +10,7 @@ function apiCallToFetch() {
 function* fetchArticles() {
     try {
         const fetchedArticles = yield call(apiCallToFetch);
-        yield delay(2000);
-        console.log('Articles :' + fetchedArticles.data);
+        yield delay(5000);
         yield put(SetArticles(fetchedArticles.data));
     } catch (error) {
         console.log("Error Fetch Articles");

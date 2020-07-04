@@ -27,7 +27,7 @@ const Header = ({dispatch}) => {
             <div className="container">
 
                 <Link to="/">
-                    <img src="logoEasyNews.png" className="Logo"/>
+                    <img src="logoEasyNews.png" className="Logo" alt={"logo"}/>
                 </Link>
                 <nav>
                     <ul>

@@ -4,10 +4,8 @@ import Carousel from 'react-bootstrap/Carousel';
 // CSS
 import '../Assets/scss/Home.scss';
 
-import CircleText from '../Components/CircleText';
 import ImageText from "../Components/ImageText";
 import HomeBlockLeft from "../Components/HomeBlockLeft";
-import HomeBlockRight from "../Components/HomeBlockRight";
 import {Link} from "react-router-dom";
 
 const Home = () => {

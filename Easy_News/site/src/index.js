@@ -11,7 +11,7 @@ import App from "./Layout/App";
 
 // Redux and Store
 import {Provider} from "react-redux";
-import store from "./store/ConfigureStore";
+import store from "./Store/ConfigureStore";
 
 ReactDOM.render(
     <Provider store={store}>

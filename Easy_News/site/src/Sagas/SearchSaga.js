@@ -8,8 +8,8 @@ function* handleSearchInput() {
     // Delay by 500ms
     yield delay(500);
     const searchInput = yield select(SearchInputState);
+    yield put(Pagination_RESET());
     if (searchInput !== ''){
-        yield put(Pagination_RESET());
         yield put(showSearchArticles());
         yield put(showSearchYes());
     }

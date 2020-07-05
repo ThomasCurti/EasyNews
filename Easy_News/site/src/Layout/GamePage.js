@@ -4,6 +4,12 @@ import React from "react";
 import '../Assets/scss/Home.scss';
 import '../Assets/scss/GamePage.scss';
 
+// img
+import background from '../../public/BackgroundAccueil.png';
+
+// Game
+import game from '../../public/V1.zip';
+
 import HomeBlockLeft from "../Components/HomeBlockLeft";
 import HomeBlockRight from "../Components/HomeBlockRight";
 import DownloadButton from "../Components/DownloadButton";
@@ -13,11 +19,11 @@ const GamePage = () => {
         <div className="Home">
             <div className="Home_Title">Apprenez en jouant !</div>
 
-
             <div>
-                <img src="BackgroundAccueil.png" className="gameImage" alt={"BackgroundAccueil"}/>
+                <img src={background} className="gameImage" alt={"BackgroundAccueil"}/>
+
                 <div className="gameImageContainer">
-                    <DownloadButton filepath="/V1.zip">
+                    <DownloadButton filepath={game}>
                         <h2>Télécharger le jeu en cliquant ici</h2>
                     </DownloadButton>
                     <p>Jouable par les petits mais aussi par les grands !</p>

@@ -1,12 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 const DownloadButton = ({filepath, children}) => {
 
     return (
-        <Link to={filepath} target="_blank" rel="noopener noreferrer" download>
+        <a href={filepath} target="_blank" rel="noopener noreferrer" download={filepath}>
             {children}
-        </Link>
+        </a>
     )
 };
 

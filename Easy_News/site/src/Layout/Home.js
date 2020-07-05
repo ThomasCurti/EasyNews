@@ -4,6 +4,9 @@ import Carousel from 'react-bootstrap/Carousel';
 // CSS
 import '../Assets/scss/Home.scss';
 
+// img
+import background from '../../public/BackgroundAccueil.png';
+
 import ImageText from "../Components/ImageText";
 import HomeBlockLeft from "../Components/HomeBlockLeft";
 import {Link} from "react-router-dom";
@@ -25,7 +28,7 @@ const Home = () => {
                         </div>
                         <img
                             className="d-block w-100 carouselImage"
-                            src="BackgroundAccueil.png"
+                            src={background}
                             alt="First slide"
                         />
                     </div>
@@ -48,7 +51,7 @@ const Home = () => {
                         </div>
                         <img
                             className="d-block w-100 carouselImage"
-                            src="BackgroundAccueil.png"
+                            src={background}
                             alt="First slide"
                         />
                     </div>

@@ -14,7 +14,7 @@ export const client = axios.create({
     httpsAgent: agent
 });
 
-export const getAllArticlesApiCall = "https://localhost:443/api/Article";
+export const getAllArticlesApiCall = "https://localhost:44346/api/Article";
 export const getArticleByIdApiCall = (id) => {
     return "https://localhost:443/api/Article/" + id
 };

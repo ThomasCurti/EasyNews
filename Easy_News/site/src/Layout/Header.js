@@ -4,6 +4,9 @@ import React, {useCallback} from 'react';
 import '../Assets/scss/Header.scss';
 import {Link} from "react-router-dom";
 
+// img
+import logoEasyNews from '../../public/logoEasyNews.png';
+
 import {searchTextInput, showSearchNo} from '../Actions/Actions'
 import {connect} from "react-redux";
 
@@ -27,7 +30,7 @@ const Header = ({dispatch}) => {
             <div className="container">
 
                 <Link to="/">
-                    <img src="logoEasyNews.png" className="Logo" alt={"logo"}/>
+                    <img src={logoEasyNews} className="Logo" alt={"logo"}/>
                 </Link>
                 <nav>
                     <ul>

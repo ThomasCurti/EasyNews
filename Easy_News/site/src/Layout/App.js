@@ -2,7 +2,6 @@ import React from 'react';
 
 // Header and Bottom
 import Header from "./Header";
-import Footer from "./Footer";
 import ArticleInfo from "./ArticleInfo";
 import {connect} from "react-redux";
 
@@ -37,8 +36,6 @@ const App = ({showSearchArticles}) => {
                         <SearchResults />
                     )}
                 </div>
-
-                <Footer/>
             </BrowserRouter>
         </div>
     );

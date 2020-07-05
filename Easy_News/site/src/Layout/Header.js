@@ -13,7 +13,8 @@ import {connect} from "react-redux";
 const Header = ({dispatch}) => {
 
     const CancelShowSearch = useCallback(() => {
-        dispatch(showSearchNo())
+        dispatch(showSearchNo());
+        document.getElementById('researchInput').value = '';
     }, [
         dispatch
     ]);
@@ -24,12 +25,11 @@ const Header = ({dispatch}) => {
         dispatch,
     ]);
 
-    //<Link to="/" onClick={CancelShowSearch}></Link>
     return (
         <header>
             <div className="container">
 
-                <Link to="/">
+                <Link to="/" onClick={CancelShowSearch}>
                     <img src={logoEasyNews} className="Logo" alt={"logo"}/>
                 </Link>
                 <nav>
@@ -44,7 +44,8 @@ const Header = ({dispatch}) => {
                             <Link to="/game" onClick={CancelShowSearch}>Easy News le jeu</Link>
                         </li>
                         <li>
-                            <input type="text" className="form-control" placeholder="Rechercher une actualité"
+                            <input id={"researchInput"} type="text" className="form-control" placeholder="Rechercher une actualité"
+                                   onFocus={CancelShowSearch}
                                    onChange={handleOnChange}/>
                         </li>
                     </ul>

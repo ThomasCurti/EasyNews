@@ -16,9 +16,10 @@ namespace Backend.DataAccess
         protected EFModels.earlynews_testContext _context;
         protected readonly IMapper _mapper;
         protected LogRepository _loggerRepo;
+        protected ILogger _logger;
         public bool DoLog = true;
 
-        public Repository(EFModels.earlynews_testContext ctx, IMapper mapper, LogRepository loggerRepo)
+        public Repository(EFModels.earlynews_testContext ctx, IMapper mapper, LogRepository loggerRepo, ILogger logger)
         {
             _mapper = mapper;
             _context = ctx;
@@ -35,18 +36,18 @@ namespace Backend.DataAccess
                 
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogInformation("Deletion successful of entity with id " + idEntity + ", no entity found", this.GetType().Name, _loggerRepo);
-                Log.Information($"Tried to delete item with id {idEntity} but no item found");
+                _logger.Information($"Tried to delete item with id {idEntity} but no item found");
                 return false;
             }
                 
             try
             {
                 _set.Remove(dBEntity);
-                Log.Information($"Deleted item {dBEntity}");
+                _logger.Information($"Deleted item {dBEntity}");
             }
             catch (Exception e)
             {
-                Log.Error($"Error when trying to remove {dBEntity} of class {this.GetType().Name}");
+                _logger.Error($"Error when trying to remove {dBEntity} of class {this.GetType().Name}");
             }
             
 
@@ -59,7 +60,7 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                Log.Error($"Error when trying to save changes in delete function of class {this.GetType().Name}");
+                _logger.Error($"Error when trying to save changes in delete function of class {this.GetType().Name}");
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return false;
@@ -95,8 +96,8 @@ namespace Backend.DataAccess
                 }
                 catch (Exception e)
                 {
-                    Log.Error($"Error when trying to map in Get function of class {this.GetType().Name} with query {query}");
-                    Log.Error(e.Message);
+                    _logger.Error($"Error when trying to map in Get function of class {this.GetType().Name} with query {query}");
+                    _logger.Error(e.Message);
                     return null;
                 }
                 
@@ -104,8 +105,8 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                Log.Error($"Unexpected error in Get function of class {this.GetType().Name}");
-                Log.Error(e.Message);
+                _logger.Error($"Unexpected error in Get function of class {this.GetType().Name}");
+                _logger.Error(e.Message);
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
@@ -121,8 +122,8 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                Log.Error($"Error when trying to map in Insert function of class {this.GetType().Name} with entity {entity}");
-                Log.Error(e.Message);
+                _logger.Error($"Error when trying to map in Insert function of class {this.GetType().Name} with entity {entity}");
+                _logger.Error(e.Message);
             }
             
             _set.Add(dBEntity);
@@ -136,8 +137,8 @@ namespace Backend.DataAccess
             }
             catch(Exception e)
             {
-                Log.Error($"Unexpected error in Insert function of class {this.GetType().Name}");
-                Log.Error(e.Message);
+                _logger.Error($"Unexpected error in Insert function of class {this.GetType().Name}");
+                _logger.Error(e.Message);
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
@@ -150,7 +151,7 @@ namespace Backend.DataAccess
 
             if (dBEntity == null)
             {
-                Log.Information("Update successful of null entity");
+                _logger.Information("Update successful of null entity");
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogInformation("Update successful, null entity", this.GetType().Name, _loggerRepo);
                 return null;
@@ -159,7 +160,7 @@ namespace Backend.DataAccess
             _mapper.Map(entity, dBEntity);
             if (!_context.ChangeTracker.HasChanges())
             {
-                Log.Information("Update successful but no change done");
+                _logger.Information("Update successful but no change done");
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogInformation("Update successful, no change done", this.GetType().Name, _loggerRepo);
                 return entity;
@@ -172,14 +173,14 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                Log.Error($"Unexpected error in Update function of class {this.GetType().Name} when trying to saveChangesAsync");
-                Log.Error(e.Message);
+                _logger.Error($"Unexpected error in Update function of class {this.GetType().Name} when trying to saveChangesAsync");
+                _logger.Error(e.Message);
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
             }
 
-            Log.Information($"Update successful of entity {entity}");
+            _logger.Information($"Update successful of entity {entity}");
             if (DoLog && _loggerRepo != null)
                 await Logger.Logger.LogInformation("Update successful", this.GetType().Name, _loggerRepo);
             return _mapper.Map<ModelEntity>(dBEntity);

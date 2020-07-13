@@ -22,13 +22,15 @@ namespace Backend.Controllers
     {
         private readonly DubiousArticleRepository _dubiousArticleRepository;
         private LogRepository _logRepository;
+        private ILogger _logger;
         private bool _log { get; }
 
-        public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, bool log = true)
+        public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, ILogger logger,  bool log = true)
         {
             _dubiousArticleRepository = dubiousArticleRepository;
             _dubiousArticleRepository.DoLog = log;
             _log = log;
+            _logger = logger;
         }
 
         // GET: api/DubiousArticle
@@ -69,8 +71,8 @@ namespace Backend.Controllers
             }
             catch (Exception e)
             {
-                Log.Error("Tried to insert dubious article but the value was wrong");
-                Log.Error(e.Message);
+                _logger.Error("Tried to insert dubious article but the value was wrong");
+                _logger.Error(e.Message);
                 return;
             }
             _dubiousArticleRepository.Insert(dubiousArticle).Wait();

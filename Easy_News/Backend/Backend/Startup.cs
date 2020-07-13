@@ -57,6 +57,8 @@ namespace Backend
 
             services.AddControllers();
 
+            services.AddSingleton<ILogger>(Log.Logger);
+
             services.AddTransient<DataAccess.ArticleRepository>();
             services.AddTransient<DataAccess.ArticleSourceRepository>();
             services.AddTransient<DataAccess.DubiousArticleRepository>();

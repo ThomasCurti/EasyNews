@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -10,11 +12,14 @@ namespace Backend
     {
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+
             Log.Logger = new LoggerConfiguration()
-           .MinimumLevel.Debug()
-           .Enrich.FromLogContext()
-           .WriteTo.Console()
-           .CreateLogger();
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
             try
             {

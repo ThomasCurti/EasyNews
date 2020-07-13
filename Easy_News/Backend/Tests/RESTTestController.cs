@@ -3,11 +3,15 @@ using Backend.Controllers;
 using Backend.DataAccess;
 using Backend.DataAccess.EFModels;
 using Backend.Dbo;
+using Serilog;
+using Moq;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Tests
 {
@@ -27,6 +31,8 @@ namespace Tests
         private EventRepository _eventRepository;
         private EventTypeRepository _eventTypeRepository;
         private ScenarioRepository scenarioRepository;
+
+        private ILogger _logger;
 
         private readonly string gitlabConnection = "server=mariadb;user=root;port=3306;password=admin;database=earlynews_test";
         private readonly string localConnection = "server=localhost;user=root;port=3306;password=admin;database=earlynews_test";
@@ -50,14 +56,16 @@ namespace Tests
                     _context.connectionString = gitlabConnection;
                 _mapper = MappingData();
 
-                var logger = new LogRepository(_context, _mapper);
+                _logger = new Mock<ILogger>().Object;
 
-                _articleRepository = new ArticleRepository(_context, _mapper, logger);
-                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper, logger);
-                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger);
-                _eventRepository = new EventRepository(_context, _mapper, logger);
-                _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger);
-                scenarioRepository = new ScenarioRepository(_context, _mapper, logger);
+                var logger = new LogRepository(_context, _mapper, _logger);
+
+                _articleRepository = new ArticleRepository(_context, _mapper, logger, _logger);
+                _articleSourceRepository = new ArticleSourceRepository(_context, _mapper, logger, _logger);
+                _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger, _logger);
+                _eventRepository = new EventRepository(_context, _mapper, logger, _logger);
+                _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger, _logger);
+                scenarioRepository = new ScenarioRepository(_context, _mapper, logger, _logger);
 
             }
 
@@ -173,7 +181,7 @@ namespace Tests
         [Test]
         public void RESTDubiousArticleGetAllValues()
         {
-            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
+            var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
 
             var data = controller.Get();
             var test = data.Result.ToList();
@@ -183,7 +191,7 @@ namespace Tests
         [Test]
         public void RESTDubiousArticleGetById()
         {
-            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
+            var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
 
             var data = controller.Get(1).Result;
             Assert.IsNull(data);
@@ -192,10 +200,36 @@ namespace Tests
         [Test]
         public void RESTDubiousArticleGetByWrongId()
         {
-            var controller = new DubiousArticleController(_dubiousArticleRepository, false);
+            var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
 
             var data = controller.Get(40).Result;
             Assert.IsNull(data);
+        }
+
+        [Test]
+        public void RESTDubiousArticlePost()
+        {
+            string articleToInsert = "{\"title\": \"Coronavirus: le reconfinement\", " +
+                 "\"sourceId\": 2, " +
+                 "\"fullArticleSource\": \"fullArticleSourceInserted\"}";
+
+
+            var logger = new LogRepository(_context, _mapper, _logger);
+            var repo = new DubiousArticleRepository(_context, _mapper, logger, _logger);
+            var controller = new DubiousArticleController(repo, _logger, false);
+
+            JsonDocument doc = JsonDocument.Parse(articleToInsert);
+            controller.Post(doc.RootElement);
+
+            var test = repo.Get().Result.ToList();
+            var entity = test.Where(x => x.title == "Coronavirus: le reconfinement").FirstOrDefault();
+
+            Assert.NotNull(entity);
+
+            Assert.AreEqual("Coronavirus: le reconfinement", entity.title);
+            Assert.AreEqual(2, entity.sourceId);
+            Assert.AreEqual("fullArticleSourceInserted", entity.fullArticleSource);
+        
         }
 
         [Test]

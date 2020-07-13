@@ -2,12 +2,12 @@
 using Backend.DataAccess;
 using Backend.DataAccess.EFModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Moq;
 using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
+using Moq;
 
 namespace Tests
 {
@@ -15,6 +15,8 @@ namespace Tests
     {
         earlynews_testContext _context;
         private IMapper _mapper;
+
+        private ILogger _logger;
 
         private ArticleRepository _articleRepository;
         private ArticleSourceRepository _articleSourceRepository;
@@ -110,25 +112,28 @@ namespace Tests
             _mapper = MappingData();
 
             //LogRepo
-            var logger = new LogRepository(_context, _mapper);
+            var logger = new LogRepository(_context, _mapper, _logger);
+
+            //logger
+            _logger = new Mock<ILogger>().Object;
 
             //All other repo
-            _articleRepository = new ArticleRepository(_context, _mapper, logger);
+            _articleRepository = new ArticleRepository(_context, _mapper, logger, _logger);
             _articleRepository.DoLog = false;
 
-            _articleSourceRepository = new ArticleSourceRepository(_context, _mapper, logger);
+            _articleSourceRepository = new ArticleSourceRepository(_context, _mapper, logger, _logger);
             _articleSourceRepository.DoLog = false;
 
-            _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger);
+            _dubiousArticleRepository = new DubiousArticleRepository(_context, _mapper, logger, _logger);
             _dubiousArticleRepository.DoLog = false;
 
-            _eventRepository = new EventRepository(_context, _mapper, logger);
+            _eventRepository = new EventRepository(_context, _mapper, logger, _logger);
             _eventRepository.DoLog = false;
             
-            _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger);
+            _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger, _logger);
             _eventTypeRepository.DoLog = false;
 
-            _scenarioRepository = new ScenarioRepository(_context, _mapper, logger);
+            _scenarioRepository = new ScenarioRepository(_context, _mapper, logger, _logger);
             _scenarioRepository.DoLog = false;
         }
 
@@ -303,6 +308,35 @@ namespace Tests
             var res = _dubiousArticleRepository.Get(10).Result.FirstOrDefault();
             Assert.IsNull(res);
         }
+
+        [Test]
+        public void DubiousInsert()
+        {
+            Backend.Dbo.Model.dubious_article dubious_Article = new Backend.Dbo.Model.dubious_article
+            {
+                title = "testInsertion",
+                sourceId = 1,
+                fullArticleSource = "fullArticleSource",
+                otherSourceId = 2,
+                fullArticleOther = "fullArticleOther",
+                seenTwice = false
+            };
+
+            var res = _dubiousArticleRepository.Insert(dubious_Article);
+
+            var test = _dubiousArticleRepository.Get().Result.ToList();
+            var entity = test.Where(x => x.title == "testInsertion").FirstOrDefault();
+
+            Assert.NotNull(entity);
+
+            Assert.AreEqual("testInsertion", entity.title);
+            Assert.AreEqual(1, entity.sourceId);
+            Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
+            Assert.AreEqual(2, entity.otherSourceId);
+            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
+            Assert.AreEqual(false, entity.seenTwice);
+        }
+
 
 
         [Test]

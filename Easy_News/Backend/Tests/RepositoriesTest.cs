@@ -322,7 +322,7 @@ namespace Tests
                 seenTwice = false
             };
 
-            var res = _dubiousArticleRepository.Insert(dubious_Article);
+            var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
 
             var test = _dubiousArticleRepository.Get().Result.ToList();
             var entity = test.Where(x => x.title == "testInsertion").FirstOrDefault();
@@ -342,6 +342,88 @@ namespace Tests
         {
             bool res = _dubiousArticleRepository.DeleteAll().Result;
             Assert.IsTrue(res);
+        }
+
+        [Test]
+        public void DubiousInsertTwoSameArticle()
+        {
+            Backend.Dbo.Model.dubious_article dubious_Article = new Backend.Dbo.Model.dubious_article
+            {
+                title = "testInsertion",
+                sourceId = 1,
+                fullArticleSource = "fullArticleSource",
+                otherSourceId = 2,
+                fullArticleOther = "fullArticleOther",
+                seenTwice = false
+            };
+
+            Backend.Dbo.Model.dubious_article dubious_Article2 = new Backend.Dbo.Model.dubious_article
+            {
+                title = "testInsertion",
+                sourceId = 1,
+                fullArticleSource = "fullArticleSource",
+                otherSourceId = 2,
+                fullArticleOther = "fullArticleOther",
+                seenTwice = false
+            };
+
+            var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
+            var res2 = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article2);
+
+            var test = _dubiousArticleRepository.Get().Result.ToList();
+            var entity = test.Where(x => x.title == "testInsertion").FirstOrDefault();
+
+            Assert.NotNull(entity);
+
+            Assert.AreEqual("testInsertion", entity.title);
+            Assert.AreEqual(1, entity.sourceId);
+            Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
+            Assert.AreEqual(2, entity.otherSourceId);
+            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
+            Assert.AreEqual(false, entity.seenTwice);
+
+            Assert.AreEqual(3, test.Count);
+        }
+
+        [Test]
+        public void DubiousInsertTwoSameArticleWithLongTitle()
+        {
+            Backend.Dbo.Model.dubious_article dubious_Article = new Backend.Dbo.Model.dubious_article
+            {
+                title = "testInsertionWithLongTitleWithou",
+                sourceId = 1,
+                fullArticleSource = "fullArticleSource",
+                otherSourceId = 2,
+                fullArticleOther = "fullArticleOther",
+                seenTwice = false
+            };
+
+            Backend.Dbo.Model.dubious_article dubious_Article2 = new Backend.Dbo.Model.dubious_article
+            {
+                title = "testInsertionWithLongTitleWithou",
+                sourceId = 1,
+                fullArticleSource = "fullArticleSource",
+                otherSourceId = 2,
+                fullArticleOther = "fullArticleOther",
+                seenTwice = false
+            };
+
+            var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
+            var res2 = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article2);
+
+            var test = _dubiousArticleRepository.Get().Result.ToList();
+            var entity = test.Where(x => x.title == "testInsertionWithLongTitleWithou").FirstOrDefault();
+
+            Assert.NotNull(entity);
+
+            Assert.AreEqual("testInsertionWithLongTitleWithou", entity.title);
+            Assert.AreEqual(1, entity.sourceId);
+            Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
+            Assert.AreEqual(2, entity.otherSourceId);
+            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
+            Assert.AreEqual(false, entity.seenTwice);
+
+            Assert.AreEqual(3, test.Count);
         }
 
 

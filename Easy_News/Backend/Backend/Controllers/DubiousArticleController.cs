@@ -75,14 +75,14 @@ namespace Backend.Controllers
                 _logger.Error(e.Message);
                 return;
             }
-            _dubiousArticleRepository.Insert(dubiousArticle).Wait();
+            _dubiousArticleRepository.InsertWithoutDuplicate(dubiousArticle).Wait();
         }
 
         //DELETE: api/DubiousArticle
         [HttpDelete]
         public void DeleteAll()
         {
-            _dubiousArticleRepository.DeleteAll();
+            _dubiousArticleRepository.DeleteAll().Wait();
         }
 
         /*// PUT: api/DubiousArticle/5

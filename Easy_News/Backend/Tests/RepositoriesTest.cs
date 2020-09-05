@@ -337,6 +337,13 @@ namespace Tests
             Assert.AreEqual(false, entity.seenTwice);
         }
 
+        [Test]
+        public void DubiousDeleteAll()
+        {
+            bool res = _dubiousArticleRepository.DeleteAll().Result;
+            Assert.IsTrue(res);
+        }
+
 
 
         [Test]

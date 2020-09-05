@@ -96,8 +96,11 @@ namespace Backend.DataAccess
                 }
                 catch (Exception e)
                 {
-                    _logger.Error($"Error when trying to map in Get function of class {this.GetType().Name} with query {query}");
-                    _logger.Error(e.Message);
+                    if (_logger != null)
+                    {
+                        _logger.Error($"Error when trying to map in Get function of class {this.GetType().Name} with query {query}");
+                        _logger.Error(e.Message);
+                    }
                     return null;
                 }
                 
@@ -105,8 +108,11 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                _logger.Error($"Unexpected error in Get function of class {this.GetType().Name}");
-                _logger.Error(e.Message);
+                if (_logger != null)
+                {
+                    _logger.Error($"Unexpected error in Get function of class {this.GetType().Name}");
+                    _logger.Error(e.Message);
+                }
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;
@@ -122,8 +128,11 @@ namespace Backend.DataAccess
             }
             catch (Exception e)
             {
-                _logger.Error($"Error when trying to map in Insert function of class {this.GetType().Name} with entity {entity}");
-                _logger.Error(e.Message);
+                if (_logger != null)
+                {
+                    _logger.Error($"Error when trying to map in Insert function of class {this.GetType().Name} with entity {entity}");
+                    _logger.Error(e.Message);
+                }
             }
             
             _set.Add(dBEntity);
@@ -137,8 +146,11 @@ namespace Backend.DataAccess
             }
             catch(Exception e)
             {
-                _logger.Error($"Unexpected error in Insert function of class {this.GetType().Name}");
-                _logger.Error(e.Message);
+                if (_logger != null)
+                {
+                    _logger.Error($"Unexpected error in Insert function of class {this.GetType().Name}");
+                    _logger.Error(e.Message);
+                }
                 if (DoLog && _loggerRepo != null)
                     await Logger.Logger.LogError(e, this.GetType().Name, _loggerRepo);
                 return null;

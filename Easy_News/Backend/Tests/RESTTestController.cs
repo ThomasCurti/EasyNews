@@ -233,6 +233,20 @@ namespace Tests
         }
 
         [Test]
+        public void RESTDubiousArticleDelete()
+        {
+            var logger = new LogRepository(_context, _mapper, _logger);
+            var repo = new DubiousArticleRepository(_context, _mapper, logger, _logger);
+            var controller = new DubiousArticleController(repo, _logger, false);
+
+            controller.DeleteAll();
+
+            var test = repo.Get().Result.ToList();
+            Assert.IsNotNull(test);
+            Assert.AreEqual(0, test.Count);
+        }
+
+        [Test]
         public void RESTEventGetAllValues()
         {
             var controller = new EventController(_eventRepository, false);

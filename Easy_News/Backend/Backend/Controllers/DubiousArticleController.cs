@@ -78,6 +78,13 @@ namespace Backend.Controllers
             _dubiousArticleRepository.Insert(dubiousArticle).Wait();
         }
 
+        //DELETE: api/DubiousArticle
+        [HttpDelete]
+        public void DeleteAll()
+        {
+            _dubiousArticleRepository.DeleteAll();
+        }
+
         /*// PUT: api/DubiousArticle/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

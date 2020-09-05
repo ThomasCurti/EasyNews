@@ -23,10 +23,6 @@ test_backend:
         - name: mariadb:latest
     
     image: faltren/dotnet-sdk-npm-3:pip3
-    before_script:
-        - chmod +x /env/bin/activate
-        - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------------\n |             NEW PIPELINE STARTED            | \n |Starting backend CI for the commit         |\n|    $CI_COMMIT_TITLE \n |in pipeline number   $CI_PIPELINE_IID                            |\n----------------------------------------------"
         
     script:
         - cd Easy_News

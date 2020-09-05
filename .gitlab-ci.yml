@@ -11,18 +11,6 @@ variables:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         PROJECT_NAME: "Backend"
 
-merge:
-    image: faltren/dotnet-sdk-npm-3:pip3
-
-    stage: build
-    rules:
-        - if: $CI_COMMIT_BRANCH == 'master'
-    
-    script:
-        - chmod +x /env/bin/activate
-        - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|                     NEW MERGE                |\n | Merging $CI_COMMIT_REF_NAME| \n ----------------------------------------"
-
 test_backend:
     stage: test
     
@@ -46,54 +34,3 @@ test_backend:
         - dotnet restore
         - dotnet build $PROJECT_NAME.sln
         - dotnet test Tests
-
-test_website:
-    stage: test
-    
-    artifacts:
-        paths: 
-            - Easy_News
-        expire_in: 1 week
-
-    services:
-        - name: mariadb:latest
-    
-    image: faltren/dotnet-sdk-npm-3:pip3
-    
-    before_script:
-        - chmod +x /env/bin/activate
-        - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------------\n |             NEW PIPELINE STARTED            | \n |Starting website CI for the commit         |\n|    $CI_COMMIT_TITLE \n |in pipeline number   $CI_PIPELINE_IID                            |\n----------------------------------------------"
-        
-    script:
-        - cd Easy_News
-        - cd $PROJECT_NAME
-        - dotnet restore
-        - dotnet build $PROJECT_NAME.sln
-        - dotnet test Tests
-        - nohup dotnet run --project Backend/Backend.csproj > /dev/null 2>&1 &
-        - cd ../site; 
-        - npm install
-        - npm test
-        
-on_failure:
-    image: faltren/dotnet-sdk-npm-3:pip3
-
-    stage: .post
-    when: on_failure
-    
-    script:
-        - chmod +x /env/bin/activate
-        - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|            PIPELINE FAILED!          |\n pipeline number   $CI_PIPELINE_IID\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n----------------------------------------"
-        
-on_success: 
-    image: faltren/dotnet-sdk-npm-3:pip3
-
-    stage: .post
-    when: on_success
-    
-    script:
-        - chmod +x /env/bin/activate
-        - /env/bin/activate
-        - python3.7 Easy_News/Discord/notify.py 'ci' "----------------------------------------\n|            PIPELINE SUCCESS!          |\n pipeline number   $CI_PIPELINE_IID"

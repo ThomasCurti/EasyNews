@@ -25,7 +25,7 @@ namespace Backend.Controllers
         private ILogger _logger;
         private bool _log { get; }
 
-        public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, ILogger logger,  bool log = true)
+        public DubiousArticleController(DubiousArticleRepository dubiousArticleRepository, ILogger logger, bool log = true)
         {
             _dubiousArticleRepository = dubiousArticleRepository;
             _dubiousArticleRepository.DoLog = log;
@@ -61,7 +61,7 @@ namespace Backend.Controllers
 
         // POST: api/DubiousArticle
         [HttpPost]
-        public void Post([FromBody] JsonElement value)
+        public async void Post([FromBody] JsonElement value)
         {
             Dbo.Model.dubious_article dubiousArticle = null;
             try
@@ -75,26 +75,14 @@ namespace Backend.Controllers
                 _logger.Error(e.Message);
                 return;
             }
-            _dubiousArticleRepository.InsertWithoutDuplicate(dubiousArticle).Wait();
+            await _dubiousArticleRepository.InsertWithoutDuplicate(dubiousArticle);
         }
 
         //DELETE: api/DubiousArticle
         [HttpDelete]
-        public void DeleteAll()
+        public async void DeleteAll()
         {
-            _dubiousArticleRepository.DeleteAll().Wait();
+            await _dubiousArticleRepository.DeleteAll();
         }
-
-        /*// PUT: api/DubiousArticle/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }*/
     }
 }

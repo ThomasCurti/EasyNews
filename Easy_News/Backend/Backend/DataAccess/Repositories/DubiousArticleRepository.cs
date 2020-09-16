@@ -19,7 +19,7 @@ namespace Backend.DataAccess
 
 
         /*
-         The problem is that EF doesn't support any batch commands and the only way to delete all entities in a set using no direct DML would be:
+         The problem is that EF doesn't support any batch commands and the only way to delete all entities in a set using no direct DML (data manipulation language) would be:
             foreach (var entity in dbContext.MyEntities)
                 dbContext.MyEntities.Remove(entity);
             dbContext.SaveChanges();
@@ -75,7 +75,8 @@ namespace Backend.DataAccess
                 if (title.Length > 32)
                     title = title.Substring(0, 32);
                 title = title.TrimEnd();
-                if (dubiousArticle.Title == title && dubiousArticle.SourceId == entity.sourceId) {
+                if (dubiousArticle.Title == title && dubiousArticle.SourceId == entity.sourceId)
+                {
                     var ret = new Dbo.Model.dubious_article();
                     ret.id = -1;
                     return ret;

@@ -35,33 +35,35 @@ namespace Backend.Controllers
 
         // GET: api/DubiousArticle
         [HttpGet]
-        public async Task<IEnumerable<dubious_article>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _dubiousArticleRepository.Get();
+            return Ok(await _dubiousArticleRepository.Get());
         }
 
         // GET: api/DubiousArticle/5
         [HttpGet("{id}")]
-        public async Task<dubious_article> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var val = _dubiousArticleRepository.Get(id).Result;
 
             try
             {
                 List<Dbo.Model.dubious_article> list = new List<Dbo.Model.dubious_article>(val);
-                return list[0];
+                if (list[0] == null)
+                    return NotFound();
+                return Ok(list[0]);
             }
             catch (Exception e)
             {
                 if (_log)
                     await Logger.Logger.LogError(e, "DubiousArticleController", _logRepository);
-                return null;
+                return NotFound();
             }
         }
 
         // POST: api/DubiousArticle
         [HttpPost]
-        public async void Post([FromBody] JsonElement value)
+        public async Task<IActionResult> Post([FromBody] JsonElement value)
         {
             Dbo.Model.dubious_article dubiousArticle = null;
             try
@@ -73,16 +75,18 @@ namespace Backend.Controllers
             {
                 _logger.Error("Tried to insert dubious article but the value was wrong");
                 _logger.Error(e.Message);
-                return;
+                return NotFound();
             }
             await _dubiousArticleRepository.InsertWithoutDuplicate(dubiousArticle);
+            return Ok();
         }
 
         //DELETE: api/DubiousArticle
         [HttpDelete]
-        public async void DeleteAll()
+        public async Task<IActionResult> DeleteAll()
         {
             await _dubiousArticleRepository.DeleteAll();
+            return Ok();
         }
     }
 }

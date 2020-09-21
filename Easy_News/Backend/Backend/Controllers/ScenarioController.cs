@@ -26,27 +26,29 @@ namespace Backend.Controllers
 
         // GET: api/Scenario
         [HttpGet]
-        public async Task<IEnumerable<scenarios>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _scenarioRepository.Get();
+            return Ok(await _scenarioRepository.Get());
         }
 
         // GET: api/Scenario/5
         [HttpGet("{id}")]
-        public async Task<scenarios> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var val = _scenarioRepository.Get(id).Result;
 
             try
             {
                 List<Dbo.Model.scenarios> list = new List<Dbo.Model.scenarios>(val);
-                return list[0];
+                if (list[0] == null)
+                    return NotFound();
+                return Ok(list[0]);
             }
             catch (Exception e)
             {
                 if (_log)
                     await Logger.Logger.LogError(e, "EventTypeController", _logRepository);
-                return null;
+                return NotFound();
             }
         }
 

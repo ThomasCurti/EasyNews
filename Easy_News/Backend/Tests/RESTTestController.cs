@@ -13,6 +13,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.Text.Json;
 using Backend.Dbo.Model;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -121,11 +124,13 @@ namespace Tests
         {
             var controller = new ArticleController(_articleRepository, false);
 
-            var data = controller.Get();
-            var test = data.Result;
-            Assert.IsNotNull(test);
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<article>;
 
-            var test2 = test.ToList();
+            Assert.IsNotNull(data);
+
+            var test2 = data.ToList();
             Assert.AreEqual(12, test2.Count);
         }
 
@@ -134,7 +139,10 @@ namespace Tests
         {
             var controller = new ArticleController(_articleRepository, false);
 
-            var data = controller.Get(1).Result;
+            var result = controller.Get(1).Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as article;
+
             Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
             Assert.AreEqual("Naissance du Coronavirus", data.title);
@@ -148,8 +156,8 @@ namespace Tests
         {
             var controller = new ArticleController(_articleRepository, false);
 
-            var data = controller.Get(40).Result;
-            Assert.IsNull(data);
+            var result = controller.Get(40).Result;
+            Assert.IsTrue(result is NotFoundResult);
         }
 
         [Test]
@@ -157,8 +165,11 @@ namespace Tests
         {
             var controller = new ArticleSourceController(_articleSourceRepository, false);
 
-            var data = controller.Get();
-            var test = data.Result.ToList();
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<article_source>;
+
+            var test = data.ToList();
             if (test.Count == 4)
                 Assert.Pass();
             else
@@ -170,7 +181,10 @@ namespace Tests
         {
             var controller = new ArticleSourceController(_articleSourceRepository, false);
 
-            var data = controller.Get(1).Result;
+            var result = controller.Get(1).Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as article_source;
+
             Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
             Assert.AreEqual("AFP", data.name);
@@ -182,7 +196,7 @@ namespace Tests
             var controller = new ArticleSourceController(_articleSourceRepository, false);
 
             var data = controller.Get(40).Result;
-            Assert.IsNull(data);
+            Assert.IsTrue(data is NotFoundResult);
         }
 
         [Test]
@@ -190,18 +204,12 @@ namespace Tests
         {
             var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
 
-            var data = controller.Get();
-            var test = data.Result.ToList();
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<dubious_article>;
+
+            var test = data.ToList();
             Assert.AreEqual(0, test.Count);
-        }
-
-        [Test]
-        public void RESTDubiousArticleGetById()
-        {
-            var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
-
-            var data = controller.Get(1).Result;
-            Assert.IsNull(data);
         }
 
         [Test]
@@ -210,7 +218,7 @@ namespace Tests
             var controller = new DubiousArticleController(_dubiousArticleRepository, _logger, false);
 
             var data = controller.Get(40).Result;
-            Assert.IsNull(data);
+            Assert.IsTrue(data is NotFoundResult);
         }
 
         [Test]
@@ -220,7 +228,7 @@ namespace Tests
             var repo = new DubiousArticleRepository(_context, _mapper, logger, _logger);
             var controller = new DubiousArticleController(repo, _logger, false);
 
-            controller.DeleteAll();
+            controller.DeleteAll().Wait();
 
             var test = repo.Get().Result.ToList();
             Assert.IsNotNull(test);
@@ -232,10 +240,13 @@ namespace Tests
         {
             var controller = new EventController(_eventRepository, false);
 
-            var data = controller.Get();
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<Backend.Dbo.Model.Event>;
+
             Assert.IsNotNull(data);
 
-            var test = data.Result.ToList();
+            var test = data.ToList();
             Assert.AreEqual(12, test.Count);
         }
 
@@ -244,7 +255,10 @@ namespace Tests
         {
             var controller = new EventController(_eventRepository, false);
 
-            var data = controller.Get(1).Result;
+            var result = controller.Get(1).Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as Backend.Dbo.Model.Event;
+
             Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
             Assert.AreEqual(new DateTime(2020, 3, 2), data.published);
@@ -258,7 +272,7 @@ namespace Tests
             var controller = new EventController(_eventRepository, false);
 
             var data = controller.Get(40).Result;
-            Assert.IsNull(data);
+            Assert.IsTrue(data is NotFoundResult);
         }
 
         [Test]
@@ -266,10 +280,13 @@ namespace Tests
         {
             var controller = new EventTypeController(_eventTypeRepository, false);
 
-            var data = controller.Get();
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<event_type>;
+
             Assert.IsNotNull(data);
 
-            var test = data.Result.ToList();
+            var test = data.ToList();
             Assert.AreEqual(3, test.Count);
         }
 
@@ -278,7 +295,10 @@ namespace Tests
         {
             var controller = new EventTypeController(_eventTypeRepository, false);
 
-            var data = controller.Get(1).Result;
+            var result = controller.Get(1).Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as event_type;
+
             Assert.IsNotNull(data);
             Assert.AreEqual(1, data.id);
             Assert.AreEqual("plague", data.name);
@@ -290,7 +310,7 @@ namespace Tests
             var controller = new EventTypeController(_eventTypeRepository, false);
 
             var data = controller.Get(40).Result;
-            Assert.IsNull(data);
+            Assert.IsTrue(data is NotFoundResult);
         }
 
         [Test]
@@ -298,12 +318,18 @@ namespace Tests
         {
             var controller = new ScenarioController(scenarioRepository, false);
 
-            var data = controller.Get().Result.ToList();
+            var result = controller.Get().Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as IEnumerable<scenarios>;
+
             Assert.IsNotNull(data);
-            Assert.AreEqual(3, data.Count);
-            Assert.AreEqual("Coronavirus", data[0].Virus);
-            Assert.AreEqual("Peste", data[1].Virus);
-            Assert.AreEqual("Grippe espagnole", data[2].Virus);
+
+            var test = data.ToList();
+
+            Assert.AreEqual(3, test.Count);
+            Assert.AreEqual("Coronavirus", test[0].Virus);
+            Assert.AreEqual("Peste", test[1].Virus);
+            Assert.AreEqual("Grippe espagnole", test[2].Virus);
         }
 
         [Test]
@@ -311,7 +337,10 @@ namespace Tests
         {
             var controller = new ScenarioController(scenarioRepository, false);
 
-            var data = controller.Get(2).Result;
+            var result = controller.Get(2).Result;
+            var okResult = result as OkObjectResult;
+            var data = okResult.Value as scenarios;
+
             Assert.IsNotNull(data);
             Assert.AreEqual("Peste", data.Virus);
             Assert.AreEqual(12, data.TownId);
@@ -325,7 +354,7 @@ namespace Tests
             var controller = new ScenarioController(scenarioRepository, false);
 
             var data = controller.Get(6).Result;
-            Assert.IsNull(data);
+            Assert.IsTrue(data is NotFoundResult);
         }
     }
 }

@@ -28,27 +28,29 @@ namespace Backend.Controllers
 
         // GET: api/ArticleSource
         [HttpGet]
-        public async Task<IEnumerable<article_source>> Get()
+        public async Task<IActionResult> Get()
         {
-            return await _articleSourceRepository.Get();
+            return Ok(await _articleSourceRepository.Get());
         }
 
         // GET: api/ArticleSource/5
         [HttpGet("{id}")]
-        public async Task<article_source> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var val = _articleSourceRepository.Get(id).Result;
 
             try
             {
                 List<Dbo.Model.article_source> list = new List<Dbo.Model.article_source>(val);
-                return list[0];
+                if (list[0] == null)
+                    return NotFound();
+                return Ok(list[0]);
             }
             catch (Exception e)
             {
                 if (_log)
                     await Logger.Logger.LogError(e, "ArticleSourceController", _logRepository);
-                return null;
+                return NotFound();
             }
         }
     }

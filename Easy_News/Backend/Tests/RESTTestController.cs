@@ -39,7 +39,8 @@ namespace Tests
 
         private IMapper MappingData()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<AutomapperProfiles>();
             });
             IMapper mapper = new Mapper(config);
@@ -211,7 +212,8 @@ namespace Tests
         {
             string articleToInsert = "{\"title\": \"Coronavirus: le reconfinement\", " +
                  "\"sourceId\": 2, " +
-                 "\"fullArticleSource\": \"fullArticleSourceInserted\"}";
+                 "\"fullArticleSource\": \"fullArticleSourceInserted\", " +
+                 "\"kwFrequency\": \"test\"}";
 
 
             var logger = new LogRepository(_context, _mapper, _logger);
@@ -229,7 +231,7 @@ namespace Tests
             Assert.AreEqual("Coronavirus: le reconfinement", entity.title);
             Assert.AreEqual(2, entity.sourceId);
             Assert.AreEqual("fullArticleSourceInserted", entity.fullArticleSource);
-        
+
         }
 
         [Test]

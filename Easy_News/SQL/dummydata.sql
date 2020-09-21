@@ -202,11 +202,11 @@ INSERT INTO event VALUES
 (null, 3, 12, "2020-07-01");
 
 INSERT INTO scenarios VALUES
-(null, "Coronavirus", 1, "2020/01/02", "Description de test coronavirus");
+(NULL, 1, "Coronavirus", 1, "2020/01/02", "Description de test coronavirus");
 
 INSERT INTO scenarios VALUES
-(null, "Peste", 12, "600/01/02", "Description de test peste");
+(NULL, 2, "Peste", 12, "600/01/02", "Description de test peste");
 
 INSERT INTO scenarios VALUES
-(null, "Grippe espagnole", 3, "1600/01/02", "Description de test grippe");
+(NULL, 3, "Grippe espagnole", 3, "1600/01/02", "Description de test grippe");
 

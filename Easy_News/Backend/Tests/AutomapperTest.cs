@@ -10,7 +10,8 @@ namespace Tests
 
         private IMapper MappingData()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<AutomapperProfiles>();
             });
             IMapper mapper = new Mapper(config);
@@ -71,9 +72,6 @@ namespace Tests
                 Title = "test",
                 SourceId = 1,
                 FullArticleSource = "example.com",
-                OtherSourceId = 2,
-                FullArticleOther = "blabla",
-                SeenTwice = false,
             };
 
             var val = _mapper.Map<Backend.Dbo.Model.dubious_article>(efDubiousArticle);
@@ -82,9 +80,7 @@ namespace Tests
             Assert.AreEqual(efDubiousArticle.Id, val.id);
             Assert.AreEqual(efDubiousArticle.Title, val.title);
             Assert.AreEqual(efDubiousArticle.FullArticleSource, val.fullArticleSource);
-            Assert.AreEqual(efDubiousArticle.FullArticleOther, val.fullArticleOther);
-            Assert.AreEqual(efDubiousArticle.SeenTwice, val.seenTwice);
-            
+
         }
 
         [Test]

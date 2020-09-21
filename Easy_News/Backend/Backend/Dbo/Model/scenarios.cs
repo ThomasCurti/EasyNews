@@ -12,5 +12,6 @@ namespace Backend.Dbo.Model
         public int TownId { get; set; }
         public string BeginDate { get; set; }
         public string Description { get; set; }
+        public int IllnesType { get; set; }
     }
 }

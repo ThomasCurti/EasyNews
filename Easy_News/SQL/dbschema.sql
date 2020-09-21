@@ -35,11 +35,8 @@ CREATE OR REPLACE TABLE dubious_article (
     title               CHAR(32),
     source_id           INT,
     full_article_source LONGTEXT,
-    other_source_id     INT NULL,
-    full_article_other  LONGTEXT NULL,
-    seen_twice          BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (source_id)       REFERENCES article_source (id),
-    FOREIGN KEY (other_source_id) REFERENCES article_source (id)
+	 kw_frequency		   TEXT,
+    FOREIGN KEY (source_id)       REFERENCES article_source (id)
 );
 
 CREATE OR REPLACE TABLE logs (
@@ -51,6 +48,7 @@ CREATE OR REPLACE TABLE logs (
 
 CREATE OR REPLACE TABLE scenarios (
 	id					   INT                    AUTO_INCREMENT PRIMARY KEY,
+	illnes_type	    	INT	NOT NULL,
 	virus 				CHAR(128) NOT NULL,
 	town_id 				INT NOT NULL,
 	begin_date		 	CHAR(128) NOT NULL,

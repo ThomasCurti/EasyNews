@@ -93,9 +93,6 @@ namespace Backend.DataAccess.EFModels
             {
                 entity.ToTable("dubious_article");
 
-                entity.HasIndex(e => e.OtherSourceId)
-                    .HasName("other_source_id");
-
                 entity.HasIndex(e => e.SourceId)
                     .HasName("source_id");
 
@@ -103,25 +100,17 @@ namespace Backend.DataAccess.EFModels
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.FullArticleOther)
-                    .HasColumnName("full_article_other")
-                    .HasColumnType("longtext")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_general_ci");
-
                 entity.Property(e => e.FullArticleSource)
                     .HasColumnName("full_article_source")
                     .HasColumnType("longtext")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
 
-                entity.Property(e => e.OtherSourceId)
-                    .HasColumnName("other_source_id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.SeenTwice)
-                    .HasColumnName("seen_twice")
-                    .HasDefaultValueSql("'0'");
+                entity.Property(e => e.KwFrequency)
+                    .HasColumnName("kw_frequency")
+                    .HasColumnType("text")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
 
                 entity.Property(e => e.SourceId)
                     .HasColumnName("source_id")
@@ -133,13 +122,8 @@ namespace Backend.DataAccess.EFModels
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
 
-                entity.HasOne(d => d.OtherSource)
-                    .WithMany(p => p.DubiousArticleOtherSource)
-                    .HasForeignKey(d => d.OtherSourceId)
-                    .HasConstraintName("dubious_article_ibfk_2");
-
                 entity.HasOne(d => d.Source)
-                    .WithMany(p => p.DubiousArticleSource)
+                    .WithMany(p => p.DubiousArticle)
                     .HasForeignKey(d => d.SourceId)
                     .HasConstraintName("dubious_article_ibfk_1");
             });
@@ -245,6 +229,10 @@ namespace Backend.DataAccess.EFModels
                     .HasColumnType("longtext")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.IllnesType)
+                    .HasColumnName("illnes_type")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.TownId)
                     .HasColumnName("town_id")

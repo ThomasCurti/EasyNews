@@ -8,15 +8,13 @@ namespace Backend.DataAccess.EFModels
         public ArticleSource()
         {
             Article = new HashSet<Article>();
-            DubiousArticleOtherSource = new HashSet<DubiousArticle>();
-            DubiousArticleSource = new HashSet<DubiousArticle>();
+            DubiousArticle = new HashSet<DubiousArticle>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Article> Article { get; set; }
-        public virtual ICollection<DubiousArticle> DubiousArticleOtherSource { get; set; }
-        public virtual ICollection<DubiousArticle> DubiousArticleSource { get; set; }
+        public virtual ICollection<DubiousArticle> DubiousArticle { get; set; }
     }
 }

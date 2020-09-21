@@ -53,8 +53,8 @@ namespace Tests
 
             var dubiousArticles = new[]
             {
-                new DubiousArticle { Id = 1, Title = "dubious1", SourceId = 0, FullArticleSource = "source1", OtherSourceId = 0, FullArticleOther = "other1", SeenTwice = false },
-                new DubiousArticle { Id = 2, Title = "dubious2", SourceId = 1, FullArticleSource = "source2", OtherSourceId = 1, FullArticleOther = "other2", SeenTwice = true },
+                new DubiousArticle { Id = 1, Title = "dubious1", SourceId = 0, FullArticleSource = "source1", KwFrequency = "test1"},
+                new DubiousArticle { Id = 2, Title = "dubious2", SourceId = 1, FullArticleSource = "source2", KwFrequency = "test2" },
             };
 
             var articleSources = new[]
@@ -75,7 +75,8 @@ namespace Tests
 
         private IMapper MappingData()
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.AddProfile<AutomapperProfiles>();
             });
             IMapper mapper = new Mapper(config);
@@ -129,7 +130,7 @@ namespace Tests
 
             _eventRepository = new EventRepository(_context, _mapper, logger, _logger);
             _eventRepository.DoLog = false;
-            
+
             _eventTypeRepository = new EventTypeRepository(_context, _mapper, logger, _logger);
             _eventTypeRepository.DoLog = false;
 
@@ -297,9 +298,7 @@ namespace Tests
             Assert.AreEqual("dubious1", res.title);
             Assert.AreEqual(0, res.sourceId);
             Assert.AreEqual("source1", res.fullArticleSource);
-            Assert.AreEqual(0, res.otherSourceId);
-            Assert.AreEqual("other1", res.fullArticleOther);
-            Assert.AreEqual(false, res.seenTwice);
+            Assert.AreEqual("test1", res.kwFrequency);
         }
 
         [Test]
@@ -317,9 +316,7 @@ namespace Tests
                 title = "testInsertion",
                 sourceId = 1,
                 fullArticleSource = "fullArticleSource",
-                otherSourceId = 2,
-                fullArticleOther = "fullArticleOther",
-                seenTwice = false
+                kwFrequency = "test3"
             };
 
             var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
@@ -332,9 +329,7 @@ namespace Tests
             Assert.AreEqual("testInsertion", entity.title);
             Assert.AreEqual(1, entity.sourceId);
             Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
-            Assert.AreEqual(2, entity.otherSourceId);
-            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
-            Assert.AreEqual(false, entity.seenTwice);
+            Assert.AreEqual("test3", entity.kwFrequency);
         }
 
         [Test]
@@ -352,9 +347,7 @@ namespace Tests
                 title = "testInsertion",
                 sourceId = 1,
                 fullArticleSource = "fullArticleSource",
-                otherSourceId = 2,
-                fullArticleOther = "fullArticleOther",
-                seenTwice = false
+                kwFrequency = "test1"
             };
 
             Backend.Dbo.Model.dubious_article dubious_Article2 = new Backend.Dbo.Model.dubious_article
@@ -362,9 +355,7 @@ namespace Tests
                 title = "testInsertion",
                 sourceId = 1,
                 fullArticleSource = "fullArticleSource",
-                otherSourceId = 2,
-                fullArticleOther = "fullArticleOther",
-                seenTwice = false
+                kwFrequency = "test1"
             };
 
             var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
@@ -378,9 +369,7 @@ namespace Tests
             Assert.AreEqual("testInsertion", entity.title);
             Assert.AreEqual(1, entity.sourceId);
             Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
-            Assert.AreEqual(2, entity.otherSourceId);
-            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
-            Assert.AreEqual(false, entity.seenTwice);
+            Assert.AreEqual("test1", entity.kwFrequency);
 
             Assert.AreEqual(3, test.Count);
         }
@@ -393,9 +382,7 @@ namespace Tests
                 title = "testInsertionWithLongTitleWithou",
                 sourceId = 1,
                 fullArticleSource = "fullArticleSource",
-                otherSourceId = 2,
-                fullArticleOther = "fullArticleOther",
-                seenTwice = false
+                kwFrequency = "test1"
             };
 
             Backend.Dbo.Model.dubious_article dubious_Article2 = new Backend.Dbo.Model.dubious_article
@@ -403,9 +390,7 @@ namespace Tests
                 title = "testInsertionWithLongTitleWithou",
                 sourceId = 1,
                 fullArticleSource = "fullArticleSource",
-                otherSourceId = 2,
-                fullArticleOther = "fullArticleOther",
-                seenTwice = false
+                kwFrequency = "test1"
             };
 
             var res = _dubiousArticleRepository.InsertWithoutDuplicate(dubious_Article);
@@ -419,9 +404,7 @@ namespace Tests
             Assert.AreEqual("testInsertionWithLongTitleWithou", entity.title);
             Assert.AreEqual(1, entity.sourceId);
             Assert.AreEqual("fullArticleSource", entity.fullArticleSource);
-            Assert.AreEqual(2, entity.otherSourceId);
-            Assert.AreEqual("fullArticleOther", entity.fullArticleOther);
-            Assert.AreEqual(false, entity.seenTwice);
+            Assert.AreEqual("test1", entity.kwFrequency);
 
             Assert.AreEqual(3, test.Count);
         }

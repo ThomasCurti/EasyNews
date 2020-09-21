@@ -11,9 +11,7 @@ namespace Backend.Dbo.Model
         public string title { get; set; }
         public int? sourceId { get; set; }
         public string fullArticleSource { get; set; }
-        public int? otherSourceId { get; set; }
-        public string? fullArticleOther { get; set; }
-        public bool seenTwice { get; set; }
+        public string kwFrequency { get; set; }
 
         public static dubious_article Parse(Object[] val)
         {
@@ -35,9 +33,7 @@ namespace Backend.Dbo.Model
                 title = val[1].ToString(),
                 sourceId = Int32.Parse(val[2].ToString()),
                 fullArticleSource = val[3].ToString(),
-                otherSourceId = other,
-                fullArticleOther = full,
-                seenTwice = Boolean.Parse(val[6].ToString()),
+                kwFrequency = val[4].ToString()
             };
         }
 

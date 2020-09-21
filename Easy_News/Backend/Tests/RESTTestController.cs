@@ -213,45 +213,6 @@ namespace Tests
             Assert.IsNull(data);
         }
 
-        /*[Test]
-        public void RESTDubiousArticlePost()
-        {
-            string articleToInsert = "{\"title\": \"Coronavirus: le reconfinement\", " +
-                 "\"sourceId\": 1000, " +
-                 "\"fullArticleSource\": \"fullArticleSourceInserted\", " +
-                 "\"kwFrequency\": \"test\"}";
-
-
-            var logger = new LogRepository(_context, _mapper, _logger);
-            var repo = new DubiousArticleRepository(_context, _mapper, logger, _logger);
-
-            var sourceRepo = new ArticleSourceRepository(_context, _mapper, logger, _logger);
-
-            var source = new article_source
-            {
-                id = 1000,
-                name = "test"
-            };
-            var so = sourceRepo.Insert(source).Result;
-
-
-
-            var controller = new DubiousArticleController(repo, _logger, false);
-
-            JsonDocument doc = JsonDocument.Parse(articleToInsert);
-            controller.Post(doc.RootElement);
-
-            var test = repo.Get().Result.ToList();
-            var entity = test.Where(x => x.title == "Coronavirus: le reconfinement").FirstOrDefault();
-
-            Assert.NotNull(entity);
-
-            Assert.AreEqual("Coronavirus: le reconfinement", entity.title);
-            Assert.AreEqual(1000, entity.sourceId);
-            Assert.AreEqual("fullArticleSourceInserted", entity.fullArticleSource);
-
-        }*/
-
         [Test]
         public void RESTDubiousArticleDelete()
         {

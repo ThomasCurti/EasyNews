@@ -93,10 +93,11 @@ namespace Tests
                 DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
                 string path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dbschema.sql");
                 cmd.CommandText = File.ReadAllText(path);
-                cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Commande 1 - text");
                 Console.WriteLine(cmd.CommandText);
+
+                cmd.ExecuteNonQuery();
 
                 Console.WriteLine("Commande 2");
                 Console.WriteLine("------------------------------------------------------------");
@@ -104,10 +105,11 @@ namespace Tests
                 MySqlCommand comm = db.Connection.CreateCommand();
                 path = Path.Combine(dir.Parent.Parent.Parent.FullName, "dummydata.sql");
                 comm.CommandText = File.ReadAllText(path);
-                comm.ExecuteNonQuery();
 
                 Console.WriteLine("Commande 2 - text");
                 Console.WriteLine(comm.CommandText);
+
+                comm.ExecuteNonQuery();
 
                 db.Connection.Close();
             }

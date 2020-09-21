@@ -12,7 +12,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
     	   "Naissance du Coronavirus" as title,
            "Le coronavirus est une maladie qui est apparu en Chine dans la ville de Wuhan." as description,
            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan semper sodales. Fusce rhoncus, justo sed lacinia lacinia, sapien tellus dictum massa, ac viverra diam nibh non lacus. Sed tristique, eros ut fringilla sollicitudin, purus lacus facilisis orci, a euismod lectus elit sed nisi. Integer vestibulum erat vel metus consectetur auctor. Phasellus in suscipit sapien, nec rutrum dui. Maecenas tristique ornare velit, non dictum ante. Morbi interdum magna eu nulla cursus, non tincidunt odio mattis. Nam vehicula lectus ut eleifend luctus. Cras a ullamcorper lectus, ac cursus elit. Fusce nec ex risus. Morbi ipsum ligula, pulvinar ac laoreet sed, ultrices id ipsum. Duis blandit, augue vel pretium venenatis, velit sapien cursus nisl, a gravida lectus ex a dolor." as full_article,
-           id as source_id
+           2 as source_id
     FROM article_source
     WHERE name="AFP";
 	
@@ -25,7 +25,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           1 as source_id
     FROM article_source
     WHERE name="FranceInfo";
 	
@@ -38,7 +38,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           3 as source_id
     FROM article_source
     WHERE name="Reteurs";
 	
@@ -51,7 +51,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           2 as source_id
     FROM article_source
     WHERE name="Facebook";
 	
@@ -66,7 +66,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           1 as source_id
     FROM article_source
     WHERE name="AFP";
 	
@@ -79,7 +79,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           4 as source_id
     FROM article_source
     WHERE name="FranceInfo";
 	
@@ -92,7 +92,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           3 as source_id
     FROM article_source
     WHERE name="Reteurs";
 	
@@ -105,7 +105,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           4 as source_id
     FROM article_source
     WHERE name="Facebook";
 	
@@ -121,7 +121,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           1 as source_id
     FROM article_source
     WHERE name="AFP";
 	
@@ -134,7 +134,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           1 as source_id
     FROM article_source
     WHERE name="FranceInfo";
 	
@@ -147,7 +147,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           2 as source_id
     FROM article_source
     WHERE name="Reteurs";
 	
@@ -160,7 +160,7 @@ INSERT INTO article (id, title, description, full_article, source_id)
 			Ut placerat arcu ipsum, a auctor est pulvinar sit amet. Praesent pharetra mauris vitae tortor hendrerit efficitur. Morbi libero dolor, gravida eu elementum ac, ultrices eget leo. Sed pulvinar ligula quis odio sagittis tincidunt. Proin tincidunt pretium consectetur. Curabitur aliquam in sem sit amet ultricies. Fusce ultricies tristique lorem, non luctus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus venenatis at lacus accumsan aliquam. 
 			Phasellus dictum lorem id venenatis hendrerit. Sed porttitor risus turpis, a accumsan nulla vestibulum id. Quisque porta imperdiet lorem, sodales semper nisi molestie id. Maecenas eget suscipit purus, quis volutpat velit. Suspendisse venenatis erat in augue fringilla vestibulum tincidunt nec urna. Nullam porta auctor ex vitae placerat. Sed ullamcorper ut eros sed sodales. 
 			Phasellus placerat diam diam, eget semper sapien accumsan in. Vestibulum eget ex lacus. Morbi sagittis lacinia urna, vitae lobortis augue efficitur sit amet. Aenean ultricies, tellus sit amet cursus rhoncus, lacus neque lobortis ligula, vitae rutrum orci tortor eu orci. Praesent lacus mi, viverra et lorem non, facilisis maximus tellus. Donec imperdiet hendrerit ultrices. Maecenas tempus mattis dapibus. Nunc ultricies magna lorem, at tincidunt enim elementum quis. Curabitur tempor auctor turpis, non ornare tellus. Morbi sit amet eleifend magna. Aenean dictum justo tellus, sit amet ullamcorper nisi luctus dapibus. Morbi vel magna at odio euismod dapibus quis a ligula. Nam eu orci pretium, blandit felis vel, feugiat lectus. " as full_article,
-           id as source_id
+           3 as source_id
     FROM article_source
     WHERE name="Facebook";
 	
@@ -202,10 +202,11 @@ INSERT INTO event VALUES
 (null, 3, 12, "2020-07-01");
 
 INSERT INTO scenarios VALUES
-(null, "Coronavirus", 1, "2020/01/02", "Description de test coronavirus");
+(NULL, 1, "Coronavirus", 1, "2020/01/02", "Description de test coronavirus");
 
 INSERT INTO scenarios VALUES
-(null, "Peste", 12, "600/01/02", "Description de test peste");
+(NULL, 2, "Peste", 12, "600/01/02", "Description de test peste");
 
 INSERT INTO scenarios VALUES
-(null, "Grippe espagnole", 3, "1600/01/02", "Description de test grippe");
+(NULL, 3, "Grippe espagnole", 3, "1600/01/02", "Description de test grippe");
+

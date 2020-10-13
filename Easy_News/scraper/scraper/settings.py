@@ -117,7 +117,7 @@ PROMETHEUS_PUSH_METHOD = 'POST'  # default
 PROMETHEUS_SUPPRESS_TYPE_CHECK = True
 
 # job label value, applied to all metrics.
-PROMETHEUS_JOB = 'scrapy'  # default
+PROMETHEUS_JOB = 'scrapy'  # defaultm
 
 # grouping label dict, applied to all metrics.
 # by default it is an instance key with hostname value.

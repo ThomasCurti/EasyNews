@@ -1,0 +1,5 @@
+20/03/2020 14:50:12 - [ERR]: System.InvalidOperationException
+An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseMySql' call.
+
+MySql.Data.MySqlClient.MySqlException
+Unable to connect to any of the specified MySQL hosts.

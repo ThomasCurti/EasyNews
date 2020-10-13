@@ -1,0 +1,17 @@
+@import "Default_min";
+
+.gameImageContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.gameImage {
+  max-width: 100%;
+  width: 100%;
+  margin-top: 10px;
+  height: 500px;
+}

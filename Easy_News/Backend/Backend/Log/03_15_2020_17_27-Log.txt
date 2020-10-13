@@ -1,8 +1,0 @@
-15/03/2020 17:28:10 - [ERR]: System.ArgumentException
-The key value at position 0 of the call to 'DbSet<Article>.Find' was of type 'long', which does not match the property type of 'int'.
-15/03/2020 17:28:10 - [ERR]: System.ArgumentNullException
-Value cannot be null. (Parameter 'collection')
-15/03/2020 17:28:27 - [ERR]: System.ArgumentException
-The key value at position 0 of the call to 'DbSet<Article>.Find' was of type 'long', which does not match the property type of 'int'.
-15/03/2020 17:28:27 - [ERR]: System.ArgumentNullException
-Value cannot be null. (Parameter 'collection')

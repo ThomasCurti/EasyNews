@@ -1,0 +1,66 @@
+/*
+  Put vars here
+ */
+
+$black:     #010000;
+$white:     #ffffff;
+$red:       #ff1755;
+$lightGray: #e6e6e6;
+$darkGray:  #333;
+
+$site-color-1: #D95D39;
+$site-color-2: #FF971D;
+$site-color-3: #FFE8D6;
+$site-color-4: #FF5E5B;
+
+/*
+  Mixins
+ */
+
+@mixin translateY($e){
+  -webkit-transform: translateY($e);
+  -moz-transform: translateY($e);
+  transform: translateY($e);
+}
+
+@mixin translateX($e){
+  -webkit-transform: translateX($e);
+  -moz-transform: translateX($e);
+  transform: translateX($e);
+}
+
+@mixin translateZ($e){
+  -webkit-transform: translateZ($e);
+  -moz-transform: translateZ($e);
+  transform: translateZ($e);
+}
+
+@mixin transition($e){
+  -webkit-transition: $e;
+  -moz-transition: $e;
+  transition: $e;
+}
+
+
+/*
+  Body
+ */
+
+body{
+  font-family: Roboto;
+  font-size: 18px;
+  color: $black;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a{
+  @include transition(.4s);
+  color: $white;
+
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+
